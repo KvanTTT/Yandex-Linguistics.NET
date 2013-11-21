@@ -37,18 +37,22 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CompleteResponse.cs" />
+    <Compile Include="Predictor\CompleteResponse.cs" />
+    <Compile Include="Dictionary\Definition.cs" />
+    <Compile Include="Dictionary\DicResult.cs" />
+    <Compile Include="Dictionary\Dictionary.cs" />
     <Compile Include="Error.cs" />
-    <Compile Include="Lang.cs" />
-    <Compile Include="Predictor.cs" />
+    <Compile Include="Dictionary\Example.cs" />
+    <Compile Include="Predictor\Lang.cs" />
+    <Compile Include="Dictionary\LangPair.cs" />
+    <Compile Include="Dictionary\LookupOptions.cs" />
+    <Compile Include="Dictionary\Meaning.cs" />
+    <Compile Include="Predictor\Predictor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Dictionary\Synonym.cs" />
+    <Compile Include="Dictionary\Translation.cs" />
     <Compile Include="YandexLinguisticsException.cs" />
   </ItemGroup>
   <ItemGroup>

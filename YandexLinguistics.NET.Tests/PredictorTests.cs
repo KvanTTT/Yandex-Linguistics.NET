@@ -52,9 +52,10 @@ namespace YandexLinguistics.NET.Tests
 		public void PredictorWrongKey()
 		{
 			var predictor = new Predictor("1111");
-			Assert.Throws<YandexLinguisticsException>(
-				() => predictor.GetLangs(),
-				new YandexLinguisticsException(401, "API key is invalid").ToString());
+			var exception = Assert.Throws<YandexLinguisticsException>(() => predictor.GetLangs());
+			Assert.AreEqual(
+				new YandexLinguisticsException(401, "API key is invalid").ToString(),
+				exception.ToString());
 		}
 	}
 }

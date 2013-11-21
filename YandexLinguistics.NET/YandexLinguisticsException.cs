@@ -8,18 +8,17 @@ namespace YandexLinguistics.NET
 	public class YandexLinguisticsException : Exception
 	{
 		public readonly int Code;
-		public readonly string Message;
 
 		public YandexLinguisticsException(Error error)
+			: base(error.Message)
 		{
 			Code = error.Code;
-			Message = error.Message;
 		}
 
 		public YandexLinguisticsException(int code, string message)
+			: base(message)
 		{
 			Code = code;
-			Message = message;
 		}
 
 		public override string ToString()
