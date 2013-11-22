@@ -35,14 +35,8 @@
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="frmMain.cs">
@@ -77,7 +71,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\YandexLinguistics.NET.csproj">
+    <ProjectReference Include="..\YandexLinguistics.NET\YandexLinguistics.NET.csproj">
       <Project>{b8ba788a-d38b-4ae9-a208-47febac7e13c}</Project>
       <Name>YandexLinguistics.NET</Name>
     </ProjectReference>

@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YandexLinguistics.NET", "YandexLinguistics.NET.csproj", "{B8BA788A-D38B-4AE9-A208-47FEBAC7E13C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YandexLinguistics.NET.Tests", "..\YandexLinguistics.NET.Tests\YandexLinguistics.NET.Tests.csproj", "{8B8B3741-B57A-4B5D-96AE-D7B41AF94A87}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YandexLinguistics.NET.Gui", "YandexLinguistics.NET.Gui\YandexLinguistics.NET.Gui.csproj", "{6092D1C4-A330-4240-A729-2D43C29CB750}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YandexLinguistics.NET", "YandexLinguistics.NET\YandexLinguistics.NET.csproj", "{B8BA788A-D38B-4AE9-A208-47FEBAC7E13C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YandexLinguistics.NET.Tests", "YandexLinguistics.NET.Tests\YandexLinguistics.NET.Tests.csproj", "{8B8B3741-B57A-4B5D-96AE-D7B41AF94A87}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,6 +13,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6092D1C4-A330-4240-A729-2D43C29CB750}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6092D1C4-A330-4240-A729-2D43C29CB750}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6092D1C4-A330-4240-A729-2D43C29CB750}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6092D1C4-A330-4240-A729-2D43C29CB750}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B8BA788A-D38B-4AE9-A208-47FEBAC7E13C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B8BA788A-D38B-4AE9-A208-47FEBAC7E13C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B8BA788A-D38B-4AE9-A208-47FEBAC7E13C}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -21,10 +25,6 @@ Global
 		{8B8B3741-B57A-4B5D-96AE-D7B41AF94A87}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B8B3741-B57A-4B5D-96AE-D7B41AF94A87}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B8B3741-B57A-4B5D-96AE-D7B41AF94A87}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6092D1C4-A330-4240-A729-2D43C29CB750}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6092D1C4-A330-4240-A729-2D43C29CB750}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6092D1C4-A330-4240-A729-2D43C29CB750}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6092D1C4-A330-4240-A729-2D43C29CB750}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
