@@ -15,13 +15,6 @@ namespace YandexLinguistics.NET
 			set;
 		}
 
-		[DeserializeAs(Name = "pos")]
-		public string PartOfSpeech
-		{
-			get;
-			set;
-		}
-
 		public List<Tr> Translations
 		{
 			get;
@@ -30,6 +23,18 @@ namespace YandexLinguistics.NET
 
 		public Ex()
 		{
+		}
+
+		public void ToString(StringBuilder builder, int level, bool formatting, string indent)
+		{
+			for (int i = 0; i < level; i++)
+				builder.Append(indent);
+			//builder.Append("Example: " + Text);
+			//builder.AppendLine();
+
+			if (Translations != null && Translations.Count != 0)
+				foreach (var tr in Translations)
+					tr.ToString(builder, level + 1, formatting, indent);
 		}
 	}
 }

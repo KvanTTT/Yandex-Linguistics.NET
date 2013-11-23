@@ -10,6 +10,6 @@ namespace YandexLinguistics.NET
 	{
 		Family = 0x0001,
 		Morpho = 0x0004,
-		PosFilter = 0x0008
+		PartOfSpeechFilter = 0x0008
 	}
 }

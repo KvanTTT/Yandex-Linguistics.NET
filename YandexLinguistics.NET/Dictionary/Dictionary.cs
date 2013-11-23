@@ -33,8 +33,8 @@ namespace YandexLinguistics.NET
 				{
 					var inOut = str.Split('-');
 					return new LangPair(
-						allLangs.FirstOrDefault(lang => lang.ToString().ToLowerInvariant() == inOut[0]),
-						allLangs.FirstOrDefault(lang => lang.ToString().ToLowerInvariant() == inOut[1]));
+						(Lang)Enum.Parse(typeof(Lang), inOut[0].Remove(1).ToUpperInvariant() + inOut[0].Substring(1)),
+						(Lang)Enum.Parse(typeof(Lang), inOut[1].Remove(1).ToUpperInvariant() + inOut[1].Substring(1)));
 				}).ToArray();
 				return result;
 			}
@@ -49,13 +49,13 @@ namespace YandexLinguistics.NET
 		{
 			RestRequest request = new RestRequest("lookup");
 			request.AddParameter("key", _key);
-			request.AddParameter("lang", lang.ToString());
+			request.AddParameter("lang", lang.ToString().ToLowerInvariant());
 			request.AddParameter("text", text);
 			
 			if (!string.IsNullOrEmpty(ui))
 				request.AddParameter("ui", ui);
 			if (flags != 0)
-				request.AddParameter("flags", flags);
+				request.AddParameter("flags", (int)flags);
 
 			RestResponse response = (RestResponse)_client.Execute(request);
 			XmlAttributeDeserializer deserializer = new XmlAttributeDeserializer();

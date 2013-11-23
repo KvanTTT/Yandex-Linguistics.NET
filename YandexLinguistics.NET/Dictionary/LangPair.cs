@@ -45,9 +45,16 @@ namespace YandexLinguistics.NET
 			OutputLang = outputLang;
 		}
 
+		public LangPair(string langPair)
+		{
+			var inOut = langPair.Split('-');
+			InputLang = (Lang)Enum.Parse(typeof(Lang), inOut[0]);
+			OutputLang = (Lang)Enum.Parse(typeof(Lang), inOut[1]);
+		}
+
 		public override string ToString()
 		{
-			return InputLang.ToString().ToLowerInvariant() + "-" + OutputLang.ToString().ToLowerInvariant();
+			return InputLang.ToString() + "-" + OutputLang.ToString();
 		}
 	}
 }

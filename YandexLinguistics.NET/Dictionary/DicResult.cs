@@ -8,13 +8,6 @@ namespace YandexLinguistics.NET
 {
 	public class DicResult
 	{
-		[DeserializeAs(Name = "pos")]
-		public string PartOfSpeech
-		{
-			get;
-			set;
-		}
-
 		public List<Def> Definitions
 		{
 			get;
@@ -23,6 +16,23 @@ namespace YandexLinguistics.NET
 
 		public DicResult()
 		{
+		}
+
+		public string ToString(bool formatting, string indent)
+		{
+			StringBuilder builder = new StringBuilder();
+			for (int i = 0; i < Definitions.Count; i++)
+			{
+				builder.Append((i + 1) + ". ");
+				Definitions[i].ToString(builder, formatting, indent);
+			}
+
+			return builder.ToString();
+		}
+
+		public override string ToString()
+		{
+			return ToString(false, "    ");
 		}
 	}
 }

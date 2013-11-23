@@ -58,5 +58,137 @@ namespace YandexLinguistics.NET.Gui.Properties {
                 this["PredictorHintDelay"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Ru-Ru")]
+        public string DictionaryLangPair {
+            get {
+                return ((string)(this["DictionaryLangPair"]));
+            }
+            set {
+                this["DictionaryLangPair"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string DictionaryLangUi {
+            get {
+                return ((string)(this["DictionaryLangUi"]));
+            }
+            set {
+                this["DictionaryLangUi"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool DictionaryFamily {
+            get {
+                return ((bool)(this["DictionaryFamily"]));
+            }
+            set {
+                this["DictionaryFamily"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool DictionaryMorpho {
+            get {
+                return ((bool)(this["DictionaryMorpho"]));
+            }
+            set {
+                this["DictionaryMorpho"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool DictionaryPartOfSpeech {
+            get {
+                return ((bool)(this["DictionaryPartOfSpeech"]));
+            }
+            set {
+                this["DictionaryPartOfSpeech"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string PredictorInput {
+            get {
+                return ((string)(this["PredictorInput"]));
+            }
+            set {
+                this["PredictorInput"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string DictionaryInput {
+            get {
+                return ((string)(this["DictionaryInput"]));
+            }
+            set {
+                this["DictionaryInput"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("300")]
+        public int DictionaryHintDelay {
+            get {
+                return ((int)(this["DictionaryHintDelay"]));
+            }
+            set {
+                this["DictionaryHintDelay"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool DictionaryFormatting {
+            get {
+                return ((bool)(this["DictionaryFormatting"]));
+            }
+            set {
+                this["DictionaryFormatting"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string DictionaryOutputIndent {
+            get {
+                return ((string)(this["DictionaryOutputIndent"]));
+            }
+            set {
+                this["DictionaryOutputIndent"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int SelectedTabIndex {
+            get {
+                return ((int)(this["SelectedTabIndex"]));
+            }
+            set {
+                this["SelectedTabIndex"] = value;
+            }
+        }
     }
 }

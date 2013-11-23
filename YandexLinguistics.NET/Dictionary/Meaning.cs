@@ -15,13 +15,6 @@ namespace YandexLinguistics.NET
 			set;
 		}
 
-		[DeserializeAs(Name = "pos")]
-		public string PartOfSpeech
-		{
-			get;
-			set;
-		}
-
 		public Mean()
 		{
 		}

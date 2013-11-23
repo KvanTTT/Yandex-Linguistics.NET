@@ -38,5 +38,16 @@ namespace YandexLinguistics.NET
 		public Def()
 		{
 		}
+
+		public void ToString(StringBuilder builder, bool formatting, string indent)
+		{
+			if (!string.IsNullOrEmpty(PartOfSpeech))
+				builder.Append("PartOfSpeech: " + PartOfSpeech);
+			if (!string.IsNullOrEmpty(Transcription))
+				builder.Append("; Transcription: " + Transcription);
+			builder.AppendLine();
+			foreach (var tr in Translations)
+				tr.ToString(builder, 1, formatting, indent);
+		}
 	}
 }
