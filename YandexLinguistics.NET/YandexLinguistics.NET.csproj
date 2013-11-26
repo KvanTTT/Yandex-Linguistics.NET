@@ -45,18 +45,21 @@
     <Compile Include="Dictionary\Dictionary.cs" />
     <Compile Include="Error.cs" />
     <Compile Include="Dictionary\Example.cs" />
-    <Compile Include="Predictor\Lang.cs" />
-    <Compile Include="Dictionary\LangPair.cs" />
+    <Compile Include="Lang.cs" />
+    <Compile Include="LangPair.cs" />
     <Compile Include="Dictionary\LookupOptions.cs" />
     <Compile Include="Dictionary\Meaning.cs" />
     <Compile Include="Predictor\Predictor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Dictionary\Synonym.cs" />
     <Compile Include="Dictionary\Translation.cs" />
+    <Compile Include="Translator\DetectedLang.cs" />
+    <Compile Include="Translator\Translation.cs" />
+    <Compile Include="Translator\Translator.cs" />
+    <Compile Include="Translator\TranslatorFormat.cs" />
     <Compile Include="YandexLinguisticsException.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

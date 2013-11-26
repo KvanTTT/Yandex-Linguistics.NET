@@ -10,28 +10,38 @@ namespace YandexLinguistics.NET.Tests
 	[TestFixture]
 	public class PredictorTests
 	{
-		string _predictorKey = ConfigurationManager.AppSettings["PredictorKey"];
-		Predictor _predictor;
+		Predictor Predictor;
 
 		[SetUp]
 		public void Init()
 		{
-			_predictor = new Predictor(_predictorKey);
+			Predictor = new Predictor(ConfigurationManager.AppSettings["PredictorKey"]);
 		}
 
 		[Test]
 		public void PredictorGetLangs()
 		{
-			var langs = _predictor.GetLangs();
-			var allLangs = (Lang[])Enum.GetValues(typeof(Lang));
+			var langs = Predictor.GetLangs();
+			var expectedLangs = new Lang[]
+			{
+				Lang.Ru,
+				Lang.En,
+				Lang.Pl,
+				Lang.Uk,
+				Lang.De,
+				Lang.Fr,
+				Lang.Es,
+				Lang.It,
+				Lang.Tr
+			};
 
-			Assert.IsTrue(allLangs.All(lang => langs.Contains(lang)));
+			Assert.IsTrue(expectedLangs.All(lang => langs.Contains(lang)));
 		}
 
 		[Test]
-		public void Complete1()
+		public void PredictorComplete1()
 		{
-			var response = _predictor.Complete(Lang.En, "hello wo");
+			var response = Predictor.Complete(Lang.En, "hello wo");
 
 			Assert.AreEqual(-2, response.Pos);
 			Assert.IsFalse(response.EndOfWord);
@@ -39,9 +49,9 @@ namespace YandexLinguistics.NET.Tests
 		}
 
 		[Test]
-		public void Complete2()
+		public void PredictorComplete2()
 		{
-			var response = _predictor.Complete(Lang.Ru, "здравствуй");
+			var response = Predictor.Complete(Lang.Ru, "здравствуй");
 
 			Assert.AreEqual(-10, response.Pos);
 			Assert.IsTrue(response.EndOfWord);

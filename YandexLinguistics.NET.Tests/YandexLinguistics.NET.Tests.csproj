@@ -41,6 +41,7 @@
     <Compile Include="DictionaryTests.cs" />
     <Compile Include="PredictorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TranslatorTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

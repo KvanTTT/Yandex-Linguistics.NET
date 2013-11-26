@@ -29,8 +29,6 @@ namespace YandexLinguistics.NET
 		{
 			for (int i = 0; i < level; i++)
 				builder.Append(indent);
-			//builder.Append("Example: " + Text);
-			//builder.AppendLine();
 
 			if (Translations != null && Translations.Count != 0)
 				foreach (var tr in Translations)

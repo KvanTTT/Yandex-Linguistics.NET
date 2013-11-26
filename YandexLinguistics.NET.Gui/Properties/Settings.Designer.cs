@@ -169,18 +169,6 @@ namespace YandexLinguistics.NET.Gui.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string DictionaryOutputIndent {
-            get {
-                return ((string)(this["DictionaryOutputIndent"]));
-            }
-            set {
-                this["DictionaryOutputIndent"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public int SelectedTabIndex {
             get {
@@ -188,6 +176,18 @@ namespace YandexLinguistics.NET.Gui.Properties {
             }
             set {
                 this["SelectedTabIndex"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string DictionaryOutputIndent {
+            get {
+                return ((string)(this["DictionaryOutputIndent"]));
+            }
+            set {
+                this["DictionaryOutputIndent"] = value;
             }
         }
     }

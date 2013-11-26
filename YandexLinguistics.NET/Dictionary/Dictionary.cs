@@ -28,7 +28,6 @@ namespace YandexLinguistics.NET
 			{
 				var strs = deserializer.Deserialize<List<string>>(response);
 				
-				var allLangs = (Lang[])Enum.GetValues(typeof(Lang));
 				LangPair[] result = strs.Select(str => 
 				{
 					var inOut = str.Split('-');

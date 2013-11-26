@@ -7,22 +7,22 @@ using System.Text;
 
 namespace YandexLinguistics.NET.Tests
 {
+	[TestFixture]
 	public class DictionaryTests
 	{
-		string _dictionaryKey = ConfigurationManager.AppSettings["DictionaryKey"];
-		Dictionary _dictionary;
+		Dictionary Dictionary;
 
 		[SetUp]
 		public void Init()
 		{
-			_dictionary = new Dictionary(_dictionaryKey);
+			Dictionary = new Dictionary(ConfigurationManager.AppSettings["DictionaryKey"]);
 		}
 
 		[Test]
 		public void DictionaryGetLangs()
 		{
-			var langs = _dictionary.GetLangs();
-			var availableLangPairs = new List<LangPair>()
+			var langPairs = Dictionary.GetLangs();
+			var expectedLangPairs = new List<LangPair>()
 			{
 				LangPair.RuRu,
 				LangPair.RuEn,
@@ -54,16 +54,14 @@ namespace YandexLinguistics.NET.Tests
 				LangPair.TrEn,
 			};
 
-			Assert.IsTrue(availableLangPairs.All(lang => langs.Contains(lang)));
+			Assert.IsTrue(expectedLangPairs.All(lang => langPairs.Contains(lang)));
 		}
 
 		[Test]
-		public void Lookup1()
+		public void DictionaryLookup()
 		{
-			var dicResult = _dictionary.Lookup(LangPair.EnRu, "time");
+			var dicResult = Dictionary.Lookup(LangPair.EnRu, "time");
 
-			Assert.AreEqual(2, dicResult.Definitions.Count);
-			
 			var def0 = dicResult.Definitions[0];
 			var def1 = dicResult.Definitions[1];
 
@@ -72,10 +70,6 @@ namespace YandexLinguistics.NET.Tests
 			var tr = def0.Translations[0];
 			Assert.AreEqual("существительное", tr.PartOfSpeech);
 			Assert.AreEqual("время", tr.Text);
-
-			Assert.AreEqual(2, tr.Synonyms.Count);
-			Assert.AreEqual(3, tr.Meanings.Count);
-			Assert.AreEqual(3, tr.Examples.Count);
 
 			Assert.AreEqual("раз", tr.Synonyms[0].Text);
 			Assert.AreEqual("тайм", tr.Synonyms[1].Text);
@@ -99,10 +93,10 @@ namespace YandexLinguistics.NET.Tests
 		}
 
 		[Test]
-		public void LangNotSupported()
+		public void DictionaryLangNotSupported()
 		{
 			var exception = Assert.Throws<YandexLinguisticsException>(
-				() => _dictionary.Lookup(new LangPair(Lang.Uk, Lang.It), "asdf"));
+				() => Dictionary.Lookup(new LangPair(Lang.Uk, Lang.It), "asdf"));
 			Assert.AreEqual(
 				new YandexLinguisticsException(501, "The specified language is not supported").ToString(),
 				exception.ToString());
