@@ -181,6 +181,66 @@ namespace YandexLinguistics.NET.Gui.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("None")]
+        public string TranslatorInputLang {
+            get {
+                return ((string)(this["TranslatorInputLang"]));
+            }
+            set {
+                this["TranslatorInputLang"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Ru")]
+        public string TranslatorOutputLang {
+            get {
+                return ((string)(this["TranslatorOutputLang"]));
+            }
+            set {
+                this["TranslatorOutputLang"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("300")]
+        public int TranslatorHintDelay {
+            get {
+                return ((int)(this["TranslatorHintDelay"]));
+            }
+            set {
+                this["TranslatorHintDelay"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool TranslatorDetectInputLang {
+            get {
+                return ((bool)(this["TranslatorDetectInputLang"]));
+            }
+            set {
+                this["TranslatorDetectInputLang"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string TranslatorInput {
+            get {
+                return ((string)(this["TranslatorInput"]));
+            }
+            set {
+                this["TranslatorInput"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string DictionaryOutputIndent {
             get {

@@ -41,6 +41,21 @@
     <Setting Name="SelectedTabIndex" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
+    <Setting Name="TranslatorInputLang" Type="System.String" Scope="User">
+      <Value Profile="(Default)">None</Value>
+    </Setting>
+    <Setting Name="TranslatorOutputLang" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Ru</Value>
+    </Setting>
+    <Setting Name="TranslatorHintDelay" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">300</Value>
+    </Setting>
+    <Setting Name="TranslatorDetectInputLang" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="TranslatorInput" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
     <Setting Name="DictionaryOutputIndent" Type="System.String" Scope="User">
       <Value Profile="(Default)">
         </Value>

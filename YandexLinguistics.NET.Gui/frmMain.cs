@@ -17,15 +17,19 @@ namespace YandexLinguistics.NET.Gui
 	{
 		Predictor Predictor;
 		Dictionary Dictionary;
+		Translator Translator;
 		System.Threading.Timer PredictorTimer;
 		System.Threading.Timer DictionaryTimer;
+		System.Threading.Timer TranslatorTimer;
 
 		public frmMain()
 		{
 			Predictor = new Predictor(ConfigurationManager.AppSettings["PredictorKey"]);
 			Dictionary = new Dictionary(ConfigurationManager.AppSettings["DictionaryKey"]);
+			Translator = new Translator(ConfigurationManager.AppSettings["TranslatorKey"]);
 			PredictorTimer = new System.Threading.Timer(_ => UpdatePredictorResult(), null, Timeout.Infinite, Timeout.Infinite);
 			DictionaryTimer = new System.Threading.Timer(_ => UpdateDictionaryResult(), null, Timeout.Infinite, Timeout.Infinite);
+			TranslatorTimer = new System.Threading.Timer(_ => UpdateTranslatorResult(), null, Timeout.Infinite, Timeout.Infinite);
 
 			InitializeComponent();
 
@@ -51,6 +55,15 @@ namespace YandexLinguistics.NET.Gui
 			tbDictionaryInput.Text = Settings.Default.DictionaryInput;
 			cbDictionaryFormatting.Checked = Settings.Default.DictionaryFormatting;
 			rbDictionaryOutput.Text = Settings.Default.DictionaryOutputIndent;
+
+			var langArray = ((Lang[])Enum.GetValues(typeof(Lang))).Select(lang => (object)lang).ToArray();
+			cmbTranslatorInputLang.Items.AddRange(langArray);
+			cmbTranslatorOutputLang.Items.AddRange(langArray);
+			cmbTranslatorInputLang.SelectedItem = (Lang)Enum.Parse(typeof(Lang), Settings.Default.TranslatorInputLang);
+			cmbTranslatorOutputLang.SelectedItem = (Lang)Enum.Parse(typeof(Lang), Settings.Default.TranslatorOutputLang);
+			nudTranslatorDelay.Value = Settings.Default.TranslatorHintDelay;
+			cbTranslatorDetectInputLang.Checked = Settings.Default.TranslatorDetectInputLang;
+			tbTranslatorInput.Text = Settings.Default.TranslatorInput;
 		}
 
 		private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
@@ -72,6 +85,12 @@ namespace YandexLinguistics.NET.Gui
 			Settings.Default.DictionaryFormatting = cbDictionaryFormatting.Checked;
 			Settings.Default.DictionaryOutputIndent = tbDictionaryIndent.Text;
 
+			Settings.Default.TranslatorInputLang = cmbTranslatorInputLang.SelectedItem.ToString();
+			Settings.Default.TranslatorOutputLang = cmbTranslatorOutputLang.SelectedItem.ToString();
+			Settings.Default.TranslatorHintDelay = (int)nudTranslatorDelay.Value;
+			Settings.Default.TranslatorDetectInputLang = cbTranslatorDetectInputLang.Checked;
+			Settings.Default.TranslatorInput = tbTranslatorInput.Text;
+
 			Settings.Default.Save();
 		}
 
@@ -87,20 +106,33 @@ namespace YandexLinguistics.NET.Gui
 			DictionaryTimer.Change((int)nudDictionaryDelay.Value, Timeout.Infinite);
 		}
 
+		private void tbTranslatorInput_TextChanged(object sender, EventArgs e)
+		{
+			rtbTranslatorOutput.Clear();
+			TranslatorTimer.Change((int)nudTranslatorDelay.Value, Timeout.Infinite);
+		}
+
 		private void UpdatePredictorResult()
 		{
 			this.Invoke(new Action(() =>
 			{
-				var response = Predictor.Complete((Lang)cmbPredictorLangs.SelectedItem, tbPredictorInput.Text, (int)nudMaxHintCount.Value);
-
-				tbHintCount.Text = response.Text.Count.ToString();
-				tbPos.Text = response.Pos.ToString();
-				tbEndOfWorld.Text = response.EndOfWord.ToString();
-
-				if (response.Text.Count > 0)
+				try
 				{
-					lbHints.Items.AddRange(response.Text.Select(t => (object)t).ToArray());
-					lbHints.SelectedIndex = 0;
+					var response = Predictor.Complete((Lang)cmbPredictorLangs.SelectedItem, tbPredictorInput.Text, (int)nudMaxHintCount.Value);
+
+					tbHintCount.Text = response.Text.Count.ToString();
+					tbPos.Text = response.Pos.ToString();
+					tbEndOfWorld.Text = response.EndOfWord.ToString();
+
+					if (response.Text.Count > 0)
+					{
+						lbHints.Items.AddRange(response.Text.Select(t => (object)t).ToArray());
+						lbHints.SelectedIndex = 0;
+					}
+				}
+				catch (Exception ex)
+				{
+					MessageBox.Show(ex.ToString(), "Error");
 				}
 			}));
 		}
@@ -135,17 +167,24 @@ namespace YandexLinguistics.NET.Gui
 		{
 			this.Invoke(new Action(() =>
 			{
-				LookupOptions lookupOptions = 0;
-				if (cbFamily.Checked)
-					lookupOptions |= LookupOptions.Family;
-				if (cbMorpho.Checked)
-					lookupOptions |= LookupOptions.Morpho;
-				if (cbPartOfSpeech.Checked)
-					lookupOptions |= LookupOptions.PartOfSpeechFilter;
-				var response = Dictionary.Lookup((LangPair)cmbDictionaryLangPairs.SelectedItem,
-					tbDictionaryInput.Text, cmbDictionaryLangUi.SelectedItem.ToString().ToLowerInvariant(), lookupOptions);
+				try
+				{
+					LookupOptions lookupOptions = 0;
+					if (cbFamily.Checked)
+						lookupOptions |= LookupOptions.Family;
+					if (cbMorpho.Checked)
+						lookupOptions |= LookupOptions.Morpho;
+					if (cbPartOfSpeech.Checked)
+						lookupOptions |= LookupOptions.PartOfSpeechFilter;
+					var response = Dictionary.Lookup((LangPair)cmbDictionaryLangPairs.SelectedItem,
+						tbDictionaryInput.Text, cmbDictionaryLangUi.SelectedItem.ToString().ToLowerInvariant(), lookupOptions);
 
-				rbDictionaryOutput.Text = response.ToString(cbDictionaryFormatting.Checked, tbDictionaryIndent.Text);
+					rbDictionaryOutput.Text = response.ToString(cbDictionaryFormatting.Checked, tbDictionaryIndent.Text);
+				}
+				catch (Exception ex)
+				{
+					rbDictionaryOutput.Text = ex.ToString();
+				}
 			}));
 		}
 
@@ -161,7 +200,32 @@ namespace YandexLinguistics.NET.Gui
 					tbDictionaryInput.Focus();
 					tbDictionaryInput.Select(tbDictionaryInput.Text.Length, 0);
 					break;
+				case 2:
+					tbTranslatorInput.Focus();
+					tbTranslatorInput.Select(tbTranslatorInput.Text.Length, 0);
+					break;
 			}
+		}
+
+		private void UpdateTranslatorResult()
+		{
+			this.Invoke(new Action(() =>
+			{
+				try
+				{
+					var response = Translator.Translate(tbTranslatorInput.Text,
+						new LangPair((Lang)cmbTranslatorInputLang.SelectedItem, (Lang)cmbTranslatorOutputLang.SelectedItem), null, cbTranslatorDetectInputLang.Checked);
+
+					if (response.Detected != null)
+						tbTranslatorDetectedLang.Text = response.Detected.Lang.ToString();
+					rtbTranslatorOutput.Text = response.Text;
+				}
+				catch (Exception ex)
+				{
+					tbTranslatorDetectedLang.Text = "";
+					rtbTranslatorOutput.Text = ex.ToString();
+				}
+			}));
 		}
 	}
 }
