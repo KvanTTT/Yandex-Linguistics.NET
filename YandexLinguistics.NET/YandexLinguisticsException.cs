@@ -9,7 +9,7 @@ namespace YandexLinguistics.NET
 	{
 		public readonly int Code;
 
-		public YandexLinguisticsException(Error error)
+		public YandexLinguisticsException(YandexError error)
 			: base(error.Message)
 		{
 			Code = error.Code;

@@ -40,7 +40,7 @@ namespace YandexLinguistics.NET
 			}
 			else
 			{
-				var error = deserializer.Deserialize<Error>(response);
+				var error = deserializer.Deserialize<YandexError>(response);
 				throw new YandexLinguisticsException(error);
 			}
 		}
@@ -60,12 +60,12 @@ namespace YandexLinguistics.NET
 			}
 			else
 			{
-				var error = deserializer.Deserialize<Error>(response);
+				var error = deserializer.Deserialize<YandexError>(response);
 				throw new YandexLinguisticsException(error);
 			}
 		}
 
-		public Translation Translate(string text, LangPair lang, TranslatorFormat? format = null, bool options = false)
+		public Translation Translate(string text, LangPair lang, OutputFormat? format = null, bool options = false)
 		{
 			RestRequest request = new RestRequest("translate");
 			request.AddParameter("key", _key);
@@ -91,7 +91,7 @@ namespace YandexLinguistics.NET
 			}
 			else
 			{
-				var error = deserializer.Deserialize<Error>(response);
+				var error = deserializer.Deserialize<YandexError>(response);
 				throw new YandexLinguisticsException(error);
 			}
 		}

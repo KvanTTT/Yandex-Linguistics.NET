@@ -5,9 +5,16 @@ using System.Text;
 
 namespace YandexLinguistics.NET
 {
-	public enum TranslatorFormat
+	public class SpellResult
 	{
-		Plain,
-		Html
+		public List<Error> Errors
+		{
+			get;
+			set;
+		}
+
+		public SpellResult()
+		{
+		}
 	}
 }

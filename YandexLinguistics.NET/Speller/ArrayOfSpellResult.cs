@@ -5,21 +5,15 @@ using System.Text;
 
 namespace YandexLinguistics.NET
 {
-	public class YandexError
+	public class ArrayOfSpellResult
 	{
-		public int Code
+		public List<SpellResult> Results
 		{
 			get;
 			set;
 		}
 
-		public string Message
-		{
-			get;
-			set;
-		}
-
-		public YandexError()
+		public ArrayOfSpellResult()
 		{
 		}
 	}

@@ -39,7 +39,7 @@ namespace YandexLinguistics.NET
 			}
 			else
 			{
-				var error = deserializer.Deserialize<Error>(response);
+				var error = deserializer.Deserialize<YandexError>(response);
 				throw new YandexLinguisticsException(error);
 			}
 		}
@@ -65,7 +65,7 @@ namespace YandexLinguistics.NET
 			}
 			else
 			{
-				var error = deserializer.Deserialize<Error>(response);
+				var error = deserializer.Deserialize<YandexError>(response);
 				throw new YandexLinguisticsException(error);
 			}
 		}
