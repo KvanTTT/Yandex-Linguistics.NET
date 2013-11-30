@@ -18,18 +18,22 @@ namespace YandexLinguistics.NET.Gui
 		Predictor Predictor;
 		Dictionary Dictionary;
 		Translator Translator;
+		Speller Speller;
 		System.Threading.Timer PredictorTimer;
 		System.Threading.Timer DictionaryTimer;
 		System.Threading.Timer TranslatorTimer;
+		System.Threading.Timer SpellerTimer;
 
 		public frmMain()
 		{
 			Predictor = new Predictor(ConfigurationManager.AppSettings["PredictorKey"]);
 			Dictionary = new Dictionary(ConfigurationManager.AppSettings["DictionaryKey"]);
 			Translator = new Translator(ConfigurationManager.AppSettings["TranslatorKey"]);
+			Speller = new Speller();
 			PredictorTimer = new System.Threading.Timer(_ => UpdatePredictorResult(), null, Timeout.Infinite, Timeout.Infinite);
 			DictionaryTimer = new System.Threading.Timer(_ => UpdateDictionaryResult(), null, Timeout.Infinite, Timeout.Infinite);
 			TranslatorTimer = new System.Threading.Timer(_ => UpdateTranslatorResult(), null, Timeout.Infinite, Timeout.Infinite);
+			SpellerTimer = new System.Threading.Timer(_ => UpdateSpellerResult(), null, Timeout.Infinite, Timeout.Infinite);
 
 			InitializeComponent();
 
@@ -64,6 +68,23 @@ namespace YandexLinguistics.NET.Gui
 			nudTranslatorDelay.Value = Settings.Default.TranslatorHintDelay;
 			cbTranslatorDetectInputLang.Checked = Settings.Default.TranslatorDetectInputLang;
 			tbTranslatorInput.Text = Settings.Default.TranslatorInput;
+
+			cbSpellerRu.Checked = Settings.Default.SpellerRuLang;
+			cbSpellerEn.Checked = Settings.Default.SpellerEnLang;
+			cbSpellerUk.Checked = Settings.Default.SpellerUkLang;
+			SpellerOptions options = (SpellerOptions)Settings.Default.SpellerOptions;
+			cbIgnoreUppercase.Checked = options.HasFlag(SpellerOptions.IgnoreUppercase);
+			cbIgnoreDigits.Checked = options.HasFlag(SpellerOptions.IgnoreDigits);
+			cbIgnoreUrls.Checked = options.HasFlag(SpellerOptions.IgnoreUrls);
+			cbFindRepeatWords.Checked = options.HasFlag(SpellerOptions.FindRepeatWords);
+			cbIgnoreLatin.Checked = options.HasFlag(SpellerOptions.IgnoreLatin);
+			cbNoSuggest.Checked = options.HasFlag(SpellerOptions.NoSuggest);
+			cbFlagLatin.Checked = options.HasFlag(SpellerOptions.FlagLatin);
+			cbByWords.Checked = options.HasFlag(SpellerOptions.ByWords);
+			cbIgnoreCapitalization.Checked = options.HasFlag(SpellerOptions.IgnoreCapitalization);
+			nudSpellerDelay.Value = Settings.Default.SpellerHintDelay;
+			tbSpellerInput.Text = Settings.Default.SpellerInput;
+			cbIncludeErrorWords.Checked = Settings.Default.SpellerIncludeErrorWords;
 		}
 
 		private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
@@ -91,6 +112,33 @@ namespace YandexLinguistics.NET.Gui
 			Settings.Default.TranslatorDetectInputLang = cbTranslatorDetectInputLang.Checked;
 			Settings.Default.TranslatorInput = tbTranslatorInput.Text;
 
+			Settings.Default.SpellerRuLang = cbSpellerRu.Checked;
+			Settings.Default.SpellerEnLang = cbSpellerEn.Checked;
+			Settings.Default.SpellerUkLang = cbSpellerUk.Checked;
+			SpellerOptions options = 0;
+			if (cbIgnoreUppercase.Checked)
+				options |= SpellerOptions.IgnoreUppercase;
+			if (cbIgnoreDigits.Checked)
+				options |= SpellerOptions.IgnoreDigits;
+			if (cbIgnoreUrls.Checked)
+				options |= SpellerOptions.IgnoreUrls;
+			if (cbFindRepeatWords.Checked)
+				options |= SpellerOptions.FindRepeatWords;
+			if (cbIgnoreLatin.Checked)
+				options |= SpellerOptions.IgnoreLatin;
+			if (cbNoSuggest.Checked)
+				options |= SpellerOptions.NoSuggest;
+			if (cbFlagLatin.Checked)
+				options |= SpellerOptions.FlagLatin;
+			if (cbByWords.Checked)
+				options |= SpellerOptions.ByWords;
+			if (cbIgnoreCapitalization.Checked)
+				options |= SpellerOptions.IgnoreCapitalization;
+			Settings.Default.SpellerOptions = (int)options;
+			Settings.Default.SpellerHintDelay = (int)nudSpellerDelay.Value;
+			Settings.Default.SpellerInput = tbSpellerInput.Text;
+			Settings.Default.SpellerIncludeErrorWords = cbIncludeErrorWords.Checked;
+
 			Settings.Default.Save();
 		}
 
@@ -112,29 +160,10 @@ namespace YandexLinguistics.NET.Gui
 			TranslatorTimer.Change((int)nudTranslatorDelay.Value, Timeout.Infinite);
 		}
 
-		private void UpdatePredictorResult()
+		private void tbSpellerInput_TextChanged(object sender, EventArgs e)
 		{
-			this.Invoke(new Action(() =>
-			{
-				try
-				{
-					var response = Predictor.Complete((Lang)cmbPredictorLangs.SelectedItem, tbPredictorInput.Text, (int)nudMaxHintCount.Value);
-
-					tbHintCount.Text = response.Text.Count.ToString();
-					tbPos.Text = response.Pos.ToString();
-					tbEndOfWorld.Text = response.EndOfWord.ToString();
-
-					if (response.Text.Count > 0)
-					{
-						lbHints.Items.AddRange(response.Text.Select(t => (object)t).ToArray());
-						lbHints.SelectedIndex = 0;
-					}
-				}
-				catch (Exception ex)
-				{
-					MessageBox.Show(ex.ToString(), "Error");
-				}
-			}));
+			rtbSpellerOutput.Clear();
+			SpellerTimer.Change((int)nudSpellerDelay.Value, Timeout.Infinite);
 		}
 
 		private void tbPredictor_KeyDown(object sender, KeyEventArgs e)
@@ -163,6 +192,50 @@ namespace YandexLinguistics.NET.Gui
 			}
 		}
 
+		private void tcServices_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			switch (tcServices.SelectedIndex)
+			{
+				case 0:
+					tbPredictorInput.Focus();
+					tbPredictorInput.Select(tbPredictorInput.Text.Length, 0);
+					break;
+				case 1:
+					tbDictionaryInput.Focus();
+					tbDictionaryInput.Select(tbDictionaryInput.Text.Length, 0);
+					break;
+				case 2:
+					tbTranslatorInput.Focus();
+					tbTranslatorInput.Select(tbTranslatorInput.Text.Length, 0);
+					break;
+			}
+		}
+
+		private void UpdatePredictorResult()
+		{
+			this.Invoke(new Action(() =>
+			{
+				try
+				{
+					var response = Predictor.Complete((Lang)cmbPredictorLangs.SelectedItem, tbPredictorInput.Text, (int)nudMaxHintCount.Value);
+
+					tbHintCount.Text = response.Text.Count.ToString();
+					tbPos.Text = response.Pos.ToString();
+					tbEndOfWorld.Text = response.EndOfWord.ToString();
+
+					if (response.Text.Count > 0)
+					{
+						lbHints.Items.AddRange(response.Text.Select(t => (object)t).ToArray());
+						lbHints.SelectedIndex = 0;
+					}
+				}
+				catch (Exception ex)
+				{
+					MessageBox.Show(ex.ToString(), "Error");
+				}
+			}));
+		}
+
 		private void UpdateDictionaryResult()
 		{
 			this.Invoke(new Action(() =>
@@ -188,25 +261,6 @@ namespace YandexLinguistics.NET.Gui
 			}));
 		}
 
-		private void tcServices_SelectedIndexChanged(object sender, EventArgs e)
-		{
-			switch (tcServices.SelectedIndex)
-			{
-				case 0:
-					tbPredictorInput.Focus();
-					tbPredictorInput.Select(tbPredictorInput.Text.Length, 0);
-					break;
-				case 1:
-					tbDictionaryInput.Focus();
-					tbDictionaryInput.Select(tbDictionaryInput.Text.Length, 0);
-					break;
-				case 2:
-					tbTranslatorInput.Focus();
-					tbTranslatorInput.Select(tbTranslatorInput.Text.Length, 0);
-					break;
-			}
-		}
-
 		private void UpdateTranslatorResult()
 		{
 			this.Invoke(new Action(() =>
@@ -223,6 +277,111 @@ namespace YandexLinguistics.NET.Gui
 				catch (Exception ex)
 				{
 					tbTranslatorDetectedLang.Text = "";
+					rtbTranslatorOutput.Text = ex.ToString();
+				}
+			}));
+		}
+
+		private void UpdateSpellerResult()
+		{
+			this.Invoke(new Action(() =>
+			{
+				try
+				{
+					SpellerOptions options = 0;
+					if (cbIgnoreUppercase.Checked)
+						options |= SpellerOptions.IgnoreUppercase;
+					if (cbIgnoreDigits.Checked)
+						options |= SpellerOptions.IgnoreDigits;
+					if (cbIgnoreUrls.Checked)
+						options |= SpellerOptions.IgnoreUrls;
+					if (cbFindRepeatWords.Checked)
+						options |= SpellerOptions.FindRepeatWords;
+					if (cbIgnoreLatin.Checked)
+						options |= SpellerOptions.IgnoreLatin;
+					if (cbNoSuggest.Checked)
+						options |= SpellerOptions.NoSuggest;
+					if (cbFlagLatin.Checked)
+						options |= SpellerOptions.FlagLatin;
+					if (cbByWords.Checked)
+						options |= SpellerOptions.ByWords;
+					if (cbIgnoreCapitalization.Checked)
+						options |= SpellerOptions.IgnoreCapitalization;
+
+					List<Lang> langs = new List<Lang>();
+					if (cbSpellerRu.Checked)
+						langs.Add(Lang.Ru);
+					if (cbSpellerEn.Checked)
+						langs.Add(Lang.En);
+					if (cbSpellerUk.Checked)
+						langs.Add(Lang.Uk);
+
+					var response = Speller.CheckText(tbSpellerInput.Text, langs.ToArray(), options);
+					var errors = response.Errors;
+
+					string input = tbSpellerInput.Text;
+
+					if (errors.Count != 0)
+					{
+						StringBuilder output = new StringBuilder(input.Length);
+						int currentErrorNumber = 0;
+						int i = 0;
+						int lastInd = 0;
+						Error currentError = errors[0];
+						var highlightedCharPoses = new Dictionary<int, CharMistakeType>();
+						while (i < input.Length)
+						{
+							if (currentError.Column == i)
+							{
+								output.Append(input.Substring(lastInd, i - lastInd));
+								if (currentError.Steer != null)
+								{
+									output.Append(currentError.Steer);
+									var poses = Speller.LevenshteinDiff(currentError.Word, currentError.Steer);
+									foreach (var pos in poses)
+										highlightedCharPoses.Add(
+											output.Length - currentError.Steer.Length + pos.Key,
+											pos.Value);
+								}
+								else if (cbIncludeErrorWords.Checked)
+									output.Append(currentError.Word);
+
+								i += currentError.Length;
+								currentErrorNumber++;
+								if (currentErrorNumber < errors.Count)
+									currentError = errors[currentErrorNumber];
+								lastInd = i;
+							}
+							else
+								i++;
+						}
+						output.Append(input.Substring(lastInd, i - lastInd));
+
+						rtbSpellerOutput.Text = output.ToString();
+						foreach (var pos in highlightedCharPoses)
+						{
+							if (pos.Value == CharMistakeType.Substitution)
+							{
+								rtbSpellerOutput.Select(pos.Key, 1);
+								rtbSpellerOutput.SelectionColor = Color.Red;
+							}
+							else if (pos.Value == CharMistakeType.Deletion)
+							{
+								rtbSpellerOutput.Select(pos.Key, 2);
+								rtbSpellerOutput.SelectionBackColor = Color.Gold;
+							}
+							else if (pos.Value == CharMistakeType.Insertion)
+							{
+								rtbSpellerOutput.Select(pos.Key, 1);
+								rtbSpellerOutput.SelectionColor = Color.Blue;
+							}
+						}
+					}
+					else
+						rtbSpellerOutput.Text = input;
+				}
+				catch (Exception ex)
+				{
 					rtbTranslatorOutput.Text = ex.ToString();
 				}
 			}));

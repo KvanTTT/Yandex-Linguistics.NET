@@ -68,7 +68,7 @@ namespace YandexLinguistics.NET.Tests
 		[Test]
 		public void SpellerFlags()
 		{
-			var response = Speller.CheckText("asdf@asdf.com орапгн36 москва", Lang.Ru, SpellerOptions.IgnoreDigits | SpellerOptions.IgnoreUrls | SpellerOptions.IgnoreCapitalization);
+			var response = Speller.CheckText("asdf@asdf.com орапгн36 москва", null, SpellerOptions.IgnoreDigits | SpellerOptions.IgnoreUrls | SpellerOptions.IgnoreCapitalization);
 
 			Assert.AreEqual(0, response.Errors.Count);
 		}

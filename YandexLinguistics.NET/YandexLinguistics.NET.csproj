@@ -43,7 +43,8 @@
     <Compile Include="Dictionary\Definition.cs" />
     <Compile Include="Dictionary\DicResult.cs" />
     <Compile Include="Dictionary\Dictionary.cs" />
-    <Compile Include="Error.cs" />
+    <Compile Include="Speller\CharMistakeType.cs" />
+    <Compile Include="YandexError.cs" />
     <Compile Include="Dictionary\Example.cs" />
     <Compile Include="Lang.cs" />
     <Compile Include="LangPair.cs" />

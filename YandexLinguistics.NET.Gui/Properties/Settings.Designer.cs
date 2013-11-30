@@ -241,6 +241,78 @@ namespace YandexLinguistics.NET.Gui.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool SpellerRuLang {
+            get {
+                return ((bool)(this["SpellerRuLang"]));
+            }
+            set {
+                this["SpellerRuLang"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool SpellerEnLang {
+            get {
+                return ((bool)(this["SpellerEnLang"]));
+            }
+            set {
+                this["SpellerEnLang"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool SpellerUkLang {
+            get {
+                return ((bool)(this["SpellerUkLang"]));
+            }
+            set {
+                this["SpellerUkLang"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int SpellerOptions {
+            get {
+                return ((int)(this["SpellerOptions"]));
+            }
+            set {
+                this["SpellerOptions"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("300")]
+        public int SpellerHintDelay {
+            get {
+                return ((int)(this["SpellerHintDelay"]));
+            }
+            set {
+                this["SpellerHintDelay"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string SpellerInput {
+            get {
+                return ((string)(this["SpellerInput"]));
+            }
+            set {
+                this["SpellerInput"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string DictionaryOutputIndent {
             get {
@@ -248,6 +320,18 @@ namespace YandexLinguistics.NET.Gui.Properties {
             }
             set {
                 this["DictionaryOutputIndent"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool SpellerIncludeErrorWords {
+            get {
+                return ((bool)(this["SpellerIncludeErrorWords"]));
+            }
+            set {
+                this["SpellerIncludeErrorWords"] = value;
             }
         }
     }
