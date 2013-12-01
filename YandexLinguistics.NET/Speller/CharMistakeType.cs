@@ -10,6 +10,7 @@ namespace YandexLinguistics.NET
 		None,
 		Substitution,
 		Insertion,
-		Deletion
+		Deletion,
+		Transposition
 	}
 }

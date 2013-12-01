@@ -434,9 +434,9 @@
 			this.label29.AutoSize = true;
 			this.label29.Location = new System.Drawing.Point(6, 446);
 			this.label29.Name = "label29";
-			this.label29.Size = new System.Drawing.Size(305, 13);
+			this.label29.Size = new System.Drawing.Size(299, 13);
 			this.label29.TabIndex = 29;
-			this.label29.Text = "Реализовано с помощью сервиса «API «Яндекс.Словарь»";
+			this.label29.Text = "Реализовано с помощью сервиса API «Яндекс.Словарь»";
 			// 
 			// linkLabel3
 			// 
@@ -916,15 +916,15 @@
 			this.label31.AutoSize = true;
 			this.label31.Location = new System.Drawing.Point(8, 446);
 			this.label31.Name = "label31";
-			this.label31.Size = new System.Drawing.Size(228, 13);
+			this.label31.Size = new System.Drawing.Size(234, 13);
 			this.label31.TabIndex = 40;
-			this.label31.Text = "Проверка правописания: Яндекс.Спеллер»";
+			this.label31.Text = "Проверка правописания: «Яндекс.Спеллер»";
 			// 
 			// linkLabel4
 			// 
 			this.linkLabel4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.linkLabel4.AutoSize = true;
-			this.linkLabel4.Location = new System.Drawing.Point(236, 446);
+			this.linkLabel4.Location = new System.Drawing.Point(248, 446);
 			this.linkLabel4.Name = "linkLabel4";
 			this.linkLabel4.Size = new System.Drawing.Size(141, 13);
 			this.linkLabel4.TabIndex = 39;
@@ -962,6 +962,7 @@
 			this.cbSpellerUk.TabIndex = 37;
 			this.cbSpellerUk.Text = "Uk";
 			this.cbSpellerUk.UseVisualStyleBackColor = true;
+			this.cbSpellerUk.CheckedChanged += new System.EventHandler(this.tbSpellerInput_TextChanged);
 			// 
 			// cbSpellerEn
 			// 
@@ -972,6 +973,7 @@
 			this.cbSpellerEn.TabIndex = 36;
 			this.cbSpellerEn.Text = "En";
 			this.cbSpellerEn.UseVisualStyleBackColor = true;
+			this.cbSpellerEn.CheckedChanged += new System.EventHandler(this.tbSpellerInput_TextChanged);
 			// 
 			// cbSpellerRu
 			// 
@@ -982,6 +984,7 @@
 			this.cbSpellerRu.TabIndex = 35;
 			this.cbSpellerRu.Text = "Ru";
 			this.cbSpellerRu.UseVisualStyleBackColor = true;
+			this.cbSpellerRu.CheckedChanged += new System.EventHandler(this.tbSpellerInput_TextChanged);
 			// 
 			// label24
 			// 

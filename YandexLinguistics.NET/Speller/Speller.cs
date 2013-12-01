@@ -1,5 +1,7 @@
 ﻿using RestSharp;
 using RestSharp.Deserializers;
+using System;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace YandexLinguistics.NET
@@ -17,7 +19,7 @@ namespace YandexLinguistics.NET
 			RestRequest request = new RestRequest("checkText");
 			request.AddParameter("text", text);
 			if (lang != null && lang.Length != 0)
-				request.AddParameter("lang", string.Join(",", lang.ToString().ToLowerInvariant()));
+				request.AddParameter("lang", string.Join(",", lang.Select(l => l.ToString().ToLowerInvariant())));
 			if (options.HasValue)
 				request.AddParameter("options", (int)options.Value);
 			if (format.HasValue)
@@ -63,120 +65,110 @@ namespace YandexLinguistics.NET
 			}
 		}
 
-		public static Dictionary<int, CharMistakeType> DiffCharPoses(string word, string steer)
-		{
-			var result = new Dictionary<int, CharMistakeType>();
-
-			if (string.IsNullOrEmpty(word) || string.IsNullOrEmpty(steer))
-				return result;
-
-			if (word.Length == steer.Length)
-			{
-				for (int i = 0; i < steer.Length; i++)
-					if (word[i] != steer[i])
-						result.Add(i, CharMistakeType.Substitution);
-			}
-			else if (word.Length < steer.Length)
-			{
-				int minInd = 0;
-				int minDiff = word.Length;
-				for (int i = 0; i <= steer.Length - word.Length; i++)
-				{
-					int diff = 0;
-					for (int j = 0; j < word.Length; j++)
-						if (word[j] != steer[j + i])
-							diff++;
-					if (diff < minDiff)
-					{
-						minInd = i;
-						minDiff = diff;
-					}
-				}
-				for (int j = 0; j < minInd; j++)
-					result.Add(j, CharMistakeType.Insertion);
-				for (int j = 0; j < word.Length; j++)
-					if (word[j] != steer[j + minInd])
-						result.Add(j + minInd, CharMistakeType.Substitution);
-				for (int j = word.Length + minInd; j < steer.Length; j++)
-					result.Add(j, CharMistakeType.Insertion);
-			}
-
-			return result;
-		}
-
-		public static Dictionary<int, CharMistakeType> LevenshteinDiff(string word, string steer)
+		public static List<Mistake> DamerauLevenshteinDistance(
+			string word, string correctedWord,
+			bool transposition = true,
+			int substitutionCost = 1,
+			int insertionCost = 1,
+			int deletionCost = 1,
+			int transpositionCost = 1)
 		{
 			int w_length = word.Length;
-			int s_length = steer.Length;
-			KeyValuePair<int, CharMistakeType>[,] d = new KeyValuePair<int, CharMistakeType>[w_length + 1, s_length + 1];
-			var result = new Dictionary<int, CharMistakeType>();
+			int cw_length = correctedWord.Length;
+			var d = new KeyValuePair<int, CharMistakeType>[w_length + 1, cw_length + 1];
+			var result = new List<Mistake>(Math.Max(w_length, cw_length));
 
 			if (w_length == 0)
 			{
-				for (int i = 0; i < s_length; i++)
-					result.Add(i, CharMistakeType.Insertion);
-				return result;
-			}
-
-			if (s_length == 0)
-			{
-				for (int i = 0; i < w_length; i++)
-					result.Add(i, CharMistakeType.Deletion);
+				for (int i = 0; i < cw_length; i++)
+					result.Add(new Mistake(i, CharMistakeType.Insertion));
 				return result;
 			}
 
 			for (int i = 0; i <= w_length; i++)
 				d[i, 0] = new KeyValuePair<int, CharMistakeType>(i, CharMistakeType.None);
 
-			for (int j = 0; j <= s_length; j++)
+			for (int j = 0; j <= cw_length; j++)
 				d[0, j] = new KeyValuePair<int, CharMistakeType>(j, CharMistakeType.None);
 
 			for (int i = 1; i <= w_length; i++)
 			{
-				for (int j = 1; j <= s_length; j++)
+				for (int j = 1; j <= cw_length; j++)
 				{
-					if (steer[j - 1] == word[i - 1])
-						d[i, j] = new KeyValuePair<int, CharMistakeType>(d[i - 1, j - 1].Key, CharMistakeType.None);
-					else
+					bool equal = correctedWord[j - 1] == word[i - 1];
+					int delCost = d[i - 1, j].Key + deletionCost;
+					int insCost = d[i, j - 1].Key + insertionCost;
+					int subCost = d[i - 1, j - 1].Key;
+					if (!equal)
+						subCost += substitutionCost;
+					int transCost = int.MaxValue;
+					if (transposition && i > 1 && j > 1 && word[i - 1] == correctedWord[j - 2] && word[i - 2] == correctedWord[j - 1])
 					{
-						d[i, j] = new KeyValuePair<int, CharMistakeType>(d[i - 1, j].Key + 1, CharMistakeType.Deletion);
-
-						int val = d[i, j - 1].Key + 1;
-						if (val < d[i, j].Key)
-							d[i, j] = new KeyValuePair<int, CharMistakeType>(val, CharMistakeType.Insertion);
-
-						val = d[i - 1, j - 1].Key + 1;
-						if (val < d[i, j].Key)
-							d[i, j] = new KeyValuePair<int, CharMistakeType>(val, CharMistakeType.Substitution);
+						transCost = d[i - 2, j - 2].Key;
+						if (!equal)
+							transCost += transpositionCost;
 					}
+
+					int min = delCost;
+					CharMistakeType mistakeType = CharMistakeType.Deletion;
+					if (insCost < min)
+					{
+						min = insCost;
+						mistakeType = CharMistakeType.Insertion;
+					}
+					if (subCost < min)
+					{
+						min = subCost;
+						mistakeType = equal ? CharMistakeType.None : CharMistakeType.Substitution;
+					}
+					if (transCost < min)
+					{
+						min = transCost;
+						mistakeType = CharMistakeType.Transposition;
+					}
+
+					d[i, j] = new KeyValuePair<int, CharMistakeType>(min, mistakeType);
 				}
 			}
 
-			int w_ind = word.Length;
-			int s_ind = steer.Length;
-			while (w_ind >= 0 && s_ind >= 0)
+			int w_ind = w_length;
+			int cw_ind = cw_length;
+			while (w_ind >= 0 && cw_ind >= 0)
 			{
-				switch (d[w_ind, s_ind].Value)
+				switch (d[w_ind, cw_ind].Value)
 				{
 					case CharMistakeType.None:
 						w_ind--;
-						s_ind--;
+						cw_ind--;
 						break;
 					case CharMistakeType.Substitution:
-						result.Add(s_ind - 1, d[w_ind, s_ind].Value);
+						result.Add(new Mistake(cw_ind - 1, CharMistakeType.Substitution));
 						w_ind--;
-						s_ind--;
+						cw_ind--;
 						break;
 					case CharMistakeType.Deletion:
-						result.Add(s_ind, d[w_ind, s_ind].Value);
+						result.Add(new Mistake(cw_ind, CharMistakeType.Deletion));
 						w_ind--;
 						break;
 					case CharMistakeType.Insertion:
-						result.Add(s_ind - 1, d[w_ind, s_ind].Value);
-						s_ind--;
+						result.Add(new Mistake(cw_ind - 1, CharMistakeType.Insertion));
+						cw_ind--;
+						break;
+					case CharMistakeType.Transposition:
+						result.Add(new Mistake(cw_ind - 2, CharMistakeType.Transposition));
+						w_ind -= 2;
+						cw_ind -= 2;
 						break;
 				}
 			}
+			if (d[w_length, cw_length].Key > result.Count)
+			{
+				int delMistakesCount = d[w_length, cw_length].Key - result.Count;
+				for (int i = 0; i < delMistakesCount; i++)
+					result.Add(new Mistake(0, CharMistakeType.Deletion));
+			}
+
+			result.Reverse();
 
 			return result;
 		}

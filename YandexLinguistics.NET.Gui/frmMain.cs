@@ -393,11 +393,11 @@ namespace YandexLinguistics.NET.Gui
 								if (currentError.Steer != null)
 								{
 									output.Append(currentError.Steer);
-									var poses = Speller.LevenshteinDiff(currentError.Word, currentError.Steer);
+									var poses = Speller.DamerauLevenshteinDistance(currentError.Word, currentError.Steer);
 									foreach (var pos in poses)
 										highlightedCharPoses.Add(
-											output.Length - currentError.Steer.Length + pos.Key,
-											pos.Value);
+											output.Length - currentError.Steer.Length + pos.Position,
+											pos.Type);
 								}
 								else if (cbIncludeErrorWords.Checked)
 									output.Append(currentError.Word);
@@ -423,13 +423,21 @@ namespace YandexLinguistics.NET.Gui
 							}
 							else if (pos.Value == CharMistakeType.Deletion)
 							{
-								rtbSpellerOutput.Select(pos.Key, 2);
+								if (pos.Key == 0)
+									rtbSpellerOutput.Select(0, 1);
+								else
+									rtbSpellerOutput.Select(pos.Key - 1, 2);
 								rtbSpellerOutput.SelectionBackColor = Color.Gold;
 							}
 							else if (pos.Value == CharMistakeType.Insertion)
 							{
 								rtbSpellerOutput.Select(pos.Key, 1);
 								rtbSpellerOutput.SelectionColor = Color.Blue;
+							}
+							else if (pos.Value == CharMistakeType.Transposition)
+							{
+								rtbSpellerOutput.Select(pos.Key, 2);
+								rtbSpellerOutput.SelectionBackColor = Color.Violet;
 							}
 						}
 					}
@@ -438,7 +446,7 @@ namespace YandexLinguistics.NET.Gui
 				}
 				catch (Exception ex)
 				{
-					rtbTranslatorOutput.Text = ex.ToString();
+					rtbSpellerOutput.Text = ex.ToString();
 				}
 			}));
 		}

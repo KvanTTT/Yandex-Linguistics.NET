@@ -44,6 +44,7 @@
     <Compile Include="Dictionary\DicResult.cs" />
     <Compile Include="Dictionary\Dictionary.cs" />
     <Compile Include="Speller\CharMistakeType.cs" />
+    <Compile Include="Speller\Mistake.cs" />
     <Compile Include="YandexError.cs" />
     <Compile Include="Dictionary\Example.cs" />
     <Compile Include="Lang.cs" />

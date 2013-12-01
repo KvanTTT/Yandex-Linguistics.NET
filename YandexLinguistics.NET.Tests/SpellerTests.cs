@@ -72,5 +72,106 @@ namespace YandexLinguistics.NET.Tests
 
 			Assert.AreEqual(0, response.Errors.Count);
 		}
+
+		[Test]
+		public void SpellerSubstitution()
+		{
+			var mistakes = Speller.DamerauLevenshteinDistance("синхрАфазАтрон", "синхрофазотрон");
+			Assert.AreEqual(2, mistakes.Count);
+			Assert.AreEqual(mistakes[0].Position, 5);
+			Assert.AreEqual(mistakes[0].Type, CharMistakeType.Substitution);
+			Assert.AreEqual(mistakes[1].Position, 9);
+			Assert.AreEqual(mistakes[1].Type, CharMistakeType.Substitution);
+		}
+
+		[Test]
+		public void SpellerInsertion()
+		{
+			var mistakes = Speller.DamerauLevenshteinDistance("синхрофазотр", "синхрофазотрон");
+			Assert.AreEqual(2, mistakes.Count);
+			Assert.AreEqual(12, mistakes[0].Position);
+			Assert.AreEqual(CharMistakeType.Insertion, mistakes[0].Type);
+			Assert.AreEqual(13, mistakes[1].Position);
+			Assert.AreEqual(CharMistakeType.Insertion, mistakes[1].Type);
+		}
+
+		[Test]
+		public void SpellerDeletion1()
+		{
+			var mistakes = Speller.DamerauLevenshteinDistance("синНхрофаАзотрон", "синхрофазотрон");
+			Assert.AreEqual(2, mistakes.Count);
+			Assert.AreEqual(3, mistakes[0].Position);
+			Assert.AreEqual(CharMistakeType.Deletion, mistakes[0].Type);
+			Assert.AreEqual(8, mistakes[1].Position);
+			Assert.AreEqual(CharMistakeType.Deletion, mistakes[1].Type);
+		}
+
+		[Test]
+		public void SpellerDeletion2()
+		{
+			var mistakes = Speller.DamerauLevenshteinDistance("аДубна", "Дубна");
+			Assert.AreEqual(1, mistakes.Count);
+			Assert.AreEqual(0, mistakes[0].Position);
+			Assert.AreEqual(CharMistakeType.Deletion, mistakes[0].Type);
+		}
+
+		[Test]
+		public void SpellerTransposition()
+		{
+			var mistakes = Speller.DamerauLevenshteinDistance("синхрофазортон", "синхрофазотрон");
+			Assert.AreEqual(1, mistakes.Count);
+			Assert.AreEqual(10, mistakes[0].Position);
+			Assert.AreEqual(CharMistakeType.Transposition, mistakes[0].Type);
+		}
+
+		[Test]
+		public void SpellerTranspositionOff()
+		{
+			var mistakes = Speller.DamerauLevenshteinDistance("синхрофазортон", "синхрофазотрон", false);
+			Assert.AreEqual(2, mistakes.Count);
+			Assert.AreEqual(10, mistakes[0].Position);
+			Assert.AreEqual(CharMistakeType.Insertion, mistakes[0].Type);
+			Assert.AreEqual(12, mistakes[1].Position);
+			Assert.AreEqual(CharMistakeType.Deletion, mistakes[1].Type);
+		}
+
+		[Test]
+		public void SpellerMixed()
+		{
+			var mistakes = Speller.DamerauLevenshteinDistance("АсИнхрофаортон", "синхрофазотрон");
+			Assert.AreEqual(4, mistakes.Count);
+			Assert.AreEqual(0, mistakes[0].Position);
+			Assert.AreEqual(CharMistakeType.Deletion, mistakes[0].Type);
+			Assert.AreEqual(1, mistakes[1].Position);
+			Assert.AreEqual(CharMistakeType.Substitution, mistakes[1].Type);
+			Assert.AreEqual(8, mistakes[2].Position);
+			Assert.AreEqual(CharMistakeType.Insertion, mistakes[2].Type);
+			Assert.AreEqual(10, mistakes[3].Position);
+			Assert.AreEqual(CharMistakeType.Transposition, mistakes[3].Type);
+		}
+
+		[Test]
+		public void SpellerInputEpmty()
+		{
+			var mistakes = Speller.DamerauLevenshteinDistance("", "синхрофазотрон");
+			Assert.AreEqual("синхрофазартон".Length, mistakes.Count);
+			for (int i = 0; i < mistakes.Count; i++)
+			{
+				Assert.AreEqual(i, mistakes[i].Position);
+				Assert.AreEqual(CharMistakeType.Insertion, mistakes[i].Type);
+			}
+		}
+
+		[Test]
+		public void SpellerOutputEpmty()
+		{
+			var mistakes = Speller.DamerauLevenshteinDistance("синхрофазотрон", "");
+			Assert.AreEqual("синхрофазартон".Length, mistakes.Count);
+			for (int i = 0; i < mistakes.Count; i++)
+			{
+				Assert.AreEqual(0, mistakes[i].Position);
+				Assert.AreEqual(CharMistakeType.Deletion, mistakes[i].Type);
+			}
+		}
 	}
 }
