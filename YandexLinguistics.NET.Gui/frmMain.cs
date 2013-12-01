@@ -26,10 +26,11 @@ namespace YandexLinguistics.NET.Gui
 
 		public frmMain()
 		{
-			Predictor = new Predictor(ConfigurationManager.AppSettings["PredictorKey"]);
-			Dictionary = new Dictionary(ConfigurationManager.AppSettings["DictionaryKey"]);
-			Translator = new Translator(ConfigurationManager.AppSettings["TranslatorKey"]);
+			Predictor = new Predictor(Settings.Default.PredictorKey);
+			Dictionary = new Dictionary(Settings.Default.DictionaryKey);
+			Translator = new Translator(Settings.Default.TranslatorKey);
 			Speller = new Speller();
+
 			PredictorTimer = new System.Threading.Timer(_ => UpdatePredictorResult(), null, Timeout.Infinite, Timeout.Infinite);
 			DictionaryTimer = new System.Threading.Timer(_ => UpdateDictionaryResult(), null, Timeout.Infinite, Timeout.Infinite);
 			TranslatorTimer = new System.Threading.Timer(_ => UpdateTranslatorResult(), null, Timeout.Infinite, Timeout.Infinite);
@@ -85,11 +86,19 @@ namespace YandexLinguistics.NET.Gui
 			nudSpellerDelay.Value = Settings.Default.SpellerHintDelay;
 			tbSpellerInput.Text = Settings.Default.SpellerInput;
 			cbIncludeErrorWords.Checked = Settings.Default.SpellerIncludeErrorWords;
+
+			tbPredictorKey.Text = Settings.Default.PredictorKey;
+			tbDictionaryKey.Text = Settings.Default.DictionaryKey;
+			tbTranslatorKey.Text = Settings.Default.TranslatorKey;
 		}
 
 		private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
 		{
 			Settings.Default.SelectedTabIndex = tcServices.SelectedIndex;
+
+			Settings.Default.PredictorKey = tbPredictorKey.Text;
+			Settings.Default.DictionaryKey = tbDictionaryKey.Text;
+			Settings.Default.TranslatorKey = tbTranslatorKey.Text;
 
 			Settings.Default.PredictorLanguage = cmbPredictorLangs.SelectedItem.ToString();
 			Settings.Default.PredictorMaxHintCount = (int)nudMaxHintCount.Value;
@@ -139,31 +148,78 @@ namespace YandexLinguistics.NET.Gui
 			Settings.Default.SpellerInput = tbSpellerInput.Text;
 			Settings.Default.SpellerIncludeErrorWords = cbIncludeErrorWords.Checked;
 
+
 			Settings.Default.Save();
+		}
+
+		private void tbPredictorKey_TextChanged(object sender, EventArgs e)
+		{
+			Predictor = new Predictor(tbPredictorKey.Text);
+			tbPredictor_TextChanged(sender, e);
+		}
+
+		private void tbDictionaryKey_TextChanged(object sender, EventArgs e)
+		{
+			Dictionary = new Dictionary(tbDictionaryKey.Text);
+			tbDictionaryInput_TextChanged(sender, e);
+		}
+
+		private void tbTranslatorKey_TextChanged(object sender, EventArgs e)
+		{
+			Translator = new Translator(tbTranslatorKey.Text);
+			tbTranslatorInput_TextChanged(sender, e);
 		}
 
 		private void tbPredictor_TextChanged(object sender, EventArgs e)
 		{
 			lbHints.Items.Clear();
-			PredictorTimer.Change((int)nudPredictorDelay.Value, Timeout.Infinite);
+			if (nudPredictorDelay.Value != 0)
+				PredictorTimer.Change((int)nudPredictorDelay.Value, Timeout.Infinite);
 		}
 
 		private void tbDictionaryInput_TextChanged(object sender, EventArgs e)
 		{
 			rbDictionaryOutput.Clear();
-			DictionaryTimer.Change((int)nudDictionaryDelay.Value, Timeout.Infinite);
+			if (nudDictionaryDelay.Value != 0)
+				DictionaryTimer.Change((int)nudDictionaryDelay.Value, Timeout.Infinite);
 		}
 
 		private void tbTranslatorInput_TextChanged(object sender, EventArgs e)
 		{
 			rtbTranslatorOutput.Clear();
-			TranslatorTimer.Change((int)nudTranslatorDelay.Value, Timeout.Infinite);
+			if (nudTranslatorDelay.Value != 0)
+				TranslatorTimer.Change((int)nudTranslatorDelay.Value, Timeout.Infinite);
 		}
 
 		private void tbSpellerInput_TextChanged(object sender, EventArgs e)
 		{
 			rtbSpellerOutput.Clear();
-			SpellerTimer.Change((int)nudSpellerDelay.Value, Timeout.Infinite);
+			if (nudSpellerDelay.Value != 0)
+				SpellerTimer.Change((int)nudSpellerDelay.Value, Timeout.Infinite);
+		}
+
+		private void btnPredict_Click(object sender, EventArgs e)
+		{
+			lbHints.Items.Clear();
+			UpdatePredictorResult();
+		}
+
+		private void btnDetermine_Click(object sender, EventArgs e)
+		{
+			rbDictionaryOutput.Clear();
+			UpdateDictionaryResult();
+		}
+
+		private void btnTranslate_Click(object sender, EventArgs e)
+		{
+			rtbTranslatorOutput.Clear();
+			UpdateTranslatorResult();
+		}
+
+		private void btnSpellerCheck_Click(object sender, EventArgs e)
+		{
+			rtbSpellerOutput.Clear();
+			UpdateSpellerResult();
 		}
 
 		private void tbPredictor_KeyDown(object sender, KeyEventArgs e)
@@ -385,6 +441,11 @@ namespace YandexLinguistics.NET.Gui
 					rtbTranslatorOutput.Text = ex.ToString();
 				}
 			}));
+		}
+
+		private void linkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+		{
+			System.Diagnostics.Process.Start(((LinkLabel)sender).Text);
 		}
 	}
 }

@@ -30,6 +30,11 @@
 		{
 			this.tcServices = new System.Windows.Forms.TabControl();
 			this.tpPredictor = new System.Windows.Forms.TabPage();
+			this.label28 = new System.Windows.Forms.Label();
+			this.linkLabel2 = new System.Windows.Forms.LinkLabel();
+			this.tbPredictorKey = new System.Windows.Forms.TextBox();
+			this.label25 = new System.Windows.Forms.Label();
+			this.btnPredict = new System.Windows.Forms.Button();
 			this.label11 = new System.Windows.Forms.Label();
 			this.label6 = new System.Windows.Forms.Label();
 			this.nudPredictorDelay = new System.Windows.Forms.NumericUpDown();
@@ -47,6 +52,11 @@
 			this.cmbPredictorLangs = new System.Windows.Forms.ComboBox();
 			this.tbPredictorInput = new System.Windows.Forms.TextBox();
 			this.tpDictionary = new System.Windows.Forms.TabPage();
+			this.label29 = new System.Windows.Forms.Label();
+			this.linkLabel3 = new System.Windows.Forms.LinkLabel();
+			this.tbDictionaryKey = new System.Windows.Forms.TextBox();
+			this.label27 = new System.Windows.Forms.Label();
+			this.btnDetermine = new System.Windows.Forms.Button();
 			this.tbDictionaryIndent = new System.Windows.Forms.TextBox();
 			this.label14 = new System.Windows.Forms.Label();
 			this.cbDictionaryFormatting = new System.Windows.Forms.CheckBox();
@@ -65,6 +75,11 @@
 			this.label8 = new System.Windows.Forms.Label();
 			this.cmbDictionaryLangPairs = new System.Windows.Forms.ComboBox();
 			this.tpTranslator = new System.Windows.Forms.TabPage();
+			this.label30 = new System.Windows.Forms.Label();
+			this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+			this.tbTranslatorKey = new System.Windows.Forms.TextBox();
+			this.label26 = new System.Windows.Forms.Label();
+			this.btnTranslate = new System.Windows.Forms.Button();
 			this.tbTranslatorDetectedLang = new System.Windows.Forms.TextBox();
 			this.label20 = new System.Windows.Forms.Label();
 			this.label19 = new System.Windows.Forms.Label();
@@ -79,6 +94,10 @@
 			this.label15 = new System.Windows.Forms.Label();
 			this.cmbTranslatorInputLang = new System.Windows.Forms.ComboBox();
 			this.tpSpeller = new System.Windows.Forms.TabPage();
+			this.label31 = new System.Windows.Forms.Label();
+			this.linkLabel4 = new System.Windows.Forms.LinkLabel();
+			this.btnSpellerCheck = new System.Windows.Forms.Button();
+			this.cbIncludeErrorWords = new System.Windows.Forms.CheckBox();
 			this.cbSpellerUk = new System.Windows.Forms.CheckBox();
 			this.cbSpellerEn = new System.Windows.Forms.CheckBox();
 			this.cbSpellerRu = new System.Windows.Forms.CheckBox();
@@ -99,7 +118,6 @@
 			this.rtbSpellerOutput = new System.Windows.Forms.RichTextBox();
 			this.label22 = new System.Windows.Forms.Label();
 			this.tbSpellerInput = new System.Windows.Forms.TextBox();
-			this.cbIncludeErrorWords = new System.Windows.Forms.CheckBox();
 			this.tcServices.SuspendLayout();
 			this.tpPredictor.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.nudPredictorDelay)).BeginInit();
@@ -124,12 +142,17 @@
 			this.tcServices.Location = new System.Drawing.Point(0, 0);
 			this.tcServices.Name = "tcServices";
 			this.tcServices.SelectedIndex = 0;
-			this.tcServices.Size = new System.Drawing.Size(549, 477);
+			this.tcServices.Size = new System.Drawing.Size(526, 490);
 			this.tcServices.TabIndex = 0;
 			this.tcServices.SelectedIndexChanged += new System.EventHandler(this.tcServices_SelectedIndexChanged);
 			// 
 			// tpPredictor
 			// 
+			this.tpPredictor.Controls.Add(this.label28);
+			this.tpPredictor.Controls.Add(this.linkLabel2);
+			this.tpPredictor.Controls.Add(this.tbPredictorKey);
+			this.tpPredictor.Controls.Add(this.label25);
+			this.tpPredictor.Controls.Add(this.btnPredict);
 			this.tpPredictor.Controls.Add(this.label11);
 			this.tpPredictor.Controls.Add(this.label6);
 			this.tpPredictor.Controls.Add(this.nudPredictorDelay);
@@ -149,15 +172,66 @@
 			this.tpPredictor.Location = new System.Drawing.Point(4, 22);
 			this.tpPredictor.Name = "tpPredictor";
 			this.tpPredictor.Padding = new System.Windows.Forms.Padding(3);
-			this.tpPredictor.Size = new System.Drawing.Size(541, 451);
+			this.tpPredictor.Size = new System.Drawing.Size(518, 464);
 			this.tpPredictor.TabIndex = 0;
 			this.tpPredictor.Text = "Predictor";
 			this.tpPredictor.UseVisualStyleBackColor = true;
 			// 
+			// label28
+			// 
+			this.label28.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.label28.AutoSize = true;
+			this.label28.Location = new System.Drawing.Point(6, 446);
+			this.label28.Name = "label28";
+			this.label28.Size = new System.Drawing.Size(291, 13);
+			this.label28.TabIndex = 22;
+			this.label28.Text = "Реализовано с помощью сервиса «Яндекс.Предиктор»";
+			// 
+			// linkLabel2
+			// 
+			this.linkLabel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.linkLabel2.AutoSize = true;
+			this.linkLabel2.Location = new System.Drawing.Point(303, 446);
+			this.linkLabel2.Name = "linkLabel2";
+			this.linkLabel2.Size = new System.Drawing.Size(152, 13);
+			this.linkLabel2.TabIndex = 21;
+			this.linkLabel2.TabStop = true;
+			this.linkLabel2.Text = "http://api.yandex.ru/predictor/";
+			this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
+			// 
+			// tbPredictorKey
+			// 
+			this.tbPredictorKey.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.tbPredictorKey.Location = new System.Drawing.Point(65, 12);
+			this.tbPredictorKey.Name = "tbPredictorKey";
+			this.tbPredictorKey.Size = new System.Drawing.Size(442, 20);
+			this.tbPredictorKey.TabIndex = 20;
+			this.tbPredictorKey.TextChanged += new System.EventHandler(this.tbPredictorKey_TextChanged);
+			// 
+			// label25
+			// 
+			this.label25.AutoSize = true;
+			this.label25.Location = new System.Drawing.Point(4, 15);
+			this.label25.Name = "label25";
+			this.label25.Size = new System.Drawing.Size(25, 13);
+			this.label25.TabIndex = 19;
+			this.label25.Text = "Key";
+			// 
+			// btnPredict
+			// 
+			this.btnPredict.Location = new System.Drawing.Point(65, 283);
+			this.btnPredict.Name = "btnPredict";
+			this.btnPredict.Size = new System.Drawing.Size(105, 23);
+			this.btnPredict.TabIndex = 18;
+			this.btnPredict.Text = "Predict";
+			this.btnPredict.UseVisualStyleBackColor = true;
+			this.btnPredict.Click += new System.EventHandler(this.btnPredict_Click);
+			// 
 			// label11
 			// 
 			this.label11.AutoSize = true;
-			this.label11.Location = new System.Drawing.Point(3, 112);
+			this.label11.Location = new System.Drawing.Point(4, 143);
 			this.label11.Name = "label11";
 			this.label11.Size = new System.Drawing.Size(31, 13);
 			this.label11.TabIndex = 17;
@@ -166,7 +240,7 @@
 			// label6
 			// 
 			this.label6.AutoSize = true;
-			this.label6.Location = new System.Drawing.Point(227, 41);
+			this.label6.Location = new System.Drawing.Point(228, 72);
 			this.label6.Name = "label6";
 			this.label6.Size = new System.Drawing.Size(56, 13);
 			this.label6.TabIndex = 16;
@@ -179,14 +253,9 @@
             0,
             0,
             0});
-			this.nudPredictorDelay.Location = new System.Drawing.Point(313, 38);
+			this.nudPredictorDelay.Location = new System.Drawing.Point(314, 69);
 			this.nudPredictorDelay.Maximum = new decimal(new int[] {
             5000,
-            0,
-            0,
-            0});
-			this.nudPredictorDelay.Minimum = new decimal(new int[] {
-            1,
             0,
             0,
             0});
@@ -203,14 +272,14 @@
 			// lbHints
 			// 
 			this.lbHints.FormattingEnabled = true;
-			this.lbHints.Location = new System.Drawing.Point(64, 112);
+			this.lbHints.Location = new System.Drawing.Point(65, 143);
 			this.lbHints.Name = "lbHints";
 			this.lbHints.Size = new System.Drawing.Size(260, 134);
 			this.lbHints.TabIndex = 14;
 			// 
 			// tbHintCount
 			// 
-			this.tbHintCount.Location = new System.Drawing.Point(424, 173);
+			this.tbHintCount.Location = new System.Drawing.Point(425, 204);
 			this.tbHintCount.Name = "tbHintCount";
 			this.tbHintCount.ReadOnly = true;
 			this.tbHintCount.Size = new System.Drawing.Size(62, 20);
@@ -219,7 +288,7 @@
 			// label7
 			// 
 			this.label7.AutoSize = true;
-			this.label7.Location = new System.Drawing.Point(338, 176);
+			this.label7.Location = new System.Drawing.Point(339, 207);
 			this.label7.Name = "label7";
 			this.label7.Size = new System.Drawing.Size(59, 13);
 			this.label7.TabIndex = 12;
@@ -228,7 +297,7 @@
 			// label5
 			// 
 			this.label5.AutoSize = true;
-			this.label5.Location = new System.Drawing.Point(3, 79);
+			this.label5.Location = new System.Drawing.Point(4, 110);
 			this.label5.Name = "label5";
 			this.label5.Size = new System.Drawing.Size(31, 13);
 			this.label5.TabIndex = 9;
@@ -236,7 +305,7 @@
 			// 
 			// tbEndOfWorld
 			// 
-			this.tbEndOfWorld.Location = new System.Drawing.Point(424, 147);
+			this.tbEndOfWorld.Location = new System.Drawing.Point(425, 178);
 			this.tbEndOfWorld.Name = "tbEndOfWorld";
 			this.tbEndOfWorld.ReadOnly = true;
 			this.tbEndOfWorld.Size = new System.Drawing.Size(62, 20);
@@ -245,7 +314,7 @@
 			// label4
 			// 
 			this.label4.AutoSize = true;
-			this.label4.Location = new System.Drawing.Point(338, 150);
+			this.label4.Location = new System.Drawing.Point(339, 181);
 			this.label4.Name = "label4";
 			this.label4.Size = new System.Drawing.Size(72, 13);
 			this.label4.TabIndex = 7;
@@ -253,7 +322,7 @@
 			// 
 			// tbPos
 			// 
-			this.tbPos.Location = new System.Drawing.Point(424, 121);
+			this.tbPos.Location = new System.Drawing.Point(425, 152);
 			this.tbPos.Name = "tbPos";
 			this.tbPos.ReadOnly = true;
 			this.tbPos.Size = new System.Drawing.Size(62, 20);
@@ -262,7 +331,7 @@
 			// label3
 			// 
 			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(338, 124);
+			this.label3.Location = new System.Drawing.Point(339, 155);
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(28, 13);
 			this.label3.TabIndex = 5;
@@ -271,7 +340,7 @@
 			// label2
 			// 
 			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(227, 15);
+			this.label2.Location = new System.Drawing.Point(228, 46);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(80, 13);
 			this.label2.TabIndex = 4;
@@ -280,7 +349,7 @@
 			// label1
 			// 
 			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(3, 12);
+			this.label1.Location = new System.Drawing.Point(4, 43);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(55, 13);
 			this.label1.TabIndex = 3;
@@ -288,7 +357,7 @@
 			// 
 			// nudMaxHintCount
 			// 
-			this.nudMaxHintCount.Location = new System.Drawing.Point(313, 12);
+			this.nudMaxHintCount.Location = new System.Drawing.Point(314, 43);
 			this.nudMaxHintCount.Maximum = new decimal(new int[] {
             20,
             0,
@@ -313,7 +382,7 @@
 			// 
 			this.cmbPredictorLangs.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.cmbPredictorLangs.FormattingEnabled = true;
-			this.cmbPredictorLangs.Location = new System.Drawing.Point(64, 9);
+			this.cmbPredictorLangs.Location = new System.Drawing.Point(65, 40);
 			this.cmbPredictorLangs.Name = "cmbPredictorLangs";
 			this.cmbPredictorLangs.Size = new System.Drawing.Size(66, 21);
 			this.cmbPredictorLangs.TabIndex = 1;
@@ -323,15 +392,20 @@
 			// 
 			this.tbPredictorInput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.tbPredictorInput.Location = new System.Drawing.Point(64, 76);
+			this.tbPredictorInput.Location = new System.Drawing.Point(65, 107);
 			this.tbPredictorInput.Name = "tbPredictorInput";
-			this.tbPredictorInput.Size = new System.Drawing.Size(465, 20);
+			this.tbPredictorInput.Size = new System.Drawing.Size(442, 20);
 			this.tbPredictorInput.TabIndex = 0;
 			this.tbPredictorInput.TextChanged += new System.EventHandler(this.tbPredictor_TextChanged);
 			this.tbPredictorInput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbPredictor_KeyDown);
 			// 
 			// tpDictionary
 			// 
+			this.tpDictionary.Controls.Add(this.label29);
+			this.tpDictionary.Controls.Add(this.linkLabel3);
+			this.tpDictionary.Controls.Add(this.tbDictionaryKey);
+			this.tpDictionary.Controls.Add(this.label27);
+			this.tpDictionary.Controls.Add(this.btnDetermine);
 			this.tpDictionary.Controls.Add(this.tbDictionaryIndent);
 			this.tpDictionary.Controls.Add(this.label14);
 			this.tpDictionary.Controls.Add(this.cbDictionaryFormatting);
@@ -349,14 +423,66 @@
 			this.tpDictionary.Location = new System.Drawing.Point(4, 22);
 			this.tpDictionary.Name = "tpDictionary";
 			this.tpDictionary.Padding = new System.Windows.Forms.Padding(3);
-			this.tpDictionary.Size = new System.Drawing.Size(541, 451);
+			this.tpDictionary.Size = new System.Drawing.Size(518, 464);
 			this.tpDictionary.TabIndex = 1;
 			this.tpDictionary.Text = "Dictionary";
 			this.tpDictionary.UseVisualStyleBackColor = true;
 			// 
+			// label29
+			// 
+			this.label29.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.label29.AutoSize = true;
+			this.label29.Location = new System.Drawing.Point(6, 446);
+			this.label29.Name = "label29";
+			this.label29.Size = new System.Drawing.Size(305, 13);
+			this.label29.TabIndex = 29;
+			this.label29.Text = "Реализовано с помощью сервиса «API «Яндекс.Словарь»";
+			// 
+			// linkLabel3
+			// 
+			this.linkLabel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.linkLabel3.AutoSize = true;
+			this.linkLabel3.Location = new System.Drawing.Point(317, 446);
+			this.linkLabel3.Name = "linkLabel3";
+			this.linkLabel3.Size = new System.Drawing.Size(156, 13);
+			this.linkLabel3.TabIndex = 28;
+			this.linkLabel3.TabStop = true;
+			this.linkLabel3.Text = "http://api.yandex.ru/dictionary/";
+			this.linkLabel3.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
+			// 
+			// tbDictionaryKey
+			// 
+			this.tbDictionaryKey.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.tbDictionaryKey.Location = new System.Drawing.Point(93, 10);
+			this.tbDictionaryKey.Name = "tbDictionaryKey";
+			this.tbDictionaryKey.Size = new System.Drawing.Size(417, 20);
+			this.tbDictionaryKey.TabIndex = 27;
+			this.tbDictionaryKey.TextChanged += new System.EventHandler(this.tbDictionaryKey_TextChanged);
+			// 
+			// label27
+			// 
+			this.label27.AutoSize = true;
+			this.label27.Location = new System.Drawing.Point(11, 13);
+			this.label27.Name = "label27";
+			this.label27.Size = new System.Drawing.Size(25, 13);
+			this.label27.TabIndex = 26;
+			this.label27.Text = "Key";
+			// 
+			// btnDetermine
+			// 
+			this.btnDetermine.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.btnDetermine.Location = new System.Drawing.Point(93, 410);
+			this.btnDetermine.Name = "btnDetermine";
+			this.btnDetermine.Size = new System.Drawing.Size(105, 23);
+			this.btnDetermine.TabIndex = 25;
+			this.btnDetermine.Text = "Determine";
+			this.btnDetermine.UseVisualStyleBackColor = true;
+			this.btnDetermine.Click += new System.EventHandler(this.btnDetermine_Click);
+			// 
 			// tbDictionaryIndent
 			// 
-			this.tbDictionaryIndent.Location = new System.Drawing.Point(463, 81);
+			this.tbDictionaryIndent.Location = new System.Drawing.Point(413, 101);
 			this.tbDictionaryIndent.Name = "tbDictionaryIndent";
 			this.tbDictionaryIndent.Size = new System.Drawing.Size(68, 20);
 			this.tbDictionaryIndent.TabIndex = 24;
@@ -366,7 +492,7 @@
 			// label14
 			// 
 			this.label14.AutoSize = true;
-			this.label14.Location = new System.Drawing.Point(401, 82);
+			this.label14.Location = new System.Drawing.Point(351, 102);
 			this.label14.Name = "label14";
 			this.label14.Size = new System.Drawing.Size(37, 13);
 			this.label14.TabIndex = 23;
@@ -375,7 +501,7 @@
 			// cbDictionaryFormatting
 			// 
 			this.cbDictionaryFormatting.AutoSize = true;
-			this.cbDictionaryFormatting.Location = new System.Drawing.Point(404, 47);
+			this.cbDictionaryFormatting.Location = new System.Drawing.Point(354, 67);
 			this.cbDictionaryFormatting.Name = "cbDictionaryFormatting";
 			this.cbDictionaryFormatting.Size = new System.Drawing.Size(75, 17);
 			this.cbDictionaryFormatting.TabIndex = 22;
@@ -386,7 +512,7 @@
 			// label13
 			// 
 			this.label13.AutoSize = true;
-			this.label13.Location = new System.Drawing.Point(11, 140);
+			this.label13.Location = new System.Drawing.Point(11, 160);
 			this.label13.Name = "label13";
 			this.label13.Size = new System.Drawing.Size(37, 13);
 			this.label13.TabIndex = 21;
@@ -397,17 +523,17 @@
 			this.rbDictionaryOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.rbDictionaryOutput.Location = new System.Drawing.Point(93, 137);
+			this.rbDictionaryOutput.Location = new System.Drawing.Point(93, 157);
 			this.rbDictionaryOutput.Name = "rbDictionaryOutput";
 			this.rbDictionaryOutput.ReadOnly = true;
-			this.rbDictionaryOutput.Size = new System.Drawing.Size(440, 306);
+			this.rbDictionaryOutput.Size = new System.Drawing.Size(417, 247);
 			this.rbDictionaryOutput.TabIndex = 20;
 			this.rbDictionaryOutput.Text = "";
 			// 
 			// label12
 			// 
 			this.label12.AutoSize = true;
-			this.label12.Location = new System.Drawing.Point(401, 22);
+			this.label12.Location = new System.Drawing.Point(351, 42);
 			this.label12.Name = "label12";
 			this.label12.Size = new System.Drawing.Size(56, 13);
 			this.label12.TabIndex = 19;
@@ -420,14 +546,9 @@
             0,
             0,
             0});
-			this.nudDictionaryDelay.Location = new System.Drawing.Point(463, 19);
+			this.nudDictionaryDelay.Location = new System.Drawing.Point(413, 39);
 			this.nudDictionaryDelay.Maximum = new decimal(new int[] {
             5000,
-            0,
-            0,
-            0});
-			this.nudDictionaryDelay.Minimum = new decimal(new int[] {
-            1,
             0,
             0,
             0});
@@ -446,7 +567,7 @@
 			this.groupBox1.Controls.Add(this.cbPartOfSpeech);
 			this.groupBox1.Controls.Add(this.cbFamily);
 			this.groupBox1.Controls.Add(this.cbMorpho);
-			this.groupBox1.Location = new System.Drawing.Point(239, 16);
+			this.groupBox1.Location = new System.Drawing.Point(189, 36);
 			this.groupBox1.Name = "groupBox1";
 			this.groupBox1.Size = new System.Drawing.Size(144, 89);
 			this.groupBox1.TabIndex = 16;
@@ -489,7 +610,7 @@
 			// label10
 			// 
 			this.label10.AutoSize = true;
-			this.label10.Location = new System.Drawing.Point(11, 46);
+			this.label10.Location = new System.Drawing.Point(11, 66);
 			this.label10.Name = "label10";
 			this.label10.Size = new System.Drawing.Size(69, 13);
 			this.label10.TabIndex = 13;
@@ -499,7 +620,7 @@
 			// 
 			this.cmbDictionaryLangUi.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.cmbDictionaryLangUi.FormattingEnabled = true;
-			this.cmbDictionaryLangUi.Location = new System.Drawing.Point(93, 43);
+			this.cmbDictionaryLangUi.Location = new System.Drawing.Point(93, 63);
 			this.cmbDictionaryLangUi.Name = "cmbDictionaryLangUi";
 			this.cmbDictionaryLangUi.Size = new System.Drawing.Size(72, 21);
 			this.cmbDictionaryLangUi.TabIndex = 12;
@@ -508,7 +629,7 @@
 			// label9
 			// 
 			this.label9.AutoSize = true;
-			this.label9.Location = new System.Drawing.Point(11, 114);
+			this.label9.Location = new System.Drawing.Point(11, 134);
 			this.label9.Name = "label9";
 			this.label9.Size = new System.Drawing.Size(31, 13);
 			this.label9.TabIndex = 11;
@@ -518,16 +639,16 @@
 			// 
 			this.tbDictionaryInput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.tbDictionaryInput.Location = new System.Drawing.Point(93, 111);
+			this.tbDictionaryInput.Location = new System.Drawing.Point(93, 131);
 			this.tbDictionaryInput.Name = "tbDictionaryInput";
-			this.tbDictionaryInput.Size = new System.Drawing.Size(440, 20);
+			this.tbDictionaryInput.Size = new System.Drawing.Size(417, 20);
 			this.tbDictionaryInput.TabIndex = 10;
 			this.tbDictionaryInput.TextChanged += new System.EventHandler(this.tbDictionaryInput_TextChanged);
 			// 
 			// label8
 			// 
 			this.label8.AutoSize = true;
-			this.label8.Location = new System.Drawing.Point(11, 19);
+			this.label8.Location = new System.Drawing.Point(11, 39);
 			this.label8.Name = "label8";
 			this.label8.Size = new System.Drawing.Size(76, 13);
 			this.label8.TabIndex = 5;
@@ -537,7 +658,7 @@
 			// 
 			this.cmbDictionaryLangPairs.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.cmbDictionaryLangPairs.FormattingEnabled = true;
-			this.cmbDictionaryLangPairs.Location = new System.Drawing.Point(93, 16);
+			this.cmbDictionaryLangPairs.Location = new System.Drawing.Point(93, 36);
 			this.cmbDictionaryLangPairs.Name = "cmbDictionaryLangPairs";
 			this.cmbDictionaryLangPairs.Size = new System.Drawing.Size(72, 21);
 			this.cmbDictionaryLangPairs.TabIndex = 4;
@@ -545,6 +666,11 @@
 			// 
 			// tpTranslator
 			// 
+			this.tpTranslator.Controls.Add(this.label30);
+			this.tpTranslator.Controls.Add(this.linkLabel1);
+			this.tpTranslator.Controls.Add(this.tbTranslatorKey);
+			this.tpTranslator.Controls.Add(this.label26);
+			this.tpTranslator.Controls.Add(this.btnTranslate);
 			this.tpTranslator.Controls.Add(this.tbTranslatorDetectedLang);
 			this.tpTranslator.Controls.Add(this.label20);
 			this.tpTranslator.Controls.Add(this.label19);
@@ -560,19 +686,70 @@
 			this.tpTranslator.Controls.Add(this.cmbTranslatorInputLang);
 			this.tpTranslator.Location = new System.Drawing.Point(4, 22);
 			this.tpTranslator.Name = "tpTranslator";
-			this.tpTranslator.Size = new System.Drawing.Size(541, 451);
+			this.tpTranslator.Size = new System.Drawing.Size(518, 464);
 			this.tpTranslator.TabIndex = 2;
 			this.tpTranslator.Text = "Translator";
 			this.tpTranslator.UseVisualStyleBackColor = true;
+			// 
+			// label30
+			// 
+			this.label30.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.label30.AutoSize = true;
+			this.label30.Location = new System.Drawing.Point(8, 446);
+			this.label30.Name = "label30";
+			this.label30.Size = new System.Drawing.Size(222, 13);
+			this.label30.TabIndex = 37;
+			this.label30.Text = "Переведено сервисом «Яндекс.Перевод»";
+			// 
+			// linkLabel1
+			// 
+			this.linkLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.linkLabel1.AutoSize = true;
+			this.linkLabel1.Location = new System.Drawing.Point(236, 446);
+			this.linkLabel1.Name = "linkLabel1";
+			this.linkLabel1.Size = new System.Drawing.Size(132, 13);
+			this.linkLabel1.TabIndex = 36;
+			this.linkLabel1.TabStop = true;
+			this.linkLabel1.Text = "http://translate.yandex.ru/";
+			this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
+			// 
+			// tbTranslatorKey
+			// 
+			this.tbTranslatorKey.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.tbTranslatorKey.Location = new System.Drawing.Point(81, 12);
+			this.tbTranslatorKey.Name = "tbTranslatorKey";
+			this.tbTranslatorKey.Size = new System.Drawing.Size(417, 20);
+			this.tbTranslatorKey.TabIndex = 35;
+			this.tbTranslatorKey.TextChanged += new System.EventHandler(this.tbTranslatorKey_TextChanged);
+			// 
+			// label26
+			// 
+			this.label26.AutoSize = true;
+			this.label26.Location = new System.Drawing.Point(8, 15);
+			this.label26.Name = "label26";
+			this.label26.Size = new System.Drawing.Size(25, 13);
+			this.label26.TabIndex = 34;
+			this.label26.Text = "Key";
+			// 
+			// btnTranslate
+			// 
+			this.btnTranslate.Location = new System.Drawing.Point(81, 352);
+			this.btnTranslate.Name = "btnTranslate";
+			this.btnTranslate.Size = new System.Drawing.Size(105, 23);
+			this.btnTranslate.TabIndex = 33;
+			this.btnTranslate.Text = "Translate";
+			this.btnTranslate.UseVisualStyleBackColor = true;
+			this.btnTranslate.Click += new System.EventHandler(this.btnTranslate_Click);
 			// 
 			// tbTranslatorDetectedLang
 			// 
 			this.tbTranslatorDetectedLang.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.tbTranslatorDetectedLang.Location = new System.Drawing.Point(421, 332);
+			this.tbTranslatorDetectedLang.Location = new System.Drawing.Point(420, 352);
 			this.tbTranslatorDetectedLang.Name = "tbTranslatorDetectedLang";
 			this.tbTranslatorDetectedLang.ReadOnly = true;
-			this.tbTranslatorDetectedLang.Size = new System.Drawing.Size(101, 20);
+			this.tbTranslatorDetectedLang.Size = new System.Drawing.Size(78, 20);
 			this.tbTranslatorDetectedLang.TabIndex = 32;
 			// 
 			// label20
@@ -580,7 +757,7 @@
 			this.label20.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.label20.AutoSize = true;
-			this.label20.Location = new System.Drawing.Point(310, 335);
+			this.label20.Location = new System.Drawing.Point(309, 355);
 			this.label20.Name = "label20";
 			this.label20.Size = new System.Drawing.Size(105, 13);
 			this.label20.TabIndex = 31;
@@ -589,7 +766,7 @@
 			// label19
 			// 
 			this.label19.AutoSize = true;
-			this.label19.Location = new System.Drawing.Point(359, 16);
+			this.label19.Location = new System.Drawing.Point(358, 42);
 			this.label19.Name = "label19";
 			this.label19.Size = new System.Drawing.Size(56, 13);
 			this.label19.TabIndex = 30;
@@ -602,14 +779,9 @@
             0,
             0,
             0});
-			this.nudTranslatorDelay.Location = new System.Drawing.Point(421, 13);
+			this.nudTranslatorDelay.Location = new System.Drawing.Point(420, 39);
 			this.nudTranslatorDelay.Maximum = new decimal(new int[] {
             5000,
-            0,
-            0,
-            0});
-			this.nudTranslatorDelay.Minimum = new decimal(new int[] {
-            1,
             0,
             0,
             0});
@@ -626,7 +798,7 @@
 			// cbTranslatorDetectInputLang
 			// 
 			this.cbTranslatorDetectInputLang.AutoSize = true;
-			this.cbTranslatorDetectInputLang.Location = new System.Drawing.Point(362, 39);
+			this.cbTranslatorDetectInputLang.Location = new System.Drawing.Point(361, 65);
 			this.cbTranslatorDetectInputLang.Name = "cbTranslatorDetectInputLang";
 			this.cbTranslatorDetectInputLang.Size = new System.Drawing.Size(112, 17);
 			this.cbTranslatorDetectInputLang.TabIndex = 28;
@@ -637,7 +809,7 @@
 			// label18
 			// 
 			this.label18.AutoSize = true;
-			this.label18.Location = new System.Drawing.Point(177, 22);
+			this.label18.Location = new System.Drawing.Point(173, 42);
 			this.label18.Name = "label18";
 			this.label18.Size = new System.Drawing.Size(66, 13);
 			this.label18.TabIndex = 27;
@@ -647,7 +819,7 @@
 			// 
 			this.cmbTranslatorOutputLang.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.cmbTranslatorOutputLang.FormattingEnabled = true;
-			this.cmbTranslatorOutputLang.Location = new System.Drawing.Point(249, 18);
+			this.cmbTranslatorOutputLang.Location = new System.Drawing.Point(245, 38);
 			this.cmbTranslatorOutputLang.Name = "cmbTranslatorOutputLang";
 			this.cmbTranslatorOutputLang.Size = new System.Drawing.Size(73, 21);
 			this.cmbTranslatorOutputLang.TabIndex = 26;
@@ -656,7 +828,7 @@
 			// label16
 			// 
 			this.label16.AutoSize = true;
-			this.label16.Location = new System.Drawing.Point(11, 208);
+			this.label16.Location = new System.Drawing.Point(7, 228);
 			this.label16.Name = "label16";
 			this.label16.Size = new System.Drawing.Size(37, 13);
 			this.label16.TabIndex = 25;
@@ -666,18 +838,18 @@
 			// 
 			this.rtbTranslatorOutput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.rtbTranslatorOutput.Location = new System.Drawing.Point(85, 205);
+			this.rtbTranslatorOutput.Location = new System.Drawing.Point(81, 225);
 			this.rtbTranslatorOutput.Name = "rtbTranslatorOutput";
 			this.rtbTranslatorOutput.ReadOnly = true;
 			this.rtbTranslatorOutput.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-			this.rtbTranslatorOutput.Size = new System.Drawing.Size(440, 121);
+			this.rtbTranslatorOutput.Size = new System.Drawing.Size(417, 121);
 			this.rtbTranslatorOutput.TabIndex = 24;
 			this.rtbTranslatorOutput.Text = "";
 			// 
 			// label17
 			// 
 			this.label17.AutoSize = true;
-			this.label17.Location = new System.Drawing.Point(11, 78);
+			this.label17.Location = new System.Drawing.Point(7, 98);
 			this.label17.Name = "label17";
 			this.label17.Size = new System.Drawing.Size(31, 13);
 			this.label17.TabIndex = 23;
@@ -687,18 +859,18 @@
 			// 
 			this.tbTranslatorInput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.tbTranslatorInput.Location = new System.Drawing.Point(85, 75);
+			this.tbTranslatorInput.Location = new System.Drawing.Point(81, 95);
 			this.tbTranslatorInput.Multiline = true;
 			this.tbTranslatorInput.Name = "tbTranslatorInput";
 			this.tbTranslatorInput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.tbTranslatorInput.Size = new System.Drawing.Size(440, 121);
+			this.tbTranslatorInput.Size = new System.Drawing.Size(417, 121);
 			this.tbTranslatorInput.TabIndex = 22;
 			this.tbTranslatorInput.TextChanged += new System.EventHandler(this.tbTranslatorInput_TextChanged);
 			// 
 			// label15
 			// 
 			this.label15.AutoSize = true;
-			this.label15.Location = new System.Drawing.Point(11, 21);
+			this.label15.Location = new System.Drawing.Point(7, 41);
 			this.label15.Name = "label15";
 			this.label15.Size = new System.Drawing.Size(58, 13);
 			this.label15.TabIndex = 7;
@@ -708,7 +880,7 @@
 			// 
 			this.cmbTranslatorInputLang.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.cmbTranslatorInputLang.FormattingEnabled = true;
-			this.cmbTranslatorInputLang.Location = new System.Drawing.Point(85, 18);
+			this.cmbTranslatorInputLang.Location = new System.Drawing.Point(81, 38);
 			this.cmbTranslatorInputLang.Name = "cmbTranslatorInputLang";
 			this.cmbTranslatorInputLang.Size = new System.Drawing.Size(73, 21);
 			this.cmbTranslatorInputLang.TabIndex = 6;
@@ -716,6 +888,9 @@
 			// 
 			// tpSpeller
 			// 
+			this.tpSpeller.Controls.Add(this.label31);
+			this.tpSpeller.Controls.Add(this.linkLabel4);
+			this.tpSpeller.Controls.Add(this.btnSpellerCheck);
 			this.tpSpeller.Controls.Add(this.cbIncludeErrorWords);
 			this.tpSpeller.Controls.Add(this.cbSpellerUk);
 			this.tpSpeller.Controls.Add(this.cbSpellerEn);
@@ -730,10 +905,53 @@
 			this.tpSpeller.Controls.Add(this.tbSpellerInput);
 			this.tpSpeller.Location = new System.Drawing.Point(4, 22);
 			this.tpSpeller.Name = "tpSpeller";
-			this.tpSpeller.Size = new System.Drawing.Size(541, 451);
+			this.tpSpeller.Size = new System.Drawing.Size(518, 464);
 			this.tpSpeller.TabIndex = 3;
 			this.tpSpeller.Text = "Speller";
 			this.tpSpeller.UseVisualStyleBackColor = true;
+			// 
+			// label31
+			// 
+			this.label31.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.label31.AutoSize = true;
+			this.label31.Location = new System.Drawing.Point(8, 446);
+			this.label31.Name = "label31";
+			this.label31.Size = new System.Drawing.Size(228, 13);
+			this.label31.TabIndex = 40;
+			this.label31.Text = "Проверка правописания: Яндекс.Спеллер»";
+			// 
+			// linkLabel4
+			// 
+			this.linkLabel4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.linkLabel4.AutoSize = true;
+			this.linkLabel4.Location = new System.Drawing.Point(236, 446);
+			this.linkLabel4.Name = "linkLabel4";
+			this.linkLabel4.Size = new System.Drawing.Size(141, 13);
+			this.linkLabel4.TabIndex = 39;
+			this.linkLabel4.TabStop = true;
+			this.linkLabel4.Text = "http://api.yandex.ru/speller/";
+			this.linkLabel4.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
+			// 
+			// btnSpellerCheck
+			// 
+			this.btnSpellerCheck.Location = new System.Drawing.Point(91, 370);
+			this.btnSpellerCheck.Name = "btnSpellerCheck";
+			this.btnSpellerCheck.Size = new System.Drawing.Size(105, 23);
+			this.btnSpellerCheck.TabIndex = 1;
+			this.btnSpellerCheck.Text = "Check";
+			this.btnSpellerCheck.UseVisualStyleBackColor = true;
+			this.btnSpellerCheck.Click += new System.EventHandler(this.btnSpellerCheck_Click);
+			// 
+			// cbIncludeErrorWords
+			// 
+			this.cbIncludeErrorWords.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.cbIncludeErrorWords.AutoSize = true;
+			this.cbIncludeErrorWords.Location = new System.Drawing.Point(390, 374);
+			this.cbIncludeErrorWords.Name = "cbIncludeErrorWords";
+			this.cbIncludeErrorWords.Size = new System.Drawing.Size(120, 17);
+			this.cbIncludeErrorWords.TabIndex = 38;
+			this.cbIncludeErrorWords.Text = "Include Error Words";
+			this.cbIncludeErrorWords.UseVisualStyleBackColor = true;
 			// 
 			// cbSpellerUk
 			// 
@@ -784,11 +1002,6 @@
 			this.nudSpellerDelay.Location = new System.Drawing.Point(91, 82);
 			this.nudSpellerDelay.Maximum = new decimal(new int[] {
             5000,
-            0,
-            0,
-            0});
-			this.nudSpellerDelay.Minimum = new decimal(new int[] {
-            1,
             0,
             0,
             0});
@@ -945,7 +1158,7 @@
 			this.rtbSpellerOutput.Name = "rtbSpellerOutput";
 			this.rtbSpellerOutput.ReadOnly = true;
 			this.rtbSpellerOutput.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-			this.rtbSpellerOutput.Size = new System.Drawing.Size(442, 121);
+			this.rtbSpellerOutput.Size = new System.Drawing.Size(419, 121);
 			this.rtbSpellerOutput.TabIndex = 28;
 			this.rtbSpellerOutput.Text = "";
 			// 
@@ -966,25 +1179,15 @@
 			this.tbSpellerInput.Multiline = true;
 			this.tbSpellerInput.Name = "tbSpellerInput";
 			this.tbSpellerInput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.tbSpellerInput.Size = new System.Drawing.Size(442, 121);
+			this.tbSpellerInput.Size = new System.Drawing.Size(419, 121);
 			this.tbSpellerInput.TabIndex = 26;
 			this.tbSpellerInput.TextChanged += new System.EventHandler(this.tbSpellerInput_TextChanged);
-			// 
-			// cbIncludeErrorWords
-			// 
-			this.cbIncludeErrorWords.AutoSize = true;
-			this.cbIncludeErrorWords.Location = new System.Drawing.Point(91, 370);
-			this.cbIncludeErrorWords.Name = "cbIncludeErrorWords";
-			this.cbIncludeErrorWords.Size = new System.Drawing.Size(120, 17);
-			this.cbIncludeErrorWords.TabIndex = 38;
-			this.cbIncludeErrorWords.Text = "Include Error Words";
-			this.cbIncludeErrorWords.UseVisualStyleBackColor = true;
 			// 
 			// frmMain
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(549, 477);
+			this.ClientSize = new System.Drawing.Size(526, 490);
 			this.Controls.Add(this.tcServices);
 			this.Name = "frmMain";
 			this.Text = "Yandex Linguistics";
@@ -1085,6 +1288,24 @@
 		private System.Windows.Forms.CheckBox cbSpellerUk;
 		private System.Windows.Forms.CheckBox cbSpellerEn;
 		private System.Windows.Forms.CheckBox cbIncludeErrorWords;
+		private System.Windows.Forms.Button btnPredict;
+		private System.Windows.Forms.Button btnDetermine;
+		private System.Windows.Forms.Button btnTranslate;
+		private System.Windows.Forms.Button btnSpellerCheck;
+		private System.Windows.Forms.TextBox tbPredictorKey;
+		private System.Windows.Forms.Label label25;
+		private System.Windows.Forms.TextBox tbDictionaryKey;
+		private System.Windows.Forms.Label label27;
+		private System.Windows.Forms.TextBox tbTranslatorKey;
+		private System.Windows.Forms.Label label26;
+		private System.Windows.Forms.Label label28;
+		private System.Windows.Forms.LinkLabel linkLabel2;
+		private System.Windows.Forms.Label label29;
+		private System.Windows.Forms.LinkLabel linkLabel3;
+		private System.Windows.Forms.Label label30;
+		private System.Windows.Forms.LinkLabel linkLabel1;
+		private System.Windows.Forms.Label label31;
+		private System.Windows.Forms.LinkLabel linkLabel4;
 	}
 }
 

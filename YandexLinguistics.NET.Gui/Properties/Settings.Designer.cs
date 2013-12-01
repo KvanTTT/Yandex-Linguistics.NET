@@ -313,6 +313,18 @@ namespace YandexLinguistics.NET.Gui.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool SpellerIncludeErrorWords {
+            get {
+                return ((bool)(this["SpellerIncludeErrorWords"]));
+            }
+            set {
+                this["SpellerIncludeErrorWords"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string DictionaryOutputIndent {
             get {
@@ -325,13 +337,40 @@ namespace YandexLinguistics.NET.Gui.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool SpellerIncludeErrorWords {
+        [global::System.Configuration.DefaultSettingValueAttribute("pdct.1.1.20131116T111605Z.e45a2927eae2bd1b.7bd44f99c7d9d634ef38bcd649fdc996c8b6dd" +
+            "be")]
+        public string PredictorKey {
             get {
-                return ((bool)(this["SpellerIncludeErrorWords"]));
+                return ((string)(this["PredictorKey"]));
             }
             set {
-                this["SpellerIncludeErrorWords"] = value;
+                this["PredictorKey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("dict.1.1.20131116T111739Z.ed5e7998d207ec85.dcbda87c023115b94a6c5caeb6dd122a0b62c8" +
+            "40")]
+        public string DictionaryKey {
+            get {
+                return ((string)(this["DictionaryKey"]));
+            }
+            set {
+                this["DictionaryKey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("trnsl.1.1.20131116T111727Z.1996f6347b51e3cb.51f72e60d8a05960bc4b820d9a9f558c9dc00" +
+            "404")]
+        public string TranslatorKey {
+            get {
+                return ((string)(this["TranslatorKey"]));
+            }
+            set {
+                this["TranslatorKey"] = value;
             }
         }
     }
