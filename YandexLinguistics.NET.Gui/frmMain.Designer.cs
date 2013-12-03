@@ -276,6 +276,7 @@
 			this.lbHints.Name = "lbHints";
 			this.lbHints.Size = new System.Drawing.Size(260, 134);
 			this.lbHints.TabIndex = 14;
+			this.lbHints.DoubleClick += new System.EventHandler(this.lbHints_DoubleClick);
 			// 
 			// tbHintCount
 			// 
@@ -866,6 +867,7 @@
 			this.tbTranslatorInput.Size = new System.Drawing.Size(417, 121);
 			this.tbTranslatorInput.TabIndex = 22;
 			this.tbTranslatorInput.TextChanged += new System.EventHandler(this.tbTranslatorInput_TextChanged);
+			this.tbTranslatorInput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_KeyDown);
 			// 
 			// label15
 			// 
@@ -1185,6 +1187,7 @@
 			this.tbSpellerInput.Size = new System.Drawing.Size(419, 121);
 			this.tbSpellerInput.TabIndex = 26;
 			this.tbSpellerInput.TextChanged += new System.EventHandler(this.tbSpellerInput_TextChanged);
+			this.tbSpellerInput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_KeyDown);
 			// 
 			// frmMain
 			// 

@@ -325,18 +325,6 @@ namespace YandexLinguistics.NET.Gui.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string DictionaryOutputIndent {
-            get {
-                return ((string)(this["DictionaryOutputIndent"]));
-            }
-            set {
-                this["DictionaryOutputIndent"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("pdct.1.1.20131116T111605Z.e45a2927eae2bd1b.7bd44f99c7d9d634ef38bcd649fdc996c8b6dd" +
             "be")]
         public string PredictorKey {
@@ -371,6 +359,18 @@ namespace YandexLinguistics.NET.Gui.Properties {
             }
             set {
                 this["TranslatorKey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string DictionaryOutputIndent {
+            get {
+                return ((string)(this["DictionaryOutputIndent"]));
+            }
+            set {
+                this["DictionaryOutputIndent"] = value;
             }
         }
     }

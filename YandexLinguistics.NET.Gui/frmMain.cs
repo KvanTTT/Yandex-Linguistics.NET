@@ -226,15 +226,7 @@ namespace YandexLinguistics.NET.Gui
 		{
 			if ((e.Control && e.KeyCode == Keys.Space) || e.KeyCode == Keys.Enter)
 			{
-				if (lbHints.Items.Count > 0)
-				{
-					int pos = int.Parse(tbPos.Text);
-					if (pos <= 0)
-						tbPredictorInput.Text += ((string)lbHints.SelectedItem).Substring(-pos);
-					else
-						tbPredictorInput.Text += new string(' ', pos) + (string)lbHints.SelectedItem;
-					tbPredictorInput.Select(tbPredictorInput.Text.Length, 0);
-				}
+				PredictorAppendSelectedText();
 			}
 			else if (e.KeyCode == Keys.Down)
 			{
@@ -245,6 +237,33 @@ namespace YandexLinguistics.NET.Gui
 			{
 				if (lbHints.Items.Count > 0)
 					lbHints.SelectedIndex = (lbHints.SelectedIndex - 1 + lbHints.Items.Count) % lbHints.Items.Count;
+			}
+		}
+
+		private void lbHints_DoubleClick(object sender, EventArgs e)
+		{
+			PredictorAppendSelectedText();
+		}
+
+		private void PredictorAppendSelectedText()
+		{
+			if (lbHints.Items.Count > 0)
+			{
+				int pos = int.Parse(tbPos.Text);
+				if (pos <= 0)
+					tbPredictorInput.Text += ((string)lbHints.SelectedItem).Substring(-pos);
+				else
+					tbPredictorInput.Text += new string(' ', pos) + (string)lbHints.SelectedItem;
+				tbPredictorInput.Select(tbPredictorInput.Text.Length, 0);
+			}
+		}
+
+		private void textBox_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.Control && e.KeyCode == Keys.A)
+			{
+				((TextBox)sender).SelectAll();
+				e.SuppressKeyPress = true;
 			}
 		}
 
@@ -265,6 +284,11 @@ namespace YandexLinguistics.NET.Gui
 					tbTranslatorInput.Select(tbTranslatorInput.Text.Length, 0);
 					break;
 			}
+		}
+
+		private void linkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+		{
+			System.Diagnostics.Process.Start(((LinkLabel)sender).Text);
 		}
 
 		private void UpdatePredictorResult()
@@ -449,11 +473,6 @@ namespace YandexLinguistics.NET.Gui
 					rtbSpellerOutput.Text = ex.ToString();
 				}
 			}));
-		}
-
-		private void linkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-		{
-			System.Diagnostics.Process.Start(((LinkLabel)sender).Text);
 		}
 	}
 }
