@@ -364,6 +364,54 @@ namespace YandexLinguistics.NET.Gui.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://predictor.yandex.net/api/v1/predict")]
+        public string PredictorBaseUrl {
+            get {
+                return ((string)(this["PredictorBaseUrl"]));
+            }
+            set {
+                this["PredictorBaseUrl"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://dictionary.yandex.net/api/v1/dicservice")]
+        public string DictionaryBaseUrl {
+            get {
+                return ((string)(this["DictionaryBaseUrl"]));
+            }
+            set {
+                this["DictionaryBaseUrl"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://translate.yandex.net/api/v1.5/tr")]
+        public string TranslatorBaseUrl {
+            get {
+                return ((string)(this["TranslatorBaseUrl"]));
+            }
+            set {
+                this["TranslatorBaseUrl"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://speller.yandex.net/services/spellservice")]
+        public string SpellerBaseUrl {
+            get {
+                return ((string)(this["SpellerBaseUrl"]));
+            }
+            set {
+                this["SpellerBaseUrl"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string DictionaryOutputIndent {
             get {

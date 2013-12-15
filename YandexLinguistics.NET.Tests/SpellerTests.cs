@@ -76,7 +76,7 @@ namespace YandexLinguistics.NET.Tests
 		[Test]
 		public void SpellerSubstitution()
 		{
-			var mistakes = Speller.DamerauLevenshteinDistance("синхрАфазАтрон", "синхрофазотрон");
+			var mistakes = Speller.OptimalStringAlignmentDistance("синхрАфазАтрон", "синхрофазотрон");
 			Assert.AreEqual(2, mistakes.Count);
 			Assert.AreEqual(mistakes[0].Position, 5);
 			Assert.AreEqual(mistakes[0].Type, CharMistakeType.Substitution);
@@ -87,7 +87,7 @@ namespace YandexLinguistics.NET.Tests
 		[Test]
 		public void SpellerInsertion()
 		{
-			var mistakes = Speller.DamerauLevenshteinDistance("синхрофазотр", "синхрофазотрон");
+			var mistakes = Speller.OptimalStringAlignmentDistance("синхрофазотр", "синхрофазотрон");
 			Assert.AreEqual(2, mistakes.Count);
 			Assert.AreEqual(12, mistakes[0].Position);
 			Assert.AreEqual(CharMistakeType.Insertion, mistakes[0].Type);
@@ -98,7 +98,7 @@ namespace YandexLinguistics.NET.Tests
 		[Test]
 		public void SpellerDeletion1()
 		{
-			var mistakes = Speller.DamerauLevenshteinDistance("синНхрофаАзотрон", "синхрофазотрон");
+			var mistakes = Speller.OptimalStringAlignmentDistance("синНхрофаАзотрон", "синхрофазотрон");
 			Assert.AreEqual(2, mistakes.Count);
 			Assert.AreEqual(3, mistakes[0].Position);
 			Assert.AreEqual(CharMistakeType.Deletion, mistakes[0].Type);
@@ -109,7 +109,7 @@ namespace YandexLinguistics.NET.Tests
 		[Test]
 		public void SpellerDeletion2()
 		{
-			var mistakes = Speller.DamerauLevenshteinDistance("аДубна", "Дубна");
+			var mistakes = Speller.OptimalStringAlignmentDistance("аДубна", "Дубна");
 			Assert.AreEqual(1, mistakes.Count);
 			Assert.AreEqual(0, mistakes[0].Position);
 			Assert.AreEqual(CharMistakeType.Deletion, mistakes[0].Type);
@@ -118,7 +118,7 @@ namespace YandexLinguistics.NET.Tests
 		[Test]
 		public void SpellerTransposition()
 		{
-			var mistakes = Speller.DamerauLevenshteinDistance("синхрофазортон", "синхрофазотрон");
+			var mistakes = Speller.OptimalStringAlignmentDistance("синхрофазортон", "синхрофазотрон");
 			Assert.AreEqual(1, mistakes.Count);
 			Assert.AreEqual(10, mistakes[0].Position);
 			Assert.AreEqual(CharMistakeType.Transposition, mistakes[0].Type);
@@ -127,7 +127,7 @@ namespace YandexLinguistics.NET.Tests
 		[Test]
 		public void SpellerTranspositionOff()
 		{
-			var mistakes = Speller.DamerauLevenshteinDistance("синхрофазортон", "синхрофазотрон", false);
+			var mistakes = Speller.OptimalStringAlignmentDistance("синхрофазортон", "синхрофазотрон", false);
 			Assert.AreEqual(2, mistakes.Count);
 			Assert.AreEqual(10, mistakes[0].Position);
 			Assert.AreEqual(CharMistakeType.Insertion, mistakes[0].Type);
@@ -138,7 +138,7 @@ namespace YandexLinguistics.NET.Tests
 		[Test]
 		public void SpellerMixed()
 		{
-			var mistakes = Speller.DamerauLevenshteinDistance("АсИнхрофаортон", "синхрофазотрон");
+			var mistakes = Speller.OptimalStringAlignmentDistance("АсИнхрофаортон", "синхрофазотрон");
 			Assert.AreEqual(4, mistakes.Count);
 			Assert.AreEqual(0, mistakes[0].Position);
 			Assert.AreEqual(CharMistakeType.Deletion, mistakes[0].Type);
@@ -153,7 +153,7 @@ namespace YandexLinguistics.NET.Tests
 		[Test]
 		public void SpellerInputEpmty()
 		{
-			var mistakes = Speller.DamerauLevenshteinDistance("", "синхрофазотрон");
+			var mistakes = Speller.OptimalStringAlignmentDistance("", "синхрофазотрон");
 			Assert.AreEqual("синхрофазартон".Length, mistakes.Count);
 			for (int i = 0; i < mistakes.Count; i++)
 			{
@@ -165,7 +165,7 @@ namespace YandexLinguistics.NET.Tests
 		[Test]
 		public void SpellerOutputEpmty()
 		{
-			var mistakes = Speller.DamerauLevenshteinDistance("синхрофазотрон", "");
+			var mistakes = Speller.OptimalStringAlignmentDistance("синхрофазотрон", "");
 			Assert.AreEqual("синхрофазартон".Length, mistakes.Count);
 			for (int i = 0; i < mistakes.Count; i++)
 			{

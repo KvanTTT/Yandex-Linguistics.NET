@@ -9,12 +9,13 @@ namespace YandexLinguistics.NET
 {
 	public class Dictionary
 	{
-		protected RestClient _client = new RestClient("https://dictionary.yandex.net/api/v1/dicservice/");
+		protected RestClient _client;
 		protected string _key;
 
-		public Dictionary(string dictionayKey)
+		public Dictionary(string dictionayKey, string baseUrl = "https://dictionary.yandex.net/api/v1/dicservice")
 		{
 			_key = dictionayKey;
+			_client = new RestClient(baseUrl);
 		}
 
 		public LangPair[] GetLangs()

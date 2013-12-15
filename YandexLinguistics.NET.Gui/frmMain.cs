@@ -90,6 +90,10 @@ namespace YandexLinguistics.NET.Gui
 			tbPredictorKey.Text = Settings.Default.PredictorKey;
 			tbDictionaryKey.Text = Settings.Default.DictionaryKey;
 			tbTranslatorKey.Text = Settings.Default.TranslatorKey;
+			tbPredictorBaseUrl.Text = Settings.Default.PredictorBaseUrl;
+			tbDictionaryBaseUrl.Text = Settings.Default.DictionaryBaseUrl;
+			tbTranslatorBaseUrl.Text = Settings.Default.TranslatorBaseUrl;
+			tbSpellerBaseUrl.Text = Settings.Default.SpellerBaseUrl;
 		}
 
 		private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
@@ -147,27 +151,36 @@ namespace YandexLinguistics.NET.Gui
 			Settings.Default.SpellerHintDelay = (int)nudSpellerDelay.Value;
 			Settings.Default.SpellerInput = tbSpellerInput.Text;
 			Settings.Default.SpellerIncludeErrorWords = cbIncludeErrorWords.Checked;
-
+			Settings.Default.PredictorBaseUrl = tbPredictorBaseUrl.Text;
+			Settings.Default.DictionaryBaseUrl = tbDictionaryBaseUrl.Text;
+			Settings.Default.TranslatorBaseUrl = tbTranslatorBaseUrl.Text;
+			Settings.Default.SpellerBaseUrl = tbSpellerBaseUrl.Text;
 
 			Settings.Default.Save();
 		}
 
 		private void tbPredictorKey_TextChanged(object sender, EventArgs e)
 		{
-			Predictor = new Predictor(tbPredictorKey.Text);
+			Predictor = new Predictor(tbPredictorKey.Text, tbPredictorBaseUrl.Text);
 			tbPredictor_TextChanged(sender, e);
 		}
 
 		private void tbDictionaryKey_TextChanged(object sender, EventArgs e)
 		{
-			Dictionary = new Dictionary(tbDictionaryKey.Text);
+			Dictionary = new Dictionary(tbDictionaryKey.Text, tbDictionaryBaseUrl.Text);
 			tbDictionaryInput_TextChanged(sender, e);
 		}
 
 		private void tbTranslatorKey_TextChanged(object sender, EventArgs e)
 		{
-			Translator = new Translator(tbTranslatorKey.Text);
+			Translator = new Translator(tbTranslatorKey.Text, tbTranslatorBaseUrl.Text);
 			tbTranslatorInput_TextChanged(sender, e);
+		}
+
+		private void tbSpellerBaseUrl_TextChanged(object sender, EventArgs e)
+		{
+			Speller = new Speller(tbSpellerBaseUrl.Text);
+			tbSpellerInput_TextChanged(sender, e);
 		}
 
 		private void tbPredictor_TextChanged(object sender, EventArgs e)
@@ -417,7 +430,7 @@ namespace YandexLinguistics.NET.Gui
 								if (currentError.Steer != null)
 								{
 									output.Append(currentError.Steer);
-									var poses = Speller.DamerauLevenshteinDistance(currentError.Word, currentError.Steer);
+									var poses = Speller.OptimalStringAlignmentDistance(currentError.Word, currentError.Steer);
 									foreach (var pos in poses)
 										highlightedCharPoses.Add(
 											output.Length - currentError.Steer.Length + pos.Position,

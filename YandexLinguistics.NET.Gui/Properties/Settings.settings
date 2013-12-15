@@ -86,6 +86,18 @@
     <Setting Name="TranslatorKey" Type="System.String" Scope="User">
       <Value Profile="(Default)">trnsl.1.1.20131116T111727Z.1996f6347b51e3cb.51f72e60d8a05960bc4b820d9a9f558c9dc00404</Value>
     </Setting>
+    <Setting Name="PredictorBaseUrl" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://predictor.yandex.net/api/v1/predict</Value>
+    </Setting>
+    <Setting Name="DictionaryBaseUrl" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://dictionary.yandex.net/api/v1/dicservice</Value>
+    </Setting>
+    <Setting Name="TranslatorBaseUrl" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://translate.yandex.net/api/v1.5/tr</Value>
+    </Setting>
+    <Setting Name="SpellerBaseUrl" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://speller.yandex.net/services/spellservice</Value>
+    </Setting>
     <Setting Name="DictionaryOutputIndent" Type="System.String" Scope="User">
       <Value Profile="(Default)">
         </Value>

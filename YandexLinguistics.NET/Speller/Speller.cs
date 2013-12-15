@@ -8,10 +8,11 @@ namespace YandexLinguistics.NET
 {
 	public class Speller
 	{
-		protected RestClient _client = new RestClient("http://speller.yandex.net/services/spellservice");
+		protected RestClient _client;
 
-		public Speller()
+		public Speller(string baseUrl = "http://speller.yandex.net/services/spellservice")
 		{
+			_client = new RestClient(baseUrl);
 		}
 
 		public SpellResult CheckText(string text, Lang[] lang = null, SpellerOptions? options = null, OutputFormat? format = null)
@@ -65,7 +66,7 @@ namespace YandexLinguistics.NET
 			}
 		}
 
-		public static List<Mistake> DamerauLevenshteinDistance(
+		public static List<Mistake> OptimalStringAlignmentDistance(
 			string word, string correctedWord,
 			bool transposition = true,
 			int substitutionCost = 1,

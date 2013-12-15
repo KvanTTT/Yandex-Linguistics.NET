@@ -10,12 +10,13 @@ namespace YandexLinguistics.NET
 {
 	public class Predictor
 	{
-		protected RestClient _client = new RestClient("https://predictor.yandex.net/api/v1/predict/");
+		protected RestClient _client;
 		protected string _key;
 
-		public Predictor(string predictorKey)
+		public Predictor(string predictorKey, string baseUrl = "https://predictor.yandex.net/api/v1/predict")
 		{
 			_key = predictorKey;
+			_client = new RestClient(baseUrl);
 		}
 
 		public Lang[] GetLangs()

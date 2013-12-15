@@ -9,12 +9,13 @@ namespace YandexLinguistics.NET
 {
 	public class Translator
 	{
-		protected RestClient _client = new RestClient("https://translate.yandex.net/api/v1.5/tr/");
+		protected RestClient _client;
 		protected string _key;
 
-		public Translator(string dictionayKey)
+		public Translator(string dictionayKey, string baseUrl = "https://translate.yandex.net/api/v1.5/tr")
 		{
 			_key = dictionayKey;
+			_client = new RestClient(baseUrl);
 		}
 
 		public LangPair[] GetLangs()
