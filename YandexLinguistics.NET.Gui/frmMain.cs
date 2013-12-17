@@ -19,10 +19,12 @@ namespace YandexLinguistics.NET.Gui
 		Dictionary Dictionary;
 		Translator Translator;
 		Speller Speller;
+		Inflector Inflector;
 		System.Threading.Timer PredictorTimer;
 		System.Threading.Timer DictionaryTimer;
 		System.Threading.Timer TranslatorTimer;
 		System.Threading.Timer SpellerTimer;
+		System.Threading.Timer InflectorTimer;
 
 		public frmMain()
 		{
@@ -30,11 +32,13 @@ namespace YandexLinguistics.NET.Gui
 			Dictionary = new Dictionary(Settings.Default.DictionaryKey);
 			Translator = new Translator(Settings.Default.TranslatorKey);
 			Speller = new Speller();
+			Inflector = new Inflector();
 
 			PredictorTimer = new System.Threading.Timer(_ => UpdatePredictorResult(), null, Timeout.Infinite, Timeout.Infinite);
 			DictionaryTimer = new System.Threading.Timer(_ => UpdateDictionaryResult(), null, Timeout.Infinite, Timeout.Infinite);
 			TranslatorTimer = new System.Threading.Timer(_ => UpdateTranslatorResult(), null, Timeout.Infinite, Timeout.Infinite);
 			SpellerTimer = new System.Threading.Timer(_ => UpdateSpellerResult(), null, Timeout.Infinite, Timeout.Infinite);
+			InflectorTimer = new System.Threading.Timer(_ => UpdateInflectorResult(), null, Timeout.Infinite, Timeout.Infinite);
 
 			InitializeComponent();
 
@@ -87,6 +91,8 @@ namespace YandexLinguistics.NET.Gui
 			tbSpellerInput.Text = Settings.Default.SpellerInput;
 			cbIncludeErrorWords.Checked = Settings.Default.SpellerIncludeErrorWords;
 
+			tbInflectorInput.Text = Settings.Default.InflectorInput;
+
 			tbPredictorKey.Text = Settings.Default.PredictorKey;
 			tbDictionaryKey.Text = Settings.Default.DictionaryKey;
 			tbTranslatorKey.Text = Settings.Default.TranslatorKey;
@@ -94,6 +100,7 @@ namespace YandexLinguistics.NET.Gui
 			tbDictionaryBaseUrl.Text = Settings.Default.DictionaryBaseUrl;
 			tbTranslatorBaseUrl.Text = Settings.Default.TranslatorBaseUrl;
 			tbSpellerBaseUrl.Text = Settings.Default.SpellerBaseUrl;
+			tbInflectorBaseUrl.Text = Settings.Default.InflectorBaseUrl;
 		}
 
 		private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
@@ -151,10 +158,14 @@ namespace YandexLinguistics.NET.Gui
 			Settings.Default.SpellerHintDelay = (int)nudSpellerDelay.Value;
 			Settings.Default.SpellerInput = tbSpellerInput.Text;
 			Settings.Default.SpellerIncludeErrorWords = cbIncludeErrorWords.Checked;
+
+			Settings.Default.InflectorInput = tbInflectorInput.Text;
+
 			Settings.Default.PredictorBaseUrl = tbPredictorBaseUrl.Text;
 			Settings.Default.DictionaryBaseUrl = tbDictionaryBaseUrl.Text;
 			Settings.Default.TranslatorBaseUrl = tbTranslatorBaseUrl.Text;
 			Settings.Default.SpellerBaseUrl = tbSpellerBaseUrl.Text;
+			Settings.Default.InflectorBaseUrl = tbInflectorBaseUrl.Text;
 
 			Settings.Default.Save();
 		}
@@ -183,6 +194,12 @@ namespace YandexLinguistics.NET.Gui
 			tbSpellerInput_TextChanged(sender, e);
 		}
 
+		private void tbInflectorBaseUrl_TextChanged(object sender, EventArgs e)
+		{
+			Inflector = new Inflector(tbInflectorBaseUrl.Text);
+			tbInflectorInput_TextChanged(sender, e);
+		}
+
 		private void tbPredictor_TextChanged(object sender, EventArgs e)
 		{
 			lbHints.Items.Clear();
@@ -209,6 +226,17 @@ namespace YandexLinguistics.NET.Gui
 			rtbSpellerOutput.Clear();
 			if (nudSpellerDelay.Value != 0)
 				SpellerTimer.Change((int)nudSpellerDelay.Value, Timeout.Infinite);
+		}
+
+		private void tbInflectorInput_TextChanged(object sender, EventArgs e)
+		{
+			tbNominative.Text = "";
+			tbGenitive.Text = "";
+			tbDative.Text = "";
+			tbAccusative.Text = "";
+			tbAblative.Text = "";
+			tbPrepositional.Text = "";
+			InflectorTimer.Change(300, Timeout.Infinite);
 		}
 
 		private void btnPredict_Click(object sender, EventArgs e)
@@ -484,6 +512,36 @@ namespace YandexLinguistics.NET.Gui
 				catch (Exception ex)
 				{
 					rtbSpellerOutput.Text = ex.ToString();
+				}
+			}));
+		}
+
+		private void UpdateInflectorResult()
+		{
+			this.Invoke(new Action(() =>
+			{
+				try
+				{
+					var response = Inflector.GetInflections(tbInflectorInput.Text);
+					if (response.Count == 6)
+					{
+						tbNominative.Text = response[0].Value;
+						tbGenitive.Text = response[1].Value;
+						tbDative.Text = response[2].Value;
+						tbAccusative.Text = response[3].Value;
+						tbAblative.Text = response[4].Value;
+						tbPrepositional.Text = response[5].Value;
+					}
+				}
+				catch (Exception ex)
+				{
+					tbNominative.Text = "";
+					tbGenitive.Text = "";
+					tbDative.Text = "";
+					tbAccusative.Text = "";
+					tbAblative.Text = "";
+					tbPrepositional.Text = "";
+					MessageBox.Show(ex.ToString(), "Error");
 				}
 			}));
 		}

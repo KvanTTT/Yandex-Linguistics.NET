@@ -421,5 +421,29 @@ namespace YandexLinguistics.NET.Gui.Properties {
                 this["DictionaryOutputIndent"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://export.yandex.ru/inflect.xml")]
+        public string InflectorBaseUrl {
+            get {
+                return ((string)(this["InflectorBaseUrl"]));
+            }
+            set {
+                this["InflectorBaseUrl"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string InflectorInput {
+            get {
+                return ((string)(this["InflectorInput"]));
+            }
+            set {
+                this["InflectorInput"] = value;
+            }
+        }
     }
 }

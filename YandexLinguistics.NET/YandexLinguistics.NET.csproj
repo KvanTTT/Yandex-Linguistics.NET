@@ -39,6 +39,9 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Inflector\Inflection.cs" />
+    <Compile Include="Inflector\InflectionCase.cs" />
+    <Compile Include="Inflector\Inflector.cs" />
     <Compile Include="Predictor\CompleteResponse.cs" />
     <Compile Include="Dictionary\Definition.cs" />
     <Compile Include="Dictionary\DicResult.cs" />
@@ -69,6 +72,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

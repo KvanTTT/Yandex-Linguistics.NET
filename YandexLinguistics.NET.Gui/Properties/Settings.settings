@@ -102,5 +102,11 @@
       <Value Profile="(Default)">
         </Value>
     </Setting>
+    <Setting Name="InflectorBaseUrl" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://export.yandex.ru/inflect.xml</Value>
+    </Setting>
+    <Setting Name="InflectorInput" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

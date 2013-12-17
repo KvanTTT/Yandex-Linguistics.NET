@@ -30,6 +30,8 @@
 		{
 			this.tcServices = new System.Windows.Forms.TabControl();
 			this.tpPredictor = new System.Windows.Forms.TabPage();
+			this.tbPredictorBaseUrl = new System.Windows.Forms.TextBox();
+			this.label32 = new System.Windows.Forms.Label();
 			this.label28 = new System.Windows.Forms.Label();
 			this.linkLabel2 = new System.Windows.Forms.LinkLabel();
 			this.tbPredictorKey = new System.Windows.Forms.TextBox();
@@ -52,6 +54,8 @@
 			this.cmbPredictorLangs = new System.Windows.Forms.ComboBox();
 			this.tbPredictorInput = new System.Windows.Forms.TextBox();
 			this.tpDictionary = new System.Windows.Forms.TabPage();
+			this.tbDictionaryBaseUrl = new System.Windows.Forms.TextBox();
+			this.label33 = new System.Windows.Forms.Label();
 			this.label29 = new System.Windows.Forms.Label();
 			this.linkLabel3 = new System.Windows.Forms.LinkLabel();
 			this.tbDictionaryKey = new System.Windows.Forms.TextBox();
@@ -75,6 +79,8 @@
 			this.label8 = new System.Windows.Forms.Label();
 			this.cmbDictionaryLangPairs = new System.Windows.Forms.ComboBox();
 			this.tpTranslator = new System.Windows.Forms.TabPage();
+			this.tbTranslatorBaseUrl = new System.Windows.Forms.TextBox();
+			this.label34 = new System.Windows.Forms.Label();
 			this.label30 = new System.Windows.Forms.Label();
 			this.linkLabel1 = new System.Windows.Forms.LinkLabel();
 			this.tbTranslatorKey = new System.Windows.Forms.TextBox();
@@ -94,6 +100,8 @@
 			this.label15 = new System.Windows.Forms.Label();
 			this.cmbTranslatorInputLang = new System.Windows.Forms.ComboBox();
 			this.tpSpeller = new System.Windows.Forms.TabPage();
+			this.tbSpellerBaseUrl = new System.Windows.Forms.TextBox();
+			this.label35 = new System.Windows.Forms.Label();
 			this.label31 = new System.Windows.Forms.Label();
 			this.linkLabel4 = new System.Windows.Forms.LinkLabel();
 			this.btnSpellerCheck = new System.Windows.Forms.Button();
@@ -118,14 +126,24 @@
 			this.rtbSpellerOutput = new System.Windows.Forms.RichTextBox();
 			this.label22 = new System.Windows.Forms.Label();
 			this.tbSpellerInput = new System.Windows.Forms.TextBox();
-			this.tbPredictorBaseUrl = new System.Windows.Forms.TextBox();
-			this.label32 = new System.Windows.Forms.Label();
-			this.tbDictionaryBaseUrl = new System.Windows.Forms.TextBox();
-			this.label33 = new System.Windows.Forms.Label();
-			this.tbTranslatorBaseUrl = new System.Windows.Forms.TextBox();
-			this.label34 = new System.Windows.Forms.Label();
-			this.tbSpellerBaseUrl = new System.Windows.Forms.TextBox();
-			this.label35 = new System.Windows.Forms.Label();
+			this.tpInflector = new System.Windows.Forms.TabPage();
+			this.groupBox3 = new System.Windows.Forms.GroupBox();
+			this.tbPrepositional = new System.Windows.Forms.TextBox();
+			this.label43 = new System.Windows.Forms.Label();
+			this.label44 = new System.Windows.Forms.Label();
+			this.tbAblative = new System.Windows.Forms.TextBox();
+			this.tbAccusative = new System.Windows.Forms.TextBox();
+			this.label41 = new System.Windows.Forms.Label();
+			this.label42 = new System.Windows.Forms.Label();
+			this.tbDative = new System.Windows.Forms.TextBox();
+			this.tbGenitive = new System.Windows.Forms.TextBox();
+			this.label40 = new System.Windows.Forms.Label();
+			this.label39 = new System.Windows.Forms.Label();
+			this.tbNominative = new System.Windows.Forms.TextBox();
+			this.label37 = new System.Windows.Forms.Label();
+			this.tbInflectorInput = new System.Windows.Forms.TextBox();
+			this.tbInflectorBaseUrl = new System.Windows.Forms.TextBox();
+			this.label36 = new System.Windows.Forms.Label();
 			this.tcServices.SuspendLayout();
 			this.tpPredictor.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.nudPredictorDelay)).BeginInit();
@@ -138,6 +156,8 @@
 			this.tpSpeller.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.nudSpellerDelay)).BeginInit();
 			this.groupBox2.SuspendLayout();
+			this.tpInflector.SuspendLayout();
+			this.groupBox3.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// tcServices
@@ -146,6 +166,7 @@
 			this.tcServices.Controls.Add(this.tpDictionary);
 			this.tcServices.Controls.Add(this.tpTranslator);
 			this.tcServices.Controls.Add(this.tpSpeller);
+			this.tcServices.Controls.Add(this.tpInflector);
 			this.tcServices.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tcServices.Location = new System.Drawing.Point(0, 0);
 			this.tcServices.Name = "tcServices";
@@ -186,6 +207,26 @@
 			this.tpPredictor.TabIndex = 0;
 			this.tpPredictor.Text = "Predictor";
 			this.tpPredictor.UseVisualStyleBackColor = true;
+			// 
+			// tbPredictorBaseUrl
+			// 
+			this.tbPredictorBaseUrl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.tbPredictorBaseUrl.Location = new System.Drawing.Point(70, 6);
+			this.tbPredictorBaseUrl.Name = "tbPredictorBaseUrl";
+			this.tbPredictorBaseUrl.Size = new System.Drawing.Size(464, 20);
+			this.tbPredictorBaseUrl.TabIndex = 24;
+			this.tbPredictorBaseUrl.Text = "https://predictor.yandex.net/api/v1/predict";
+			this.tbPredictorBaseUrl.TextChanged += new System.EventHandler(this.tbPredictorKey_TextChanged);
+			// 
+			// label32
+			// 
+			this.label32.AutoSize = true;
+			this.label32.Location = new System.Drawing.Point(9, 9);
+			this.label32.Name = "label32";
+			this.label32.Size = new System.Drawing.Size(20, 13);
+			this.label32.TabIndex = 23;
+			this.label32.Text = "Url";
 			// 
 			// label28
 			// 
@@ -440,6 +481,26 @@
 			this.tpDictionary.TabIndex = 1;
 			this.tpDictionary.Text = "Dictionary";
 			this.tpDictionary.UseVisualStyleBackColor = true;
+			// 
+			// tbDictionaryBaseUrl
+			// 
+			this.tbDictionaryBaseUrl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.tbDictionaryBaseUrl.Location = new System.Drawing.Point(95, 6);
+			this.tbDictionaryBaseUrl.Name = "tbDictionaryBaseUrl";
+			this.tbDictionaryBaseUrl.Size = new System.Drawing.Size(437, 20);
+			this.tbDictionaryBaseUrl.TabIndex = 31;
+			this.tbDictionaryBaseUrl.Text = "https://dictionary.yandex.net/api/v1/dicservice";
+			this.tbDictionaryBaseUrl.TextChanged += new System.EventHandler(this.tbDictionaryKey_TextChanged);
+			// 
+			// label33
+			// 
+			this.label33.AutoSize = true;
+			this.label33.Location = new System.Drawing.Point(13, 9);
+			this.label33.Name = "label33";
+			this.label33.Size = new System.Drawing.Size(20, 13);
+			this.label33.TabIndex = 30;
+			this.label33.Text = "Url";
 			// 
 			// label29
 			// 
@@ -706,6 +767,26 @@
 			this.tpTranslator.Text = "Translator";
 			this.tpTranslator.UseVisualStyleBackColor = true;
 			// 
+			// tbTranslatorBaseUrl
+			// 
+			this.tbTranslatorBaseUrl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.tbTranslatorBaseUrl.Location = new System.Drawing.Point(83, 13);
+			this.tbTranslatorBaseUrl.Name = "tbTranslatorBaseUrl";
+			this.tbTranslatorBaseUrl.Size = new System.Drawing.Size(439, 20);
+			this.tbTranslatorBaseUrl.TabIndex = 39;
+			this.tbTranslatorBaseUrl.Text = "https://translate.yandex.net/api/v1.5/tr";
+			this.tbTranslatorBaseUrl.TextChanged += new System.EventHandler(this.tbTranslatorKey_TextChanged);
+			// 
+			// label34
+			// 
+			this.label34.AutoSize = true;
+			this.label34.Location = new System.Drawing.Point(10, 16);
+			this.label34.Name = "label34";
+			this.label34.Size = new System.Drawing.Size(20, 13);
+			this.label34.TabIndex = 38;
+			this.label34.Text = "Url";
+			// 
 			// label30
 			// 
 			this.label30.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -927,6 +1008,26 @@
 			this.tpSpeller.TabIndex = 3;
 			this.tpSpeller.Text = "Speller";
 			this.tpSpeller.UseVisualStyleBackColor = true;
+			// 
+			// tbSpellerBaseUrl
+			// 
+			this.tbSpellerBaseUrl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.tbSpellerBaseUrl.Location = new System.Drawing.Point(91, 13);
+			this.tbSpellerBaseUrl.Name = "tbSpellerBaseUrl";
+			this.tbSpellerBaseUrl.Size = new System.Drawing.Size(441, 20);
+			this.tbSpellerBaseUrl.TabIndex = 42;
+			this.tbSpellerBaseUrl.Text = "http://speller.yandex.net/services/spellservice";
+			this.tbSpellerBaseUrl.TextChanged += new System.EventHandler(this.tbSpellerBaseUrl_TextChanged);
+			// 
+			// label35
+			// 
+			this.label35.AutoSize = true;
+			this.label35.Location = new System.Drawing.Point(8, 16);
+			this.label35.Name = "label35";
+			this.label35.Size = new System.Drawing.Size(20, 13);
+			this.label35.TabIndex = 41;
+			this.label35.Text = "Url";
 			// 
 			// label31
 			// 
@@ -1205,85 +1306,182 @@
 			this.tbSpellerInput.TextChanged += new System.EventHandler(this.tbSpellerInput_TextChanged);
 			this.tbSpellerInput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_KeyDown);
 			// 
-			// tbPredictorBaseUrl
+			// tpInflector
 			// 
-			this.tbPredictorBaseUrl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+			this.tpInflector.Controls.Add(this.groupBox3);
+			this.tpInflector.Controls.Add(this.label37);
+			this.tpInflector.Controls.Add(this.tbInflectorInput);
+			this.tpInflector.Controls.Add(this.tbInflectorBaseUrl);
+			this.tpInflector.Controls.Add(this.label36);
+			this.tpInflector.Location = new System.Drawing.Point(4, 22);
+			this.tpInflector.Name = "tpInflector";
+			this.tpInflector.Padding = new System.Windows.Forms.Padding(3);
+			this.tpInflector.Size = new System.Drawing.Size(540, 450);
+			this.tpInflector.TabIndex = 4;
+			this.tpInflector.Text = "Inflector";
+			this.tpInflector.UseVisualStyleBackColor = true;
+			// 
+			// groupBox3
+			// 
+			this.groupBox3.Controls.Add(this.tbPrepositional);
+			this.groupBox3.Controls.Add(this.label43);
+			this.groupBox3.Controls.Add(this.label44);
+			this.groupBox3.Controls.Add(this.tbAblative);
+			this.groupBox3.Controls.Add(this.tbAccusative);
+			this.groupBox3.Controls.Add(this.label41);
+			this.groupBox3.Controls.Add(this.label42);
+			this.groupBox3.Controls.Add(this.tbDative);
+			this.groupBox3.Controls.Add(this.tbGenitive);
+			this.groupBox3.Controls.Add(this.label40);
+			this.groupBox3.Controls.Add(this.label39);
+			this.groupBox3.Controls.Add(this.tbNominative);
+			this.groupBox3.Location = new System.Drawing.Point(8, 69);
+			this.groupBox3.Name = "groupBox3";
+			this.groupBox3.Size = new System.Drawing.Size(268, 191);
+			this.groupBox3.TabIndex = 43;
+			this.groupBox3.TabStop = false;
+			this.groupBox3.Text = "Inflections";
+			// 
+			// tbPrepositional
+			// 
+			this.tbPrepositional.Location = new System.Drawing.Point(94, 149);
+			this.tbPrepositional.Name = "tbPrepositional";
+			this.tbPrepositional.ReadOnly = true;
+			this.tbPrepositional.Size = new System.Drawing.Size(151, 20);
+			this.tbPrepositional.TabIndex = 54;
+			// 
+			// label43
+			// 
+			this.label43.AutoSize = true;
+			this.label43.Location = new System.Drawing.Point(16, 152);
+			this.label43.Name = "label43";
+			this.label43.Size = new System.Drawing.Size(67, 13);
+			this.label43.TabIndex = 53;
+			this.label43.Text = "Prepositional";
+			// 
+			// label44
+			// 
+			this.label44.AutoSize = true;
+			this.label44.Location = new System.Drawing.Point(16, 126);
+			this.label44.Name = "label44";
+			this.label44.Size = new System.Drawing.Size(45, 13);
+			this.label44.TabIndex = 52;
+			this.label44.Text = "Ablative";
+			// 
+			// tbAblative
+			// 
+			this.tbAblative.Location = new System.Drawing.Point(94, 123);
+			this.tbAblative.Name = "tbAblative";
+			this.tbAblative.ReadOnly = true;
+			this.tbAblative.Size = new System.Drawing.Size(151, 20);
+			this.tbAblative.TabIndex = 51;
+			// 
+			// tbAccusative
+			// 
+			this.tbAccusative.Location = new System.Drawing.Point(94, 97);
+			this.tbAccusative.Name = "tbAccusative";
+			this.tbAccusative.ReadOnly = true;
+			this.tbAccusative.Size = new System.Drawing.Size(151, 20);
+			this.tbAccusative.TabIndex = 50;
+			// 
+			// label41
+			// 
+			this.label41.AutoSize = true;
+			this.label41.Location = new System.Drawing.Point(16, 100);
+			this.label41.Name = "label41";
+			this.label41.Size = new System.Drawing.Size(60, 13);
+			this.label41.TabIndex = 49;
+			this.label41.Text = "Accusative";
+			// 
+			// label42
+			// 
+			this.label42.AutoSize = true;
+			this.label42.Location = new System.Drawing.Point(16, 74);
+			this.label42.Name = "label42";
+			this.label42.Size = new System.Drawing.Size(38, 13);
+			this.label42.TabIndex = 48;
+			this.label42.Text = "Dative";
+			// 
+			// tbDative
+			// 
+			this.tbDative.Location = new System.Drawing.Point(94, 71);
+			this.tbDative.Name = "tbDative";
+			this.tbDative.ReadOnly = true;
+			this.tbDative.Size = new System.Drawing.Size(151, 20);
+			this.tbDative.TabIndex = 47;
+			// 
+			// tbGenitive
+			// 
+			this.tbGenitive.Location = new System.Drawing.Point(94, 45);
+			this.tbGenitive.Name = "tbGenitive";
+			this.tbGenitive.ReadOnly = true;
+			this.tbGenitive.Size = new System.Drawing.Size(151, 20);
+			this.tbGenitive.TabIndex = 46;
+			// 
+			// label40
+			// 
+			this.label40.AutoSize = true;
+			this.label40.Location = new System.Drawing.Point(16, 48);
+			this.label40.Name = "label40";
+			this.label40.Size = new System.Drawing.Size(46, 13);
+			this.label40.TabIndex = 45;
+			this.label40.Text = "Genitive";
+			// 
+			// label39
+			// 
+			this.label39.AutoSize = true;
+			this.label39.Location = new System.Drawing.Point(16, 22);
+			this.label39.Name = "label39";
+			this.label39.Size = new System.Drawing.Size(60, 13);
+			this.label39.TabIndex = 44;
+			this.label39.Text = "Nominative";
+			// 
+			// tbNominative
+			// 
+			this.tbNominative.Location = new System.Drawing.Point(94, 19);
+			this.tbNominative.Name = "tbNominative";
+			this.tbNominative.ReadOnly = true;
+			this.tbNominative.Size = new System.Drawing.Size(151, 20);
+			this.tbNominative.TabIndex = 43;
+			// 
+			// label37
+			// 
+			this.label37.AutoSize = true;
+			this.label37.Location = new System.Drawing.Point(8, 46);
+			this.label37.Name = "label37";
+			this.label37.Size = new System.Drawing.Size(31, 13);
+			this.label37.TabIndex = 28;
+			this.label37.Text = "Input";
+			// 
+			// tbInflectorInput
+			// 
+			this.tbInflectorInput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.tbPredictorBaseUrl.Location = new System.Drawing.Point(70, 6);
-			this.tbPredictorBaseUrl.Name = "tbPredictorBaseUrl";
-			this.tbPredictorBaseUrl.Size = new System.Drawing.Size(464, 20);
-			this.tbPredictorBaseUrl.TabIndex = 24;
-			this.tbPredictorBaseUrl.Text = "https://predictor.yandex.net/api/v1/predict";
-			this.tbPredictorBaseUrl.TextChanged += new System.EventHandler(this.tbPredictorKey_TextChanged);
+			this.tbInflectorInput.Location = new System.Drawing.Point(102, 43);
+			this.tbInflectorInput.Name = "tbInflectorInput";
+			this.tbInflectorInput.Size = new System.Drawing.Size(151, 20);
+			this.tbInflectorInput.TabIndex = 27;
+			this.tbInflectorInput.TextChanged += new System.EventHandler(this.tbInflectorInput_TextChanged);
 			// 
-			// label32
+			// tbInflectorBaseUrl
 			// 
-			this.label32.AutoSize = true;
-			this.label32.Location = new System.Drawing.Point(9, 9);
-			this.label32.Name = "label32";
-			this.label32.Size = new System.Drawing.Size(20, 13);
-			this.label32.TabIndex = 23;
-			this.label32.Text = "Url";
-			// 
-			// tbDictionaryBaseUrl
-			// 
-			this.tbDictionaryBaseUrl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+			this.tbInflectorBaseUrl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.tbDictionaryBaseUrl.Location = new System.Drawing.Point(95, 6);
-			this.tbDictionaryBaseUrl.Name = "tbDictionaryBaseUrl";
-			this.tbDictionaryBaseUrl.Size = new System.Drawing.Size(437, 20);
-			this.tbDictionaryBaseUrl.TabIndex = 31;
-			this.tbDictionaryBaseUrl.Text = "https://dictionary.yandex.net/api/v1/dicservice";
-			this.tbDictionaryBaseUrl.TextChanged += new System.EventHandler(this.tbDictionaryKey_TextChanged);
+			this.tbInflectorBaseUrl.Location = new System.Drawing.Point(102, 6);
+			this.tbInflectorBaseUrl.Name = "tbInflectorBaseUrl";
+			this.tbInflectorBaseUrl.Size = new System.Drawing.Size(430, 20);
+			this.tbInflectorBaseUrl.TabIndex = 26;
+			this.tbInflectorBaseUrl.Text = "http://export.yandex.ru/inflect.xml";
+			this.tbInflectorBaseUrl.TextChanged += new System.EventHandler(this.tbInflectorBaseUrl_TextChanged);
 			// 
-			// label33
+			// label36
 			// 
-			this.label33.AutoSize = true;
-			this.label33.Location = new System.Drawing.Point(13, 9);
-			this.label33.Name = "label33";
-			this.label33.Size = new System.Drawing.Size(20, 13);
-			this.label33.TabIndex = 30;
-			this.label33.Text = "Url";
-			// 
-			// tbTranslatorBaseUrl
-			// 
-			this.tbTranslatorBaseUrl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.tbTranslatorBaseUrl.Location = new System.Drawing.Point(83, 13);
-			this.tbTranslatorBaseUrl.Name = "tbTranslatorBaseUrl";
-			this.tbTranslatorBaseUrl.Size = new System.Drawing.Size(439, 20);
-			this.tbTranslatorBaseUrl.TabIndex = 39;
-			this.tbTranslatorBaseUrl.Text = "https://translate.yandex.net/api/v1.5/tr";
-			this.tbTranslatorBaseUrl.TextChanged += new System.EventHandler(this.tbTranslatorKey_TextChanged);
-			// 
-			// label34
-			// 
-			this.label34.AutoSize = true;
-			this.label34.Location = new System.Drawing.Point(10, 16);
-			this.label34.Name = "label34";
-			this.label34.Size = new System.Drawing.Size(20, 13);
-			this.label34.TabIndex = 38;
-			this.label34.Text = "Url";
-			// 
-			// tbSpellerBaseUrl
-			// 
-			this.tbSpellerBaseUrl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.tbSpellerBaseUrl.Location = new System.Drawing.Point(91, 13);
-			this.tbSpellerBaseUrl.Name = "tbSpellerBaseUrl";
-			this.tbSpellerBaseUrl.Size = new System.Drawing.Size(441, 20);
-			this.tbSpellerBaseUrl.TabIndex = 42;
-			this.tbSpellerBaseUrl.Text = "http://speller.yandex.net/services/spellservice";
-			this.tbSpellerBaseUrl.TextChanged += new System.EventHandler(this.tbSpellerBaseUrl_TextChanged);
-			// 
-			// label35
-			// 
-			this.label35.AutoSize = true;
-			this.label35.Location = new System.Drawing.Point(8, 16);
-			this.label35.Name = "label35";
-			this.label35.Size = new System.Drawing.Size(20, 13);
-			this.label35.TabIndex = 41;
-			this.label35.Text = "Url";
+			this.label36.AutoSize = true;
+			this.label36.Location = new System.Drawing.Point(8, 9);
+			this.label36.Name = "label36";
+			this.label36.Size = new System.Drawing.Size(20, 13);
+			this.label36.TabIndex = 25;
+			this.label36.Text = "Url";
 			// 
 			// frmMain
 			// 
@@ -1312,6 +1510,10 @@
 			((System.ComponentModel.ISupportInitialize)(this.nudSpellerDelay)).EndInit();
 			this.groupBox2.ResumeLayout(false);
 			this.groupBox2.PerformLayout();
+			this.tpInflector.ResumeLayout(false);
+			this.tpInflector.PerformLayout();
+			this.groupBox3.ResumeLayout(false);
+			this.groupBox3.PerformLayout();
 			this.ResumeLayout(false);
 
 		}
@@ -1416,6 +1618,24 @@
 		private System.Windows.Forms.Label label34;
 		private System.Windows.Forms.TextBox tbSpellerBaseUrl;
 		private System.Windows.Forms.Label label35;
+		private System.Windows.Forms.TabPage tpInflector;
+		private System.Windows.Forms.Label label37;
+		private System.Windows.Forms.TextBox tbInflectorInput;
+		private System.Windows.Forms.TextBox tbInflectorBaseUrl;
+		private System.Windows.Forms.Label label36;
+		private System.Windows.Forms.GroupBox groupBox3;
+		private System.Windows.Forms.TextBox tbPrepositional;
+		private System.Windows.Forms.Label label43;
+		private System.Windows.Forms.Label label44;
+		private System.Windows.Forms.TextBox tbAblative;
+		private System.Windows.Forms.TextBox tbAccusative;
+		private System.Windows.Forms.Label label41;
+		private System.Windows.Forms.Label label42;
+		private System.Windows.Forms.TextBox tbDative;
+		private System.Windows.Forms.TextBox tbGenitive;
+		private System.Windows.Forms.Label label40;
+		private System.Windows.Forms.Label label39;
+		private System.Windows.Forms.TextBox tbNominative;
 	}
 }
 
