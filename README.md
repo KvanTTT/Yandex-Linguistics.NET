@@ -8,6 +8,7 @@
 * [Yandex.Dictionary](http://api.yandex.ru/dictionary/)
 * [Yandex.Translate](http://api.yandex.ru/translate/)
 * [Yandex.Speller](http://api.yandex.ru/speller/)
+* [Yandex.Inflector](http://export.yandex.ru/inflect.xml)
 
 ###Using
 ```csharp
