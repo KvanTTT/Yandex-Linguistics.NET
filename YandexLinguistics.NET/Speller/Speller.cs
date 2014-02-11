@@ -6,13 +6,11 @@ using System.Collections.Generic;
 
 namespace YandexLinguistics.NET
 {
-	public class Speller
+	public class Speller : YandexService
 	{
-		protected RestClient _client;
-
 		public Speller(string baseUrl = "http://speller.yandex.net/services/spellservice")
+			: base("", baseUrl)
 		{
-			_client = new RestClient(baseUrl);
 		}
 
 		public SpellResult CheckText(string text, Lang[] lang = null, SpellerOptions? options = null, OutputFormat? format = null)
@@ -26,18 +24,7 @@ namespace YandexLinguistics.NET
 			if (format.HasValue)
 				request.AddParameter("format", format.Value.ToString().ToLowerInvariant());
 
-			RestResponse response = (RestResponse)_client.Execute(request);
-			XmlAttributeDeserializer deserializer = new XmlAttributeDeserializer();
-			if (response.StatusCode == System.Net.HttpStatusCode.OK)
-			{
-				var spellResult = deserializer.Deserialize<SpellResult>(response);
-				return spellResult;
-			}
-			else
-			{
-				var error = deserializer.Deserialize<YandexError>(response);
-				throw new YandexLinguisticsException(error);
-			}
+			return SendRequest<SpellResult>(request);
 		}
 
 		public ArrayOfSpellResult CheckTexts(string[] texts, Lang[] lang = null, SpellerOptions? options = null, OutputFormat? format = null)
@@ -52,18 +39,7 @@ namespace YandexLinguistics.NET
 			if (format.HasValue)
 				request.AddParameter("format", format.Value.ToString().ToLowerInvariant());
 
-			RestResponse response = (RestResponse)_client.Execute(request);
-			XmlAttributeDeserializer deserializer = new XmlAttributeDeserializer();
-			if (response.StatusCode == System.Net.HttpStatusCode.OK)
-			{
-				var spellResult = deserializer.Deserialize<ArrayOfSpellResult>(response);
-				return spellResult;
-			}
-			else
-			{
-				var error = deserializer.Deserialize<YandexError>(response);
-				throw new YandexLinguisticsException(error);
-			}
+			return SendRequest<ArrayOfSpellResult>(request);
 		}
 
 		public static List<Mistake> OptimalStringAlignmentDistance(

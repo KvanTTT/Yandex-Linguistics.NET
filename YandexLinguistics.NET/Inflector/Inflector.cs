@@ -7,13 +7,11 @@ using System.Text;
 
 namespace YandexLinguistics.NET
 {
-	public class Inflector
+	public class Inflector : YandexService
 	{
-		protected RestClient _client;
-
 		public Inflector(string baseUrl = "http://export.yandex.ru/inflect.xml")
+			: base("", baseUrl)
 		{
-			_client = new RestClient(baseUrl);
 		}
 
 		public List<Inflection> GetInflections(string text)
@@ -21,18 +19,7 @@ namespace YandexLinguistics.NET
 			RestRequest request = new RestRequest();
 			request.AddParameter("name", text);
 
-			RestResponse response = (RestResponse)_client.Execute(request);
-			XmlAttributeDeserializer deserializer = new XmlAttributeDeserializer();
-			if (response.StatusCode == System.Net.HttpStatusCode.OK)
-			{
-				var inflections = deserializer.Deserialize<List<Inflection>>(response);
-				return inflections;
-			}
-			else
-			{
-				var error = deserializer.Deserialize<YandexError>(response);
-				throw new YandexLinguisticsException(error);
-			}
+			return SendRequest<List<Inflection>>(request);
 		}
 	}
 }

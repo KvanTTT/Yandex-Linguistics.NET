@@ -7,15 +7,11 @@ using System.Text;
 
 namespace YandexLinguistics.NET
 {
-	public class Dictionary
+	public class Dictionary : YandexService
 	{
-		protected RestClient _client;
-		protected string _key;
-
 		public Dictionary(string dictionayKey, string baseUrl = "https://dictionary.yandex.net/api/v1/dicservice")
+			: base(dictionayKey, baseUrl)
 		{
-			_key = dictionayKey;
-			_client = new RestClient(baseUrl);
 		}
 
 		public LangPair[] GetLangs()
@@ -23,26 +19,15 @@ namespace YandexLinguistics.NET
 			RestRequest request = new RestRequest("getLangs");
 			request.AddParameter("key", _key);
 
-			RestResponse response = (RestResponse)_client.Execute(request);
-			XmlAttributeDeserializer deserializer = new XmlAttributeDeserializer();
-			if (response.StatusCode == System.Net.HttpStatusCode.OK)
+			var response = SendRequest<List<string>>(request);
+			LangPair[] result = response.Select(str =>
 			{
-				var strs = deserializer.Deserialize<List<string>>(response);
-				
-				LangPair[] result = strs.Select(str => 
-				{
-					var inOut = str.Split('-');
-					return new LangPair(
-						(Lang)Enum.Parse(typeof(Lang), inOut[0].Remove(1).ToUpperInvariant() + inOut[0].Substring(1)),
-						(Lang)Enum.Parse(typeof(Lang), inOut[1].Remove(1).ToUpperInvariant() + inOut[1].Substring(1)));
-				}).ToArray();
-				return result;
-			}
-			else
-			{
-				var error = deserializer.Deserialize<YandexError>(response);
-				throw new YandexLinguisticsException(error);
-			}
+				var inOut = str.Split('-');
+				return new LangPair(
+					(Lang)Enum.Parse(typeof(Lang), inOut[0].Remove(1).ToUpperInvariant() + inOut[0].Substring(1)),
+					(Lang)Enum.Parse(typeof(Lang), inOut[1].Remove(1).ToUpperInvariant() + inOut[1].Substring(1)));
+			}).ToArray();
+			return result;
 		}
 
 		public DicResult Lookup(LangPair lang, string text, string ui = null, LookupOptions flags = 0)
@@ -57,18 +42,7 @@ namespace YandexLinguistics.NET
 			if (flags != 0)
 				request.AddParameter("flags", (int)flags);
 
-			RestResponse response = (RestResponse)_client.Execute(request);
-			XmlAttributeDeserializer deserializer = new XmlAttributeDeserializer();
-			if (response.StatusCode == System.Net.HttpStatusCode.OK)
-			{
-				var completeResponse = deserializer.Deserialize<DicResult>(response);
-				return completeResponse;
-			}
-			else
-			{
-				var error = deserializer.Deserialize<YandexError>(response);
-				throw new YandexLinguisticsException(error);
-			}
+			return SendRequest<DicResult>(request);
 		}
 	}
 }

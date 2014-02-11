@@ -57,8 +57,15 @@ namespace YandexLinguistics.NET
 			}
 			else
 			{
-				var error = deserializer.Deserialize<YandexError>(response);
-				throw new YandexLinguisticsException(error);
+				if (response.StatusCode != 0)
+				{
+					var error = deserializer.Deserialize<YandexError>(response);
+					throw new YandexLinguisticsException(error);
+				}
+				else
+				{
+					throw new YandexLinguisticsException(0, response.ErrorMessage);
+				}
 			}
 		}
 	}

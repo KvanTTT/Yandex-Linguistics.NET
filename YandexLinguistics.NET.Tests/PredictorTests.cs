@@ -67,5 +67,15 @@ namespace YandexLinguistics.NET.Tests
 				new YandexLinguisticsException(401, "API key is invalid").ToString(),
 				exception.ToString());
 		}
+
+		[Test]
+		public void PredictorVeryLongInputString()
+		{
+			var exception = Assert.Throws<YandexLinguisticsException>(
+				() => Predictor.Complete(Lang.En, new string('a', 100000)));
+			Assert.AreEqual(
+				new YandexLinguisticsException(0, "Invalid URI: The Uri string is too long.").ToString(),
+				exception.ToString());
+		}
 	}
 }

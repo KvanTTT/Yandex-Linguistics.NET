@@ -7,15 +7,11 @@ using System.Text;
 
 namespace YandexLinguistics.NET
 {
-	public class Translator
+	public class Translator : YandexService
 	{
-		protected RestClient _client;
-		protected string _key;
-
-		public Translator(string dictionayKey, string baseUrl = "https://translate.yandex.net/api/v1.5/tr")
+		public Translator(string translatorKey, string baseUrl = "https://translate.yandex.net/api/v1.5/tr")
+			: base(translatorKey, baseUrl)
 		{
-			_key = dictionayKey;
-			_client = new RestClient(baseUrl);
 		}
 
 		public LangPair[] GetLangs()
@@ -23,27 +19,16 @@ namespace YandexLinguistics.NET
 			RestRequest request = new RestRequest("getLangs");
 			request.AddParameter("key", _key);
 
-			RestResponse response = (RestResponse)_client.Execute(request);
-			XmlAttributeDeserializer deserializer = new XmlAttributeDeserializer();
-			if (response.StatusCode == System.Net.HttpStatusCode.OK)
+			var response = SendRequest<List<string>>(request);
+			var allLangs = (Lang[])Enum.GetValues(typeof(Lang));
+			LangPair[] result = response.Select(str =>
 			{
-				var strs = deserializer.Deserialize<List<string>>(response);
-
-				var allLangs = (Lang[])Enum.GetValues(typeof(Lang));
-				LangPair[] result = strs.Select(str =>
-				{
-					var inOut = str.Split('-');
-					return new LangPair(
-						(Lang)Enum.Parse(typeof(Lang), inOut[0].Remove(1).ToUpperInvariant() + inOut[0].Substring(1)),
-						(Lang)Enum.Parse(typeof(Lang), inOut[1].Remove(1).ToUpperInvariant() + inOut[1].Substring(1)));
-				}).ToArray();
-				return result;
-			}
-			else
-			{
-				var error = deserializer.Deserialize<YandexError>(response);
-				throw new YandexLinguisticsException(error);
-			}
+				var inOut = str.Split('-');
+				return new LangPair(
+					(Lang)Enum.Parse(typeof(Lang), inOut[0].Remove(1).ToUpperInvariant() + inOut[0].Substring(1)),
+					(Lang)Enum.Parse(typeof(Lang), inOut[1].Remove(1).ToUpperInvariant() + inOut[1].Substring(1)));
+			}).ToArray();
+			return result;
 		}
 
 		public Lang DetectLang(string text)
@@ -52,18 +37,7 @@ namespace YandexLinguistics.NET
 			request.AddParameter("key", _key);
 			request.AddParameter("text", text);
 
-			RestResponse response = (RestResponse)_client.Execute(request);
-			XmlAttributeDeserializer deserializer = new XmlAttributeDeserializer();
-			if (response.StatusCode == System.Net.HttpStatusCode.OK)
-			{
-				var detectedLang = deserializer.Deserialize<DetectedLang>(response);
-				return detectedLang.Lang;
-			}
-			else
-			{
-				var error = deserializer.Deserialize<YandexError>(response);
-				throw new YandexLinguisticsException(error);
-			}
+			return SendRequest<DetectedLang>(request).Lang;
 		}
 
 		public Translation Translate(string text, LangPair lang, OutputFormat? format = null, bool options = false)
@@ -83,18 +57,7 @@ namespace YandexLinguistics.NET
 			if (options)
 				request.AddParameter("options", "1");
 
-			RestResponse response = (RestResponse)_client.Execute(request);
-			XmlAttributeDeserializer deserializer = new XmlAttributeDeserializer();
-			if (response.StatusCode == System.Net.HttpStatusCode.OK)
-			{
-				var translation = deserializer.Deserialize<Translation>(response);
-				return translation;
-			}
-			else
-			{
-				var error = deserializer.Deserialize<YandexError>(response);
-				throw new YandexLinguisticsException(error);
-			}
+			return SendRequest<Translation>(request);
 		}
 	}
 }

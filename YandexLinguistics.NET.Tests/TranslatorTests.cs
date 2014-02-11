@@ -223,5 +223,15 @@ namespace YandexLinguistics.NET.Tests
 				new YandexLinguisticsException(501, "The specified translation direction is not supported").ToString(),
 				exception.ToString());
 		}
+
+		[Test]
+		public void TranslatorVeryLongInputString()
+		{
+			var exception = Assert.Throws<YandexLinguisticsException>(
+				() => Translator.Translate(new string('a', 100000), new LangPair(Lang.None, Lang.Ru)));
+			Assert.AreEqual(
+				new YandexLinguisticsException(0, "Invalid URI: The Uri string is too long.").ToString(),
+				exception.ToString());
+		}
 	}
 }

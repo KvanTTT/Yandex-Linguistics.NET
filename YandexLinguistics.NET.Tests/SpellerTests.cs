@@ -173,5 +173,15 @@ namespace YandexLinguistics.NET.Tests
 				Assert.AreEqual(CharMistakeType.Deletion, mistakes[i].Type);
 			}
 		}
+
+		[Test]
+		public void SpellerVeryLongInputString()
+		{
+			var exception = Assert.Throws<YandexLinguisticsException>(
+				() => Speller.CheckText(new string('a', 100000)));
+			Assert.AreEqual(
+				new YandexLinguisticsException(0, "Invalid URI: The Uri string is too long.").ToString(),
+				exception.ToString());
+		}
 	}
 }

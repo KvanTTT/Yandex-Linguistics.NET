@@ -68,6 +68,7 @@
     <Compile Include="Translator\Translator.cs" />
     <Compile Include="OutputFormat.cs" />
     <Compile Include="YandexLinguisticsException.cs" />
+    <Compile Include="YandexService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
