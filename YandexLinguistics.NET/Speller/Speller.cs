@@ -142,7 +142,7 @@ namespace YandexLinguistics.NET
 			{
 				int delMistakesCount = d[w_length, cw_length].Key - result.Count;
 				for (int i = 0; i < delMistakesCount; i++)
-					result.Add(new Mistake(0, CharMistakeType.Deletion));
+					result.Add(new Mistake(0, cw_length > w_length ? CharMistakeType.Insertion : CharMistakeType.Deletion));
 			}
 
 			result.Reverse();
