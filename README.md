@@ -1,18 +1,19 @@
-#Yandex Linguistics API .NET
+# Yandex Linguistics API .NET
 
-* Based on RestSharp (http://restsharp.org) to deserealize xml response into .NET objects.
-* NUnit (http://www.nunit.org/) using for testing.
+* Based on RestSharp (<http://restsharp.org>) to deserealize xml response into .NET objects.
+* NUnit (<http://www.nunit.org/>) using for testing.
 
-###Currently implemented API's
+## Currently implemented API's
+
 * [Yandex.Predictor](http://api.yandex.ru/predictor/)
 * [Yandex.Dictionary](http://api.yandex.ru/dictionary/)
 * [Yandex.Translate](http://api.yandex.ru/translate/)
 * [Yandex.Speller](http://api.yandex.ru/speller/)
 * [Yandex.Inflector](http://export.yandex.ru/inflect.xml)
 
-###Using
-```csharp
+## Using
 
+```csharp
 // Create service object (predictor, dictionary, translator or speller) with app key
 var translator = new Translator("xxx");
 
@@ -24,18 +25,18 @@ var translation = translator.Translate("Семь раз отмерь, один �
 // translation.LangPair = LangPair.RuEn
 // translation.Detected.Lang = Lang.Ru
 // translation.Text = "Seven times, cut once"
-
 ```
 
-One can use these apies with default app keys or get them on this page: http://api.yandex.ru/key/form.xml
+One can use these API's with default app keys or get them on this page: <http://api.yandex.ru/key/form.xml>
 
 All API's coveraged with tests in YandexLinguistics.NET.Tests
 
-###GUI
+## GUI
+
 WinForms GUI app is available for testing.
 
-<img src="http://habrastorage.org/storage3/3a3/65f/e27/3a365fe27b53aeb2878021bc89dc9984.png" alt="GUI sample screen"/>
+![GUI sample screen](https://habrastorage.org/storage3/3a3/65f/e27/3a365fe27b53aeb2878021bc89dc9984.png)
 
-###License
+## License
 
 Yandex-Linguistics.NET is licensed under the Apache 2.0 License.
