@@ -1,9 +1,6 @@
 ﻿using NUnit.Framework;
-using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
-using System.Text;
 
 namespace YandexLinguistics.NET.Tests
 {
@@ -21,75 +18,48 @@ namespace YandexLinguistics.NET.Tests
 		[Test]
 		public void DictionaryGetLangs()
 		{
-			var langPairs = Dictionary.GetLangs();
-			var expectedLangPairs = new List<LangPair>()
-			{
-				LangPair.RuRu,
-				LangPair.RuEn,
-				LangPair.RuPl,
-				LangPair.RuUk,
-				LangPair.RuDe,
-				LangPair.RuFr,
-				LangPair.RuEs,
-				LangPair.RuIt,
-				LangPair.RuTr,
-				LangPair.EnRu,
-				LangPair.EnEn,
-				LangPair.EnDe,
-				LangPair.EnFr,
-				LangPair.EnEs,
-				LangPair.EnIt,
-				LangPair.EnTr,
-				LangPair.PlRu,
-				LangPair.UkRu,
-				LangPair.DeRu,
-				LangPair.DeEn,
-				LangPair.FrRu,
-				LangPair.FrEn,
-				LangPair.EsRu,
-				LangPair.EsEn,
-				LangPair.ItRu,
-				LangPair.ItEn,
-				LangPair.TrRu,
-				LangPair.TrEn,
-			};
+			LangPair[] expectedLangPairs = Dictionary.GetLangs();
+			var langPairs = typeof(DictionaryDirectory).GetFields()
+				.Where(field => field.FieldType == typeof(LangPair))
+				.Select(field => (LangPair)field.GetValue(null));
 
-			Assert.IsTrue(expectedLangPairs.All(lang => langPairs.Contains(lang)));
+			CollectionAssert.AreEquivalent(expectedLangPairs, langPairs);
 		}
 
 		[Test]
 		public void DictionaryLookup()
 		{
-			var dicResult = Dictionary.Lookup(LangPair.EnRu, "time");
+			var dicResult = Dictionary.Lookup(DictionaryDirectory.EnRu, "time");
 
 			var def0 = dicResult.Definitions[0];
 			var def1 = dicResult.Definitions[1];
 
 			Assert.AreEqual("time", def0.Text);
-			Assert.AreEqual(1, def0.Translations.Count);
+			Assert.AreEqual(6, def0.Translations.Count);
 			var tr = def0.Translations[0];
-			Assert.AreEqual("существительное", tr.PartOfSpeech);
+			Assert.AreEqual("noun", tr.PartOfSpeech);
 			Assert.AreEqual("время", tr.Text);
 
 			Assert.AreEqual("раз", tr.Synonyms[0].Text);
-			Assert.AreEqual("тайм", tr.Synonyms[1].Text);
+			Assert.AreEqual("момент", tr.Synonyms[1].Text);
 
-			Assert.AreEqual("timing", tr.Meanings[0].Text);
-			Assert.AreEqual("fold", tr.Meanings[1].Text);
-			Assert.AreEqual("half", tr.Meanings[2].Text);
+			Assert.AreEqual("period", tr.Meanings[0].Text);
+			Assert.AreEqual("once", tr.Meanings[1].Text);
+			Assert.AreEqual("moment", tr.Meanings[2].Text);
+			Assert.AreEqual("pore", tr.Meanings[3].Text);
 
-			Assert.AreEqual("thromboplastin time", tr.Examples[0].Text);
-			Assert.AreEqual("тромбопластиновое время", tr.Examples[0].Translations[0].Text);
-			Assert.AreEqual("umpteenth time", tr.Examples[1].Text);
-			Assert.AreEqual("энный раз", tr.Examples[1].Translations[0].Text);
-			Assert.AreEqual("second time", tr.Examples[2].Text);
-			Assert.AreEqual("второй тайм", tr.Examples[2].Translations[0].Text);
+			Assert.AreEqual("daylight saving time", tr.Examples[0].Text);
+			Assert.AreEqual("летнее время", tr.Examples[0].Translations[0].Text);
+			Assert.AreEqual("take some time", tr.Examples[1].Text);
+			Assert.AreEqual("занять некоторое время", tr.Examples[1].Translations[0].Text);
+			Assert.AreEqual("real time mode", tr.Examples[2].Text);
+			Assert.AreEqual("режим реального времени", tr.Examples[2].Translations[0].Text);
 
-			Assert.AreEqual("adverbial participle", def1.PartOfSpeech);
+			Assert.AreEqual("verb", def1.PartOfSpeech);
 			Assert.AreEqual("taɪm", def1.Transcription);
 			Assert.AreEqual("time", def1.Text);
-			Assert.AreEqual("деепричастие", def1.Translations[0].PartOfSpeech);
-			Assert.AreEqual("временя", def1.Translations[0].Text);
+			Assert.AreEqual("verb", def1.Translations[0].PartOfSpeech);
+			Assert.AreEqual("приурочивать", def1.Translations[0].Text);
 		}
 
 		[Test]
@@ -106,7 +76,7 @@ namespace YandexLinguistics.NET.Tests
 		public void DictionaryVeryLongInputString()
 		{
 			var exception = Assert.Throws<YandexLinguisticsException>(
-				() => Dictionary.Lookup(LangPair.EnRu, new string('a', 100000)));
+				() => Dictionary.Lookup(DictionaryDirectory.EnRu, new string('a', 100000)));
 			Assert.AreEqual(
 				new YandexLinguisticsException(0, "Invalid URI: The Uri string is too long.").ToString(),
 				exception.ToString());

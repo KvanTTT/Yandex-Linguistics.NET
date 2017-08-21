@@ -54,7 +54,7 @@ namespace YandexLinguistics.NET.Gui
 			nudPredictorDelay.Value = Settings.Default.PredictorHintDelay;
 			tbPredictorInput.Text = Settings.Default.PredictorInput;
 
-			cmbDictionaryLangPairs.SelectedItem = new LangPair(Settings.Default.DictionaryLangPair);
+			cmbDictionaryLangPairs.SelectedItem = LangPair.Parse(Settings.Default.DictionaryLangPair);
 			cmbDictionaryLangUi.SelectedIndex = 0;
 			
 			cbFamily.Checked = Settings.Default.DictionaryFamily;

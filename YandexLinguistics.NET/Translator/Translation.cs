@@ -21,7 +21,7 @@ namespace YandexLinguistics.NET
 		{
 			get
 			{
-				return new LangPair(LangPairString);
+				return LangPair.Parse(LangPairString);
 			}
 			set
 			{

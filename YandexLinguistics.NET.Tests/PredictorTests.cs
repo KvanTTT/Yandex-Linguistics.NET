@@ -1,9 +1,6 @@
 ﻿using NUnit.Framework;
-using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
-using System.Text;
 
 namespace YandexLinguistics.NET.Tests
 {
@@ -21,21 +18,12 @@ namespace YandexLinguistics.NET.Tests
 		[Test]
 		public void PredictorGetLangs()
 		{
-			var langs = Predictor.GetLangs();
-			var expectedLangs = new Lang[]
-			{
-				Lang.Ru,
-				Lang.En,
-				Lang.Pl,
-				Lang.Uk,
-				Lang.De,
-				Lang.Fr,
-				Lang.Es,
-				Lang.It,
-				Lang.Tr
-			};
+			var expectedLangs = Predictor.GetLangs();
+			var langs = typeof(PredictorLang).GetFields()
+				.Where(field => field.FieldType == typeof(Lang))
+				.Select(field => (Lang)field.GetValue(null));
 
-			Assert.IsTrue(expectedLangs.All(lang => langs.Contains(lang)));
+			CollectionAssert.AreEquivalent(expectedLangs, langs);
 		}
 
 		[Test]

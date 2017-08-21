@@ -21,13 +21,7 @@ namespace YandexLinguistics.NET
 
 			var response = SendRequest<List<string>>(request);
 			var allLangs = (Lang[])Enum.GetValues(typeof(Lang));
-			LangPair[] result = response.Select(str =>
-			{
-				var inOut = str.Split('-');
-				return new LangPair(
-					(Lang)Enum.Parse(typeof(Lang), inOut[0].Remove(1).ToUpperInvariant() + inOut[0].Substring(1)),
-					(Lang)Enum.Parse(typeof(Lang), inOut[1].Remove(1).ToUpperInvariant() + inOut[1].Substring(1)));
-			}).ToArray();
+			LangPair[] result = response.Select(str => LangPair.Parse(str)).ToArray();
 			return result;
 		}
 
