@@ -44,9 +44,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dictionary\DictionaryDirectory.cs" />
-    <Compile Include="Inflector\Inflection.cs" />
-    <Compile Include="Inflector\InflectionCase.cs" />
-    <Compile Include="Inflector\Inflector.cs" />
     <Compile Include="Predictor\CompleteResponse.cs" />
     <Compile Include="Dictionary\Definition.cs" />
     <Compile Include="Dictionary\DicResult.cs" />

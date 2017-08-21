@@ -43,7 +43,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DictionaryTests.cs" />
-    <Compile Include="InflectorTests.cs" />
     <Compile Include="PredictorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpellerTests.cs" />
