@@ -43,6 +43,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dictionary\DictionaryDirectory.cs" />
     <Compile Include="Inflector\Inflection.cs" />
     <Compile Include="Inflector\InflectionCase.cs" />
     <Compile Include="Inflector\Inflector.cs" />
@@ -50,8 +51,10 @@
     <Compile Include="Dictionary\Definition.cs" />
     <Compile Include="Dictionary\DicResult.cs" />
     <Compile Include="Dictionary\Dictionary.cs" />
+    <Compile Include="Predictor\PredictorLang.cs" />
     <Compile Include="Speller\CharMistakeType.cs" />
     <Compile Include="Speller\Mistake.cs" />
+    <Compile Include="Translator\TranslatorDirectory.cs" />
     <Compile Include="YandexError.cs" />
     <Compile Include="Dictionary\Example.cs" />
     <Compile Include="Lang.cs" />

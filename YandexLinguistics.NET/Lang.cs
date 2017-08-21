@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace YandexLinguistics.NET
+﻿namespace YandexLinguistics.NET
 {
 	public enum Lang
 	{
@@ -34,7 +28,9 @@ namespace YandexLinguistics.NET
 		Hu,
 		Lt,
 		Lv,
+		Mhr,
 		Mk,
+		Mrj,
 		Nl,
 		No,
 		Pt,
@@ -42,6 +38,7 @@ namespace YandexLinguistics.NET
 		Sl,
 		Sq,
 		Sv,
+		Tt,
 		Hr,
 		Hy
 	}
