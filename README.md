@@ -1,6 +1,6 @@
 # Yandex Linguistics API .NET
 
-* Based on RestSharp (<http://restsharp.org>) to deserealize xml response into .NET objects.
+* Based on RestSharp (<http://restsharp.org>) to deserialize xml response into .NET objects.
 * NUnit (<http://www.nunit.org/>) using for testing.
 
 ## Currently implemented API's
@@ -9,7 +9,6 @@
 * [Yandex.Dictionary](http://api.yandex.ru/dictionary/)
 * [Yandex.Translate](http://api.yandex.ru/translate/)
 * [Yandex.Speller](http://api.yandex.ru/speller/)
-* [Yandex.Inflector](http://export.yandex.ru/inflect.xml)
 
 ## Using
 
@@ -29,7 +28,7 @@ var translation = translator.Translate("Семь раз отмерь, один �
 
 One can use these API's with default app keys or get them on this page: <http://api.yandex.ru/key/form.xml>
 
-All API's coveraged with tests in YandexLinguistics.NET.Tests
+All API's covered with tests in YandexLinguistics.NET.Tests.
 
 ## GUI
 
