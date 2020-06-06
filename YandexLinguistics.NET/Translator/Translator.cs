@@ -1,5 +1,4 @@
 ﻿using RestSharp;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -18,7 +17,6 @@ namespace YandexLinguistics.NET
 			request.AddParameter("key", _key);
 
 			var response = SendRequest<List<string>>(request);
-			var allLangs = (Lang[])Enum.GetValues(typeof(Lang));
 			LangPair[] result = response.Select(str => LangPair.Parse(str)).ToArray();
 			return result;
 		}
@@ -39,10 +37,10 @@ namespace YandexLinguistics.NET
 			request.AddParameter("text", text);
 			if (lang.OutputLang != Lang.None)
 			{
-				if (lang.InputLang == Lang.None)
-					request.AddParameter("lang", lang.OutputLang.ToString().ToLowerInvariant());
-				else
-					request.AddParameter("lang", lang.ToString().ToLowerInvariant());
+				request.AddParameter("lang",
+					lang.InputLang == Lang.None
+						? lang.OutputLang.ToString().ToLowerInvariant()
+						: lang.ToString().ToLowerInvariant());
 			}
 			if (format.HasValue)
 				request.AddParameter("format", format.ToString().ToLowerInvariant());

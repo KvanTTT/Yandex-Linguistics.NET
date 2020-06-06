@@ -1,9 +1,9 @@
 ﻿namespace YandexLinguistics.NET
 {
-	public struct Mistake
+	public readonly struct Mistake
 	{
-		public int Position;
-		public CharMistakeType Type;
+		public readonly int Position;
+		public readonly CharMistakeType Type;
 
 		public Mistake(int position, CharMistakeType type)
 		{
@@ -11,9 +11,6 @@
 			Type = type;
 		}
 
-		public override string ToString()
-		{
-			return Position + ", " + Type;
-		}
+		public override string ToString() => Position + ", " + Type;
 	}
 }

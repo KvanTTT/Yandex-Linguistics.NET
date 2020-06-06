@@ -6,37 +6,15 @@ namespace YandexLinguistics.NET
 {
 	public class Tr
 	{
-		[DeserializeAs(Attribute = false)]
-		public string Text
-		{
-			get;
-			set;
-		}
+		[DeserializeAs(Attribute = false)] public string Text { get; set; }
 
-		[DeserializeAs(Name = "pos")]
-		public string PartOfSpeech
-		{
-			get;
-			set;
-		}
+		[DeserializeAs(Name = "pos")] public string PartOfSpeech { get; set; }
 
-		public List<Syn> Synonyms
-		{
-			get;
-			set;
-		}
+		public List<Syn> Synonyms { get; set; }
 
-		public List<Mean> Meanings
-		{
-			get;
-			set;
-		}
+		public List<Mean> Meanings { get; set; }
 
-		public List<Ex> Examples
-		{
-			get;
-			set;
-		}
+		public List<Ex> Examples { get; set; }
 
 		public Tr()
 		{
@@ -50,7 +28,7 @@ namespace YandexLinguistics.NET
 			if (!string.IsNullOrEmpty(PartOfSpeech))
 				builder.Append("; PartOfSpeech: " + PartOfSpeech);
 			builder.AppendLine();
-			
+
 			if (Synonyms != null && Synonyms.Count > 0)
 			{
 				for (int i = 0; i < level + 1; i++)

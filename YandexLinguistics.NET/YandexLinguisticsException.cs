@@ -20,7 +20,7 @@ namespace YandexLinguistics.NET
 
 		public override string ToString()
 		{
-			return string.Format("code={0} message={1}", Code, Message);
+			return $"code={Code} message={Message}";
 		}
 	}
 }

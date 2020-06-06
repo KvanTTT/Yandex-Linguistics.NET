@@ -6,18 +6,9 @@ namespace YandexLinguistics.NET
 {
 	public class Ex
 	{
-		[DeserializeAs(Attribute = false)]
-		public string Text
-		{
-			get;
-			set;
-		}
+		[DeserializeAs(Attribute = false)] public string Text { get; set; }
 
-		public List<Tr> Translations
-		{
-			get;
-			set;
-		}
+		public List<Tr> Translations { get; set; }
 
 		public Ex()
 		{

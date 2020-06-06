@@ -5,11 +5,7 @@ namespace YandexLinguistics.NET
 {
 	public class DicResult
 	{
-		public List<Def> Definitions
-		{
-			get;
-			set;
-		}
+		public List<Def> Definitions { get; set; }
 
 		public DicResult()
 		{
@@ -20,7 +16,8 @@ namespace YandexLinguistics.NET
 			StringBuilder builder = new StringBuilder();
 			for (int i = 0; i < Definitions.Count; i++)
 			{
-				builder.Append((i + 1) + ". ");
+				builder.Append(i + 1);
+				builder.Append(". ");
 				Definitions[i].ToString(builder, formatting, indent);
 			}
 

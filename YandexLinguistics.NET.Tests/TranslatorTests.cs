@@ -7,18 +7,18 @@ namespace YandexLinguistics.NET.Tests
 	[TestFixture]
 	public class TranslatorTests
 	{
-		Translator Translator;
+		private Translator _translator;
 
 		[SetUp]
 		public void Init()
 		{
-			Translator = new Translator(ConfigurationManager.AppSettings["TranslatorKey"]);
+			_translator = new Translator(ConfigurationManager.AppSettings["TranslatorKey"]);
 		}
 
 		[Test]
 		public void TranslatorGetLangs()
 		{
-			LangPair[] expectedLangPairs = Translator.GetLangs();
+			LangPair[] expectedLangPairs = _translator.GetLangs();
 			var langPairs = typeof(TranslatorDirectory).GetFields()
 				.Where(field => field.FieldType == typeof(LangPair))
 				.Select(field => (LangPair)field.GetValue(null));
@@ -29,14 +29,14 @@ namespace YandexLinguistics.NET.Tests
 		[Test]
 		public void TranslatorDetectLang()
 		{
-			var lang = Translator.DetectLang("Язик до Києва доведе");
+			var lang = _translator.DetectLang("Язик до Києва доведе");
 			Assert.AreEqual(Lang.Uk, lang);
 		}
 
 		[Test]
 		public void TranslatorTranslate()
 		{
-			var translation = Translator.Translate("Лучше поздно, чем никогда", TranslatorDirectory.EnRu);
+			var translation = _translator.Translate("Лучше поздно, чем никогда", TranslatorDirectory.EnRu);
 			Assert.AreEqual("Лучше поздно, чем никогда", translation.Text);
 			Assert.AreEqual(TranslatorDirectory.EnRu, translation.LangPair);
 		}
@@ -44,7 +44,7 @@ namespace YandexLinguistics.NET.Tests
 		[Test]
 		public void TranslatorDetectAndTranslate()
 		{
-			var translation = Translator.Translate("Семь раз отмерь, один раз отрежь", new LangPair(Lang.None, Lang.En), null, true);
+			var translation = _translator.Translate("Семь раз отмерь, один раз отрежь", new LangPair(Lang.None, Lang.En), null, true);
 			Assert.AreEqual("Measure twice, cut once", translation.Text);
 			Assert.AreEqual(TranslatorDirectory.RuEn, translation.LangPair);
 			Assert.AreEqual(Lang.Ru, translation.Detected.Lang);
@@ -54,7 +54,7 @@ namespace YandexLinguistics.NET.Tests
 		public void TranslatorLangNotSupported()
 		{
 			var exception = Assert.Throws<YandexLinguisticsException>(
-				() => Translator.Translate("Example text", new LangPair(Lang.None, Lang.None)));
+				() => _translator.Translate("Example text", new LangPair(Lang.None, Lang.None)));
 			Assert.AreEqual(
 				new YandexLinguisticsException(502, "Invalid parameter: lang").ToString(),
 				exception.ToString());
@@ -64,7 +64,7 @@ namespace YandexLinguistics.NET.Tests
 		public void TranslatorVeryLongInputString()
 		{
 			var exception = Assert.Throws<YandexLinguisticsException>(
-				() => Translator.Translate(new string('a', 100000), new LangPair(Lang.None, Lang.Ru)));
+				() => _translator.Translate(new string('a', 100000), new LangPair(Lang.None, Lang.Ru)));
 			Assert.AreEqual(
 				new YandexLinguisticsException(0, "Invalid URI: The Uri string is too long.").ToString(),
 				exception.ToString());

@@ -5,18 +5,18 @@ namespace YandexLinguistics.NET.Tests
 	[TestFixture]
 	public class SpellerTests
 	{
-		Speller Speller;
+		private Speller _speller;
 
 		[SetUp]
 		public void Init()
 		{
-			Speller = new Speller();
+			_speller = new Speller();
 		}
 
 		[Test]
 		public void SpellerCheckText()
 		{
-			var spellResult = Speller.CheckText("синхрафазатрон в дубне");
+			var spellResult = _speller.CheckText("синхрафазатрон в дубне");
 
 			var error = spellResult.Errors[0];
 			Assert.AreEqual(1, error.Code);
@@ -40,7 +40,7 @@ namespace YandexLinguistics.NET.Tests
 		[Test]
 		public void SpellerCheckTexts()
 		{
-			var response = Speller.CheckTexts(new string[] { "синхрафазатрон", "в дубне" });
+			var response = _speller.CheckTexts(new[] { "синхрафазатрон", "в дубне" });
 
 			var error = response.Results[0].Errors[0];
 			Assert.AreEqual(1, error.Code);
@@ -64,7 +64,7 @@ namespace YandexLinguistics.NET.Tests
 		[Test]
 		public void SpellerFlags()
 		{
-			var response = Speller.CheckText("asdf@asdf.com орапгн36 москва", null, SpellerOptions.IgnoreDigits | SpellerOptions.IgnoreUrls | SpellerOptions.IgnoreCapitalization);
+			var response = _speller.CheckText("asdf@asdf.com орапгн36 москва", null, SpellerOptions.IgnoreDigits | SpellerOptions.IgnoreUrls | SpellerOptions.IgnoreCapitalization);
 
 			Assert.AreEqual(0, response.Errors.Count);
 		}
@@ -174,7 +174,7 @@ namespace YandexLinguistics.NET.Tests
 		public void SpellerVeryLongInputString()
 		{
 			var exception = Assert.Throws<YandexLinguisticsException>(
-				() => Speller.CheckText(new string('a', 100000)));
+				() => _speller.CheckText(new string('a', 100000)));
 			Assert.AreEqual(
 				new YandexLinguisticsException(0, "Invalid URI: The Uri string is too long.").ToString(),
 				exception.ToString());

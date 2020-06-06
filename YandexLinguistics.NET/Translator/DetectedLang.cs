@@ -2,10 +2,6 @@
 {
 	public class DetectedLang
 	{
-		public Lang Lang
-		{
-			get;
-			set;
-		}
+		public Lang Lang { get; set; }
 	}
 }

@@ -7,18 +7,18 @@ namespace YandexLinguistics.NET.Tests
 	[TestFixture]
 	public class DictionaryTests
 	{
-		Dictionary Dictionary;
+		private Dictionary _dictionary;
 
 		[SetUp]
 		public void Init()
 		{
-			Dictionary = new Dictionary(ConfigurationManager.AppSettings["DictionaryKey"]);
+			_dictionary = new Dictionary(ConfigurationManager.AppSettings["DictionaryKey"]);
 		}
 
 		[Test]
 		public void DictionaryGetLangs()
 		{
-			LangPair[] expectedLangPairs = Dictionary.GetLangs();
+			LangPair[] expectedLangPairs = _dictionary.GetLanguages();
 			var langPairs = typeof(DictionaryDirectory).GetFields()
 				.Where(field => field.FieldType == typeof(LangPair))
 				.Select(field => (LangPair)field.GetValue(null));
@@ -29,7 +29,7 @@ namespace YandexLinguistics.NET.Tests
 		[Test]
 		public void DictionaryLookup()
 		{
-			var dicResult = Dictionary.Lookup(DictionaryDirectory.EnRu, "time");
+			var dicResult = _dictionary.Lookup(DictionaryDirectory.EnRu, "time");
 
 			var def0 = dicResult.Definitions[0];
 			var def1 = dicResult.Definitions[1];
@@ -66,7 +66,7 @@ namespace YandexLinguistics.NET.Tests
 		public void DictionaryLangNotSupported()
 		{
 			var exception = Assert.Throws<YandexLinguisticsException>(
-				() => Dictionary.Lookup(new LangPair(Lang.Uk, Lang.It), "asdf"));
+				() => _dictionary.Lookup(new LangPair(Lang.Uk, Lang.It), "asdf"));
 			Assert.AreEqual(
 				new YandexLinguisticsException(501, "The specified language is not supported").ToString(),
 				exception.ToString());
@@ -76,7 +76,7 @@ namespace YandexLinguistics.NET.Tests
 		public void DictionaryVeryLongInputString()
 		{
 			var exception = Assert.Throws<YandexLinguisticsException>(
-				() => Dictionary.Lookup(DictionaryDirectory.EnRu, new string('a', 100000)));
+				() => _dictionary.Lookup(DictionaryDirectory.EnRu, new string('a', 100000)));
 			Assert.AreEqual(
 				new YandexLinguisticsException(0, "Invalid URI: The Uri string is too long.").ToString(),
 				exception.ToString());

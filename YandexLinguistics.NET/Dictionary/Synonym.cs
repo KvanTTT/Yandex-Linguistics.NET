@@ -4,12 +4,7 @@ namespace YandexLinguistics.NET
 {
 	public class Syn
 	{
-		[DeserializeAs(Attribute = false)]
-		public string Text
-		{
-			get;
-			set;
-		}
+		[DeserializeAs(Attribute = false)] public string Text { get; set; }
 
 		public Syn()
 		{

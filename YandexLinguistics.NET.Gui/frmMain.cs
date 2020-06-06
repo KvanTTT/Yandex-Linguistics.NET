@@ -11,35 +11,35 @@ namespace YandexLinguistics.NET.Gui
 {
 	public partial class frmMain : Form
 	{
-		Predictor Predictor;
-		Dictionary Dictionary;
-		Translator Translator;
-		Speller Speller;
-		System.Threading.Timer PredictorTimer;
-		System.Threading.Timer DictionaryTimer;
-		System.Threading.Timer TranslatorTimer;
-		System.Threading.Timer SpellerTimer;
+		private Predictor _predictor;
+		private Dictionary _dictionary;
+		private Translator _translator;
+		private Speller _speller;
+		private readonly System.Threading.Timer _predictorTimer;
+		private readonly System.Threading.Timer _dictionaryTimer;
+		private readonly System.Threading.Timer _translatorTimer;
+		private readonly System.Threading.Timer _spellerTimer;
 
 		public frmMain()
 		{
-			Predictor = new Predictor(Settings.Default.PredictorKey);
-			Dictionary = new Dictionary(Settings.Default.DictionaryKey);
-			Translator = new Translator(Settings.Default.TranslatorKey);
-			Speller = new Speller();
+			_predictor = new Predictor(Settings.Default.PredictorKey);
+			_dictionary = new Dictionary(Settings.Default.DictionaryKey);
+			_translator = new Translator(Settings.Default.TranslatorKey);
+			_speller = new Speller();
 
-			PredictorTimer = new System.Threading.Timer(_ => UpdatePredictorResult(), null, Timeout.Infinite, Timeout.Infinite);
-			DictionaryTimer = new System.Threading.Timer(_ => UpdateDictionaryResult(), null, Timeout.Infinite, Timeout.Infinite);
-			TranslatorTimer = new System.Threading.Timer(_ => UpdateTranslatorResult(), null, Timeout.Infinite, Timeout.Infinite);
-			SpellerTimer = new System.Threading.Timer(_ => UpdateSpellerResult(), null, Timeout.Infinite, Timeout.Infinite);
+			_predictorTimer = new System.Threading.Timer(_ => UpdatePredictorResult(), null, Timeout.Infinite, Timeout.Infinite);
+			_dictionaryTimer = new System.Threading.Timer(_ => UpdateDictionaryResult(), null, Timeout.Infinite, Timeout.Infinite);
+			_translatorTimer = new System.Threading.Timer(_ => UpdateTranslatorResult(), null, Timeout.Infinite, Timeout.Infinite);
+			_spellerTimer = new System.Threading.Timer(_ => UpdateSpellerResult(), null, Timeout.Infinite, Timeout.Infinite);
 
 			InitializeComponent();
 
 			tcServices.SelectedIndex = Settings.Default.SelectedTabIndex;
 
-			cmbPredictorLangs.Items.AddRange(Predictor.GetLangs().Select(lang => (object)lang).ToArray());
-			cmbDictionaryLangPairs.Items.AddRange(Dictionary.GetLangs().Select(lang => (object)lang).ToArray());
+			cmbPredictorLangs.Items.AddRange(_predictor.GetLanguages().Select(lang => (object)lang).ToArray());
+			cmbDictionaryLangPairs.Items.AddRange(_dictionary.GetLanguages().Select(lang => (object)lang).ToArray());
 			cmbDictionaryLangUi.Items.Add("");
-			cmbDictionaryLangUi.Items.AddRange(Predictor.GetLangs().Select(lang => (object)lang).ToArray());
+			cmbDictionaryLangUi.Items.AddRange(_predictor.GetLanguages().Select(lang => (object)lang).ToArray());
 
 			cmbPredictorLangs.SelectedItem = Enum.Parse(typeof(Lang), Settings.Default.PredictorLanguage);
 			nudMaxHintCount.Value = Settings.Default.PredictorMaxHintCount;
@@ -48,7 +48,7 @@ namespace YandexLinguistics.NET.Gui
 
 			cmbDictionaryLangPairs.SelectedItem = LangPair.Parse(Settings.Default.DictionaryLangPair);
 			cmbDictionaryLangUi.SelectedIndex = 0;
-			
+
 			cbFamily.Checked = Settings.Default.DictionaryFamily;
 			cbMorpho.Checked = Settings.Default.DictionaryMorpho;
 			cbPartOfSpeech.Checked = Settings.Default.DictionaryPartOfSpeech;
@@ -158,25 +158,25 @@ namespace YandexLinguistics.NET.Gui
 
 		private void tbPredictorKey_TextChanged(object sender, EventArgs e)
 		{
-			Predictor = new Predictor(tbPredictorKey.Text, tbPredictorBaseUrl.Text);
+			_predictor = new Predictor(tbPredictorKey.Text, tbPredictorBaseUrl.Text);
 			tbPredictor_TextChanged(sender, e);
 		}
 
 		private void tbDictionaryKey_TextChanged(object sender, EventArgs e)
 		{
-			Dictionary = new Dictionary(tbDictionaryKey.Text, tbDictionaryBaseUrl.Text);
+			_dictionary = new Dictionary(tbDictionaryKey.Text, tbDictionaryBaseUrl.Text);
 			tbDictionaryInput_TextChanged(sender, e);
 		}
 
 		private void tbTranslatorKey_TextChanged(object sender, EventArgs e)
 		{
-			Translator = new Translator(tbTranslatorKey.Text, tbTranslatorBaseUrl.Text);
+			_translator = new Translator(tbTranslatorKey.Text, tbTranslatorBaseUrl.Text);
 			tbTranslatorInput_TextChanged(sender, e);
 		}
 
 		private void tbSpellerBaseUrl_TextChanged(object sender, EventArgs e)
 		{
-			Speller = new Speller(tbSpellerBaseUrl.Text);
+			_speller = new Speller(tbSpellerBaseUrl.Text);
 			tbSpellerInput_TextChanged(sender, e);
 		}
 
@@ -184,28 +184,28 @@ namespace YandexLinguistics.NET.Gui
 		{
 			lbHints.Items.Clear();
 			if (nudPredictorDelay.Value != 0)
-				PredictorTimer.Change((int)nudPredictorDelay.Value, Timeout.Infinite);
+				_predictorTimer.Change((int)nudPredictorDelay.Value, Timeout.Infinite);
 		}
 
 		private void tbDictionaryInput_TextChanged(object sender, EventArgs e)
 		{
 			rbDictionaryOutput.Clear();
 			if (nudDictionaryDelay.Value != 0)
-				DictionaryTimer.Change((int)nudDictionaryDelay.Value, Timeout.Infinite);
+				_dictionaryTimer.Change((int)nudDictionaryDelay.Value, Timeout.Infinite);
 		}
 
 		private void tbTranslatorInput_TextChanged(object sender, EventArgs e)
 		{
 			rtbTranslatorOutput.Clear();
 			if (nudTranslatorDelay.Value != 0)
-				TranslatorTimer.Change((int)nudTranslatorDelay.Value, Timeout.Infinite);
+				_translatorTimer.Change((int)nudTranslatorDelay.Value, Timeout.Infinite);
 		}
 
 		private void tbSpellerInput_TextChanged(object sender, EventArgs e)
 		{
 			rtbSpellerOutput.Clear();
 			if (nudSpellerDelay.Value != 0)
-				SpellerTimer.Change((int)nudSpellerDelay.Value, Timeout.Infinite);
+				_spellerTimer.Change((int)nudSpellerDelay.Value, Timeout.Infinite);
 		}
 
 		private void btnPredict_Click(object sender, EventArgs e)
@@ -307,7 +307,7 @@ namespace YandexLinguistics.NET.Gui
 			{
 				try
 				{
-					var response = Predictor.Complete((Lang)cmbPredictorLangs.SelectedItem, tbPredictorInput.Text, (int)nudMaxHintCount.Value);
+					var response = _predictor.Complete((Lang)cmbPredictorLangs.SelectedItem, tbPredictorInput.Text, (int)nudMaxHintCount.Value);
 
 					tbHintCount.Text = response.Text.Count.ToString();
 					tbPos.Text = response.Pos.ToString();
@@ -328,7 +328,7 @@ namespace YandexLinguistics.NET.Gui
 
 		private void UpdateDictionaryResult()
 		{
-			this.Invoke(new Action(() =>
+			Invoke(new Action(() =>
 			{
 				try
 				{
@@ -339,7 +339,7 @@ namespace YandexLinguistics.NET.Gui
 						lookupOptions |= LookupOptions.Morpho;
 					if (cbPartOfSpeech.Checked)
 						lookupOptions |= LookupOptions.PartOfSpeechFilter;
-					var response = Dictionary.Lookup((LangPair)cmbDictionaryLangPairs.SelectedItem,
+					var response = _dictionary.Lookup((LangPair)cmbDictionaryLangPairs.SelectedItem,
 						tbDictionaryInput.Text, cmbDictionaryLangUi.SelectedItem.ToString().ToLowerInvariant(), lookupOptions);
 
 					rbDictionaryOutput.Text = response.ToString(cbDictionaryFormatting.Checked, tbDictionaryIndent.Text);
@@ -353,11 +353,11 @@ namespace YandexLinguistics.NET.Gui
 
 		private void UpdateTranslatorResult()
 		{
-			this.Invoke(new Action(() =>
+			Invoke(new Action(() =>
 			{
 				try
 				{
-					var response = Translator.Translate(tbTranslatorInput.Text,
+					var response = _translator.Translate(tbTranslatorInput.Text,
 						new LangPair((Lang)cmbTranslatorInputLang.SelectedItem, (Lang)cmbTranslatorOutputLang.SelectedItem), null, cbTranslatorDetectInputLang.Checked);
 
 					if (response.Detected != null)
@@ -374,7 +374,7 @@ namespace YandexLinguistics.NET.Gui
 
 		private void UpdateSpellerResult()
 		{
-			this.Invoke(new Action(() =>
+			Invoke(new Action(() =>
 			{
 				try
 				{
@@ -406,7 +406,7 @@ namespace YandexLinguistics.NET.Gui
 					if (cbSpellerUk.Checked)
 						langs.Add(Lang.Uk);
 
-					var response = Speller.CheckText(tbSpellerInput.Text, langs.ToArray(), options);
+					var response = _speller.CheckText(tbSpellerInput.Text, langs.ToArray(), options);
 					var errors = response.Errors;
 
 					string input = tbSpellerInput.Text;

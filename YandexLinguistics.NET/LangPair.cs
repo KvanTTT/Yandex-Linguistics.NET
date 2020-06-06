@@ -2,10 +2,10 @@
 
 namespace YandexLinguistics.NET
 {
-	public struct LangPair
+	public readonly struct LangPair
 	{
-		public Lang InputLang;
-		public Lang OutputLang;
+		public readonly Lang InputLang;
+		public readonly Lang OutputLang;
 
 		public LangPair(Lang inputLang, Lang outputLang)
 		{
@@ -21,9 +21,6 @@ namespace YandexLinguistics.NET
 			return result;
 		}
 
-		public override string ToString()
-		{
-			return InputLang.ToString() + "-" + OutputLang.ToString();
-		}
+		public override string ToString() => InputLang + "-" + OutputLang;
 	}
 }

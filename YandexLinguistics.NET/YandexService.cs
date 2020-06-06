@@ -5,10 +5,10 @@ namespace YandexLinguistics.NET
 {
 	public abstract class YandexService
 	{
-		protected RestClient _client;
-		protected string _key;
+		private readonly RestClient _client;
+		protected readonly string _key;
 
-		public YandexService(string key, string baseUrl)
+		protected YandexService(string key, string baseUrl)
 		{
 			_key = key;
 			_client = new RestClient(baseUrl);
@@ -23,24 +23,22 @@ namespace YandexLinguistics.NET
 				var result = deserializer.Deserialize<T>(response);
 				return result;
 			}
-			else
+
+			YandexError error = null;
+			try
 			{
-				YandexError error = null;
-				try
+				error = deserializer.Deserialize<YandexError>(response);
+			}
+			finally
+			{
+				if (error == null)
 				{
-					error = deserializer.Deserialize<YandexError>(response);
+					var errorMessage = !string.IsNullOrEmpty(response.ErrorMessage) ?
+						response.ErrorMessage : response.Content;
+					throw new YandexLinguisticsException((int)response.StatusCode, errorMessage);
 				}
-				finally
-				{
-					if (error == null)
-					{
-						var errorMessage = !string.IsNullOrEmpty(response.ErrorMessage) ?
-							response.ErrorMessage : response.Content;
-						throw new YandexLinguisticsException((int)response.StatusCode, errorMessage);
-					}
-					else
-						throw new YandexLinguisticsException(error);
-				}
+
+				throw new YandexLinguisticsException(error);
 			}
 		}
 	}

@@ -49,27 +49,27 @@ namespace YandexLinguistics.NET
 			int deletionCost = 1,
 			int transpositionCost = 1)
 		{
-			int w_length = word.Length;
-			int cw_length = correctedWord.Length;
-			var d = new KeyValuePair<int, CharMistakeType>[w_length + 1, cw_length + 1];
-			var result = new List<Mistake>(Math.Max(w_length, cw_length));
+			int wLength = word.Length;
+			int cwLength = correctedWord.Length;
+			var d = new KeyValuePair<int, CharMistakeType>[wLength + 1, cwLength + 1];
+			var result = new List<Mistake>(Math.Max(wLength, cwLength));
 
-			if (w_length == 0)
+			if (wLength == 0)
 			{
-				for (int i = 0; i < cw_length; i++)
+				for (int i = 0; i < cwLength; i++)
 					result.Add(new Mistake(i, CharMistakeType.Insertion));
 				return result;
 			}
 
-			for (int i = 0; i <= w_length; i++)
+			for (int i = 0; i <= wLength; i++)
 				d[i, 0] = new KeyValuePair<int, CharMistakeType>(i, CharMistakeType.None);
 
-			for (int j = 0; j <= cw_length; j++)
+			for (int j = 0; j <= cwLength; j++)
 				d[0, j] = new KeyValuePair<int, CharMistakeType>(j, CharMistakeType.None);
 
-			for (int i = 1; i <= w_length; i++)
+			for (int i = 1; i <= wLength; i++)
 			{
-				for (int j = 1; j <= cw_length; j++)
+				for (int j = 1; j <= cwLength; j++)
 				{
 					bool equal = correctedWord[j - 1] == word[i - 1];
 					int delCost = d[i - 1, j].Key + deletionCost;
@@ -107,41 +107,41 @@ namespace YandexLinguistics.NET
 				}
 			}
 
-			int w_ind = w_length;
-			int cw_ind = cw_length;
-			while (w_ind >= 0 && cw_ind >= 0)
+			int wInd = wLength;
+			int cwInd = cwLength;
+			while (wInd >= 0 && cwInd >= 0)
 			{
-				switch (d[w_ind, cw_ind].Value)
+				switch (d[wInd, cwInd].Value)
 				{
 					case CharMistakeType.None:
-						w_ind--;
-						cw_ind--;
+						wInd--;
+						cwInd--;
 						break;
 					case CharMistakeType.Substitution:
-						result.Add(new Mistake(cw_ind - 1, CharMistakeType.Substitution));
-						w_ind--;
-						cw_ind--;
+						result.Add(new Mistake(cwInd - 1, CharMistakeType.Substitution));
+						wInd--;
+						cwInd--;
 						break;
 					case CharMistakeType.Deletion:
-						result.Add(new Mistake(cw_ind, CharMistakeType.Deletion));
-						w_ind--;
+						result.Add(new Mistake(cwInd, CharMistakeType.Deletion));
+						wInd--;
 						break;
 					case CharMistakeType.Insertion:
-						result.Add(new Mistake(cw_ind - 1, CharMistakeType.Insertion));
-						cw_ind--;
+						result.Add(new Mistake(cwInd - 1, CharMistakeType.Insertion));
+						cwInd--;
 						break;
 					case CharMistakeType.Transposition:
-						result.Add(new Mistake(cw_ind - 2, CharMistakeType.Transposition));
-						w_ind -= 2;
-						cw_ind -= 2;
+						result.Add(new Mistake(cwInd - 2, CharMistakeType.Transposition));
+						wInd -= 2;
+						cwInd -= 2;
 						break;
 				}
 			}
-			if (d[w_length, cw_length].Key > result.Count)
+			if (d[wLength, cwLength].Key > result.Count)
 			{
-				int delMistakesCount = d[w_length, cw_length].Key - result.Count;
+				int delMistakesCount = d[wLength, cwLength].Key - result.Count;
 				for (int i = 0; i < delMistakesCount; i++)
-					result.Add(new Mistake(0, cw_length > w_length ? CharMistakeType.Insertion : CharMistakeType.Deletion));
+					result.Add(new Mistake(0, cwLength > wLength ? CharMistakeType.Insertion : CharMistakeType.Deletion));
 			}
 
 			result.Reverse();
