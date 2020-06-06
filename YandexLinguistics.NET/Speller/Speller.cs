@@ -1,5 +1,4 @@
 ﻿using RestSharp;
-using RestSharp.Deserializers;
 using System;
 using System.Linq;
 using System.Collections.Generic;
