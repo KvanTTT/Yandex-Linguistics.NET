@@ -1,107 +1,128 @@
-﻿namespace YandexLinguistics.NET
+﻿using System.Collections.Generic;
+
+namespace YandexLinguistics.NET
 {
 	public static class DictionaryDirectory
 	{
-		public static readonly LangPair BeBe = new LangPair(Lang.Be, Lang.Be);
-		public static readonly LangPair BeRu = new LangPair(Lang.Be, Lang.Ru);
-		public static readonly LangPair BgRu = new LangPair(Lang.Bg, Lang.Ru);
-		public static readonly LangPair CsEn = new LangPair(Lang.Cs, Lang.En);
-		public static readonly LangPair CsRu = new LangPair(Lang.Cs, Lang.Ru);
-		public static readonly LangPair DaEn = new LangPair(Lang.Da, Lang.En);
-		public static readonly LangPair DaRu = new LangPair(Lang.Da, Lang.Ru);
-		public static readonly LangPair DeDe = new LangPair(Lang.De, Lang.De);
-		public static readonly LangPair DeEn = new LangPair(Lang.De, Lang.En);
-		public static readonly LangPair DeRu = new LangPair(Lang.De, Lang.Ru);
-		public static readonly LangPair DeTr = new LangPair(Lang.De, Lang.Tr);
-		public static readonly LangPair ElEn = new LangPair(Lang.El, Lang.En);
-		public static readonly LangPair ElRu = new LangPair(Lang.El, Lang.Ru);
-		public static readonly LangPair EnCs = new LangPair(Lang.En, Lang.Cs);
-		public static readonly LangPair EnDa = new LangPair(Lang.En, Lang.Da);
-		public static readonly LangPair EnDe = new LangPair(Lang.En, Lang.De);
-		public static readonly LangPair EnEl = new LangPair(Lang.En, Lang.El);
-		public static readonly LangPair EnEn = new LangPair(Lang.En, Lang.En);
-		public static readonly LangPair EnEs = new LangPair(Lang.En, Lang.Es);
-		public static readonly LangPair EnEt = new LangPair(Lang.En, Lang.Et);
-		public static readonly LangPair EnFi = new LangPair(Lang.En, Lang.Fi);
-		public static readonly LangPair EnFr = new LangPair(Lang.En, Lang.Fr);
-		public static readonly LangPair EnIt = new LangPair(Lang.En, Lang.It);
-		public static readonly LangPair EnLt = new LangPair(Lang.En, Lang.Lt);
-		public static readonly LangPair EnLv = new LangPair(Lang.En, Lang.Lv);
-		public static readonly LangPair EnNl = new LangPair(Lang.En, Lang.Nl);
-		public static readonly LangPair EnNo = new LangPair(Lang.En, Lang.No);
-		public static readonly LangPair EnPt = new LangPair(Lang.En, Lang.Pt);
-		public static readonly LangPair EnRu = new LangPair(Lang.En, Lang.Ru);
-		public static readonly LangPair EnSk = new LangPair(Lang.En, Lang.Sk);
-		public static readonly LangPair EnSv = new LangPair(Lang.En, Lang.Sv);
-		public static readonly LangPair EnTr = new LangPair(Lang.En, Lang.Tr);
-		public static readonly LangPair EnUk = new LangPair(Lang.En, Lang.Uk);
-		public static readonly LangPair EsEn = new LangPair(Lang.Es, Lang.En);
-		public static readonly LangPair EsEs = new LangPair(Lang.Es, Lang.Es);
-		public static readonly LangPair EsRu = new LangPair(Lang.Es, Lang.Ru);
-		public static readonly LangPair EtEn = new LangPair(Lang.Et, Lang.En);
-		public static readonly LangPair EtRu = new LangPair(Lang.Et, Lang.Ru);
-		public static readonly LangPair FiEn = new LangPair(Lang.Fi, Lang.En);
-		public static readonly LangPair FiFi = new LangPair(Lang.Fi, Lang.Fi);
-		public static readonly LangPair FiRu = new LangPair(Lang.Fi, Lang.Ru);
-		public static readonly LangPair FrEn = new LangPair(Lang.Fr, Lang.En);
-		public static readonly LangPair FrFr = new LangPair(Lang.Fr, Lang.Fr);
-		public static readonly LangPair FrRu = new LangPair(Lang.Fr, Lang.Ru);
-		public static readonly LangPair HuHu = new LangPair(Lang.Hu, Lang.Hu);
-		public static readonly LangPair HuRu = new LangPair(Lang.Hu, Lang.Ru);
-		public static readonly LangPair ItEn = new LangPair(Lang.It, Lang.En);
-		public static readonly LangPair ItIt = new LangPair(Lang.It, Lang.It);
-		public static readonly LangPair ItRu = new LangPair(Lang.It, Lang.Ru);
-		public static readonly LangPair LtEn = new LangPair(Lang.Lt, Lang.En);
-		public static readonly LangPair LtLt = new LangPair(Lang.Lt, Lang.Lt);
-		public static readonly LangPair LtRu = new LangPair(Lang.Lt, Lang.Ru);
-		public static readonly LangPair LvEn = new LangPair(Lang.Lv, Lang.En);
-		public static readonly LangPair LvRu = new LangPair(Lang.Lv, Lang.Ru);
-		public static readonly LangPair MhrRu = new LangPair(Lang.Mhr, Lang.Ru);
-		public static readonly LangPair MrjRu = new LangPair(Lang.Mrj, Lang.Ru);
-		public static readonly LangPair NlEn = new LangPair(Lang.Nl, Lang.En);
-		public static readonly LangPair NlRu = new LangPair(Lang.Nl, Lang.Ru);
-		public static readonly LangPair NoEn = new LangPair(Lang.No, Lang.En);
-		public static readonly LangPair NoRu = new LangPair(Lang.No, Lang.Ru);
-		public static readonly LangPair PlRu = new LangPair(Lang.Pl, Lang.Ru);
-		public static readonly LangPair PtEn = new LangPair(Lang.Pt, Lang.En);
-		public static readonly LangPair PtRu = new LangPair(Lang.Pt, Lang.Ru);
-		public static readonly LangPair RuBe = new LangPair(Lang.Ru, Lang.Be);
-		public static readonly LangPair RuBg = new LangPair(Lang.Ru, Lang.Bg);
-		public static readonly LangPair RuCs = new LangPair(Lang.Ru, Lang.Cs);
-		public static readonly LangPair RuDa = new LangPair(Lang.Ru, Lang.Da);
-		public static readonly LangPair RuDe = new LangPair(Lang.Ru, Lang.De);
-		public static readonly LangPair RuEl = new LangPair(Lang.Ru, Lang.El);
-		public static readonly LangPair RuEn = new LangPair(Lang.Ru, Lang.En);
-		public static readonly LangPair RuEs = new LangPair(Lang.Ru, Lang.Es);
-		public static readonly LangPair RuEt = new LangPair(Lang.Ru, Lang.Et);
-		public static readonly LangPair RuFi = new LangPair(Lang.Ru, Lang.Fi);
-		public static readonly LangPair RuFr = new LangPair(Lang.Ru, Lang.Fr);
-		public static readonly LangPair RuHu = new LangPair(Lang.Ru, Lang.Hu);
-		public static readonly LangPair RuIt = new LangPair(Lang.Ru, Lang.It);
-		public static readonly LangPair RuLt = new LangPair(Lang.Ru, Lang.Lt);
-		public static readonly LangPair RuLv = new LangPair(Lang.Ru, Lang.Lv);
-		public static readonly LangPair RuMhr = new LangPair(Lang.Ru, Lang.Mhr);
-		public static readonly LangPair RuMrj = new LangPair(Lang.Ru, Lang.Mrj);
-		public static readonly LangPair RuNl = new LangPair(Lang.Ru, Lang.Nl);
-		public static readonly LangPair RuNo = new LangPair(Lang.Ru, Lang.No);
-		public static readonly LangPair RuPl = new LangPair(Lang.Ru, Lang.Pl);
-		public static readonly LangPair RuPt = new LangPair(Lang.Ru, Lang.Pt);
-		public static readonly LangPair RuRu = new LangPair(Lang.Ru, Lang.Ru);
-		public static readonly LangPair RuSk = new LangPair(Lang.Ru, Lang.Sk);
-		public static readonly LangPair RuSv = new LangPair(Lang.Ru, Lang.Sv);
-		public static readonly LangPair RuTr = new LangPair(Lang.Ru, Lang.Tr);
-		public static readonly LangPair RuTt = new LangPair(Lang.Ru, Lang.Tt);
-		public static readonly LangPair RuUk = new LangPair(Lang.Ru, Lang.Uk);
-		public static readonly LangPair SkEn = new LangPair(Lang.Sk, Lang.En);
-		public static readonly LangPair SkRu = new LangPair(Lang.Sk, Lang.Ru);
-		public static readonly LangPair SvEn = new LangPair(Lang.Sv, Lang.En);
-		public static readonly LangPair SvRu = new LangPair(Lang.Sv, Lang.Ru);
-		public static readonly LangPair TrDe = new LangPair(Lang.Tr, Lang.De);
-		public static readonly LangPair TrEn = new LangPair(Lang.Tr, Lang.En);
-		public static readonly LangPair TrRu = new LangPair(Lang.Tr, Lang.Ru);
-		public static readonly LangPair TtRu = new LangPair(Lang.Tt, Lang.Ru);
-		public static readonly LangPair UkEn = new LangPair(Lang.Uk, Lang.En);
-		public static readonly LangPair UkRu = new LangPair(Lang.Uk, Lang.Ru);
-		public static readonly LangPair UkUk = new LangPair(Lang.Uk, Lang.Uk);
+		public static readonly IReadOnlyCollection<LangPair> Pairs = new []
+		{
+			new LangPair(Lang.Be, Lang.Be),
+			new LangPair(Lang.Be, Lang.Ru),
+			new LangPair(Lang.Bg, Lang.Ru),
+			new LangPair(Lang.Cs, Lang.Cs),
+			new LangPair(Lang.Cs, Lang.En),
+			new LangPair(Lang.Cs, Lang.Ru),
+			new LangPair(Lang.Da, Lang.En),
+			new LangPair(Lang.Da, Lang.Ru),
+			new LangPair(Lang.De, Lang.De),
+			new LangPair(Lang.De, Lang.En),
+			new LangPair(Lang.De, Lang.Ru),
+			new LangPair(Lang.De, Lang.Tr),
+			new LangPair(Lang.El, Lang.En),
+			new LangPair(Lang.El, Lang.Ru),
+			new LangPair(Lang.En, Lang.Cs),
+			new LangPair(Lang.En, Lang.Da),
+			new LangPair(Lang.En, Lang.De),
+			new LangPair(Lang.En, Lang.El),
+			new LangPair(Lang.En, Lang.En),
+			new LangPair(Lang.En, Lang.Es),
+			new LangPair(Lang.En, Lang.Et),
+			new LangPair(Lang.En, Lang.Fi),
+			new LangPair(Lang.En, Lang.Fr),
+			new LangPair(Lang.En, Lang.It),
+			new LangPair(Lang.En, Lang.Lt),
+			new LangPair(Lang.En, Lang.Lv),
+			new LangPair(Lang.En, Lang.Nl),
+			new LangPair(Lang.En, Lang.No),
+			new LangPair(Lang.En, Lang.Pt),
+			new LangPair(Lang.En, Lang.Ru),
+			new LangPair(Lang.En, Lang.Sk),
+			new LangPair(Lang.En, Lang.Sv),
+			new LangPair(Lang.En, Lang.Tr),
+			new LangPair(Lang.En, Lang.Uk),
+			new LangPair(Lang.Es, Lang.En),
+			new LangPair(Lang.Es, Lang.Es),
+			new LangPair(Lang.Es, Lang.Ru),
+			new LangPair(Lang.Et, Lang.En),
+			new LangPair(Lang.Et, Lang.Ru),
+			new LangPair(Lang.Fi, Lang.En),
+			new LangPair(Lang.Fi, Lang.Fi),
+			new LangPair(Lang.Fi, Lang.Ru),
+			new LangPair(Lang.Fr, Lang.En),
+			new LangPair(Lang.Fr, Lang.Fr),
+			new LangPair(Lang.Fr, Lang.Ru),
+			new LangPair(Lang.Hu, Lang.Hu),
+			new LangPair(Lang.Hu, Lang.Ru),
+			new LangPair(Lang.It, Lang.En),
+			new LangPair(Lang.It, Lang.It),
+			new LangPair(Lang.It, Lang.Ru),
+			new LangPair(Lang.Lt, Lang.En),
+			new LangPair(Lang.Lt, Lang.Lt),
+			new LangPair(Lang.Lt, Lang.Ru),
+			new LangPair(Lang.Lv, Lang.En),
+			new LangPair(Lang.Lv, Lang.Ru),
+			new LangPair(Lang.Mhr, Lang.Ru),
+			new LangPair(Lang.Mrj, Lang.Ru),
+			new LangPair(Lang.Nl, Lang.En),
+			new LangPair(Lang.Nl, Lang.Ru),
+			new LangPair(Lang.No, Lang.En),
+			new LangPair(Lang.No, Lang.Ru),
+			new LangPair(Lang.Pl, Lang.Ru),
+			new LangPair(Lang.Pt, Lang.En),
+			new LangPair(Lang.Pt, Lang.Ru),
+			new LangPair(Lang.Ru, Lang.Be),
+			new LangPair(Lang.Ru, Lang.Bg),
+			new LangPair(Lang.Ru, Lang.Cs),
+			new LangPair(Lang.Ru, Lang.Da),
+			new LangPair(Lang.Ru, Lang.De),
+			new LangPair(Lang.Ru, Lang.El),
+			new LangPair(Lang.Ru, Lang.En),
+			new LangPair(Lang.Ru, Lang.Es),
+			new LangPair(Lang.Ru, Lang.Et),
+			new LangPair(Lang.Ru, Lang.Fi),
+			new LangPair(Lang.Ru, Lang.Fr),
+			new LangPair(Lang.Ru, Lang.Hu),
+			new LangPair(Lang.Ru, Lang.It),
+			new LangPair(Lang.Ru, Lang.Lt),
+			new LangPair(Lang.Ru, Lang.Lv),
+			new LangPair(Lang.Ru, Lang.Mhr),
+			new LangPair(Lang.Ru, Lang.Mrj),
+			new LangPair(Lang.Ru, Lang.Nl),
+			new LangPair(Lang.Ru, Lang.No),
+			new LangPair(Lang.Ru, Lang.Pl),
+			new LangPair(Lang.Ru, Lang.Pt),
+			new LangPair(Lang.Ru, Lang.Ru),
+			new LangPair(Lang.Ru, Lang.Sk),
+			new LangPair(Lang.Ru, Lang.Sv),
+			new LangPair(Lang.Ru, Lang.Tr),
+			new LangPair(Lang.Ru, Lang.Tt),
+			new LangPair(Lang.Ru, Lang.Uk),
+			new LangPair(Lang.Ru, Lang.Zh),
+			new LangPair(Lang.Sk, Lang.En),
+			new LangPair(Lang.Sk, Lang.Ru),
+			new LangPair(Lang.Sv, Lang.En),
+			new LangPair(Lang.Sv, Lang.Ru),
+			new LangPair(Lang.Tr, Lang.De),
+			new LangPair(Lang.Tr, Lang.En),
+			new LangPair(Lang.Tr, Lang.Ru),
+			new LangPair(Lang.Tt, Lang.Ru),
+			new LangPair(Lang.Uk, Lang.En),
+			new LangPair(Lang.Uk, Lang.Ru),
+			new LangPair(Lang.Uk, Lang.Uk),
+			new LangPair(Lang.Zh, Lang.Ru)
+		};
+
+		public static LangPair GetLangPair(Lang input, Lang output)
+		{
+			foreach (LangPair pair in Pairs)
+			{
+				if (pair.InputLang == input && pair.OutputLang == output)
+				{
+					return pair;
+				}
+			}
+
+			throw new KeyNotFoundException($"Dictionary pair with input {input} and output {output} languages does not exist");
+		}
 	}
 }

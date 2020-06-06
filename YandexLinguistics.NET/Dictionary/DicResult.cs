@@ -24,9 +24,6 @@ namespace YandexLinguistics.NET
 			return builder.ToString();
 		}
 
-		public override string ToString()
-		{
-			return ToString(false, "    ");
-		}
+		public override string ToString() => ToString(false, "    ");
 	}
 }

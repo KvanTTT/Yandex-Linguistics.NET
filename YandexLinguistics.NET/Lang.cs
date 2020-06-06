@@ -40,6 +40,7 @@
 		Sv,
 		Tt,
 		Hr,
-		Hy
+		Hy,
+		Zh
 	}
 }

@@ -11,7 +11,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <releaseNotes>Initial nuget release.</releaseNotes>
-    <copyright>Copyright (c) 2013-2014, $author$</copyright>
+    <copyright>Copyright (c) 2013-2020, $author$</copyright>
     <tags>yandex linguistics api predict translate dictionary spell</tags>
   </metadata>
 </package>

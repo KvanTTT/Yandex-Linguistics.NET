@@ -1,8 +1,8 @@
 ﻿using RestSharp;
-using RestSharp.Deserializers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using RestSharp.Serialization.Xml;
 
 namespace YandexLinguistics.NET
 {
@@ -10,6 +10,46 @@ namespace YandexLinguistics.NET
 	{
 		private readonly RestClient _client;
 		private readonly string _key;
+
+		public static readonly IReadOnlyCollection<Lang> Languages = new []
+		{
+			Lang.Ru,
+			Lang.En,
+			Lang.Pl,
+			Lang.Uk,
+			Lang.De,
+			Lang.Fr,
+			Lang.Es,
+			Lang.It,
+			Lang.Tr,
+			Lang.Az,
+			Lang.Be,
+			Lang.Bg,
+			Lang.Cs,
+			Lang.Ro,
+			Lang.Sr,
+			Lang.Ca,
+			Lang.Da,
+			Lang.El,
+			Lang.Et,
+			Lang.Fi,
+			Lang.Hu,
+			Lang.Lt,
+			Lang.Lv,
+			Lang.Mhr,
+			Lang.Mk,
+			Lang.Mrj,
+			Lang.Nl,
+			Lang.No,
+			Lang.Pt,
+			Lang.Sk,
+			Lang.Sl,
+			Lang.Sq,
+			Lang.Sv,
+			Lang.Tt,
+			Lang.Hr,
+			Lang.Hy
+		};
 
 		public Predictor(string predictorKey, string baseUrl = "https://predictor.yandex.net/api/v1/predict")
 		{

@@ -1,5 +1,5 @@
 ﻿using RestSharp;
-using RestSharp.Deserializers;
+using RestSharp.Serialization.Xml;
 
 namespace YandexLinguistics.NET
 {

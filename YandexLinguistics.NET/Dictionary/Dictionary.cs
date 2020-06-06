@@ -28,11 +28,11 @@ namespace YandexLinguistics.NET
 			return result;
 		}
 
-		public DicResult Lookup(LangPair lang, string text, string ui = null, LookupOptions flags = 0)
+		public DicResult Lookup(LangPair langPair, string text, string ui = null, LookupOptions flags = 0)
 		{
 			RestRequest request = new RestRequest("lookup");
 			request.AddParameter("key", _key);
-			request.AddParameter("lang", lang.ToString().ToLowerInvariant());
+			request.AddParameter("lang", langPair.ToString().ToLowerInvariant());
 			request.AddParameter("text", text);
 
 			if (!string.IsNullOrEmpty(ui))
