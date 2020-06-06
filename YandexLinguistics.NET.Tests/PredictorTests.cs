@@ -1,6 +1,4 @@
 ﻿using NUnit.Framework;
-using System.Configuration;
-using System.Linq;
 
 namespace YandexLinguistics.NET.Tests
 {
@@ -9,21 +7,17 @@ namespace YandexLinguistics.NET.Tests
 	{
 		private Predictor _predictor;
 
-		[SetUp]
+		[OneTimeSetUp]
 		public void Init()
 		{
-			_predictor = new Predictor(ConfigurationManager.AppSettings["PredictorKey"]);
+			_predictor = new Predictor(Utils.PredictorKey);
 		}
 
 		[Test]
-		public void PredictorGetLangs()
+		public void PredictorGetLanguages()
 		{
 			var expectedLangs = _predictor.GetLanguages();
-			var langs = typeof(PredictorLang).GetFields()
-				.Where(field => field.FieldType == typeof(Lang))
-				.Select(field => (Lang)field.GetValue(null));
-
-			CollectionAssert.AreEquivalent(expectedLangs, langs);
+			CollectionAssert.AreEquivalent(expectedLangs, Predictor.Languages);
 		}
 
 		[Test]
@@ -42,7 +36,7 @@ namespace YandexLinguistics.NET.Tests
 			var response = _predictor.Complete(Lang.Ru, "здравствуй");
 
 			Assert.AreEqual(-10, response.Pos);
-			Assert.IsTrue(response.EndOfWord);
+			Assert.IsFalse(response.EndOfWord);
 			Assert.AreEqual("здравствуйте", response.Text[0]);
 		}
 

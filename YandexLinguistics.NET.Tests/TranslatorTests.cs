@@ -1,6 +1,4 @@
 ﻿using NUnit.Framework;
-using System.Configuration;
-using System.Linq;
 
 namespace YandexLinguistics.NET.Tests
 {
@@ -9,21 +7,17 @@ namespace YandexLinguistics.NET.Tests
 	{
 		private Translator _translator;
 
-		[SetUp]
+		[OneTimeSetUp]
 		public void Init()
 		{
-			_translator = new Translator(ConfigurationManager.AppSettings["TranslatorKey"]);
+			_translator = new Translator(Utils.TranslatorKey);
 		}
 
 		[Test]
 		public void TranslatorGetLangs()
 		{
 			LangPair[] expectedLangPairs = _translator.GetLangs();
-			var langPairs = typeof(TranslatorDirectory).GetFields()
-				.Where(field => field.FieldType == typeof(LangPair))
-				.Select(field => (LangPair)field.GetValue(null));
-
-			CollectionAssert.AreEquivalent(expectedLangPairs, langPairs);
+			CollectionAssert.AreEquivalent(expectedLangPairs, TranslatorDirectory.Pairs);
 		}
 
 		[Test]
@@ -36,9 +30,9 @@ namespace YandexLinguistics.NET.Tests
 		[Test]
 		public void TranslatorTranslate()
 		{
-			var translation = _translator.Translate("Лучше поздно, чем никогда", TranslatorDirectory.EnRu);
+			var translation = _translator.Translate("Лучше поздно, чем никогда", TranslatorDirectory.GetLangPair(Lang.En, Lang.Ru));
 			Assert.AreEqual("Лучше поздно, чем никогда", translation.Text);
-			Assert.AreEqual(TranslatorDirectory.EnRu, translation.LangPair);
+			Assert.AreEqual(TranslatorDirectory.GetLangPair(Lang.En, Lang.Ru), translation.LangPair);
 		}
 
 		[Test]
@@ -46,7 +40,7 @@ namespace YandexLinguistics.NET.Tests
 		{
 			var translation = _translator.Translate("Семь раз отмерь, один раз отрежь", new LangPair(Lang.None, Lang.En), null, true);
 			Assert.AreEqual("Measure twice, cut once", translation.Text);
-			Assert.AreEqual(TranslatorDirectory.RuEn, translation.LangPair);
+			Assert.AreEqual(TranslatorDirectory.GetLangPair(Lang.Ru, Lang.En), translation.LangPair);
 			Assert.AreEqual(Lang.Ru, translation.Detected.Lang);
 		}
 

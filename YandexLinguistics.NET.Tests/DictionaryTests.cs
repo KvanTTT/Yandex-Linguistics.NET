@@ -1,6 +1,4 @@
 ﻿using NUnit.Framework;
-using System.Configuration;
-using System.Linq;
 
 namespace YandexLinguistics.NET.Tests
 {
@@ -9,27 +7,23 @@ namespace YandexLinguistics.NET.Tests
 	{
 		private Dictionary _dictionary;
 
-		[SetUp]
+		[OneTimeSetUp]
 		public void Init()
 		{
-			_dictionary = new Dictionary(ConfigurationManager.AppSettings["DictionaryKey"]);
+			_dictionary = new Dictionary(Utils.DictionaryKey);
 		}
 
 		[Test]
 		public void DictionaryGetLangs()
 		{
 			LangPair[] expectedLangPairs = _dictionary.GetLanguages();
-			var langPairs = typeof(DictionaryDirectory).GetFields()
-				.Where(field => field.FieldType == typeof(LangPair))
-				.Select(field => (LangPair)field.GetValue(null));
-
-			CollectionAssert.AreEquivalent(expectedLangPairs, langPairs);
+			CollectionAssert.AreEquivalent(expectedLangPairs, DictionaryDirectory.Pairs);
 		}
 
 		[Test]
 		public void DictionaryLookup()
 		{
-			var dicResult = _dictionary.Lookup(DictionaryDirectory.EnRu, "time");
+			var dicResult = _dictionary.Lookup(DictionaryDirectory.GetLangPair(Lang.En, Lang.Ru), "time");
 
 			var def0 = dicResult.Definitions[0];
 			var def1 = dicResult.Definitions[1];
@@ -46,7 +40,7 @@ namespace YandexLinguistics.NET.Tests
 			Assert.AreEqual("period", tr.Meanings[0].Text);
 			Assert.AreEqual("once", tr.Meanings[1].Text);
 			Assert.AreEqual("moment", tr.Meanings[2].Text);
-			Assert.AreEqual("pore", tr.Meanings[3].Text);
+			Assert.AreEqual("now", tr.Meanings[3].Text);
 
 			Assert.AreEqual("daylight saving time", tr.Examples[0].Text);
 			Assert.AreEqual("летнее время", tr.Examples[0].Translations[0].Text);
@@ -76,7 +70,7 @@ namespace YandexLinguistics.NET.Tests
 		public void DictionaryVeryLongInputString()
 		{
 			var exception = Assert.Throws<YandexLinguisticsException>(
-				() => _dictionary.Lookup(DictionaryDirectory.EnRu, new string('a', 100000)));
+				() => _dictionary.Lookup(DictionaryDirectory.GetLangPair(Lang.En, Lang.Ru), new string('a', 100000)));
 			Assert.AreEqual(
 				new YandexLinguisticsException(0, "Invalid URI: The Uri string is too long.").ToString(),
 				exception.ToString());
