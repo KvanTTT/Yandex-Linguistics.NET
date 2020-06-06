@@ -303,20 +303,29 @@ namespace YandexLinguistics.NET.Gui
 
 		private void UpdatePredictorResult()
 		{
-			this.Invoke(new Action(() =>
+			Invoke(new Action(() =>
 			{
 				try
 				{
-					var response = _predictor.Complete((Lang)cmbPredictorLangs.SelectedItem, tbPredictorInput.Text, (int)nudMaxHintCount.Value);
-
-					tbHintCount.Text = response.Text.Count.ToString();
-					tbPos.Text = response.Pos.ToString();
-					tbEndOfWorld.Text = response.EndOfWord.ToString();
-
-					if (response.Text.Count > 0)
+					if (!string.IsNullOrWhiteSpace(tbPredictorInput.Text))
 					{
-						lbHints.Items.AddRange(response.Text.Select(t => (object)t).ToArray());
-						lbHints.SelectedIndex = 0;
+						var response = _predictor.Complete((Lang) cmbPredictorLangs.SelectedItem, tbPredictorInput.Text,
+							(int) nudMaxHintCount.Value);
+
+						tbHintCount.Text = response.Text.Count.ToString();
+						tbPos.Text = response.Pos.ToString();
+						tbEndOfWorld.Text = response.EndOfWord.ToString();
+
+						if (response.Text.Count > 0)
+						{
+							lbHints.Items.AddRange(response.Text.Select(t => (object) t).ToArray());
+							lbHints.SelectedIndex = 0;
+						}
+					}
+					else
+					{
+						tbHintCount.Text = tbPos.Text = tbEndOfWorld.Text = "";
+						lbHints.Items.Clear();
 					}
 				}
 				catch (Exception ex)
@@ -332,17 +341,26 @@ namespace YandexLinguistics.NET.Gui
 			{
 				try
 				{
-					LookupOptions lookupOptions = 0;
-					if (cbFamily.Checked)
-						lookupOptions |= LookupOptions.Family;
-					if (cbMorpho.Checked)
-						lookupOptions |= LookupOptions.Morpho;
-					if (cbPartOfSpeech.Checked)
-						lookupOptions |= LookupOptions.PartOfSpeechFilter;
-					var response = _dictionary.Lookup((LangPair)cmbDictionaryLangPairs.SelectedItem,
-						tbDictionaryInput.Text, cmbDictionaryLangUi.SelectedItem.ToString().ToLowerInvariant(), lookupOptions);
+					if (!string.IsNullOrWhiteSpace(tbDictionaryInput.Text))
+					{
+						LookupOptions lookupOptions = 0;
+						if (cbFamily.Checked)
+							lookupOptions |= LookupOptions.Family;
+						if (cbMorpho.Checked)
+							lookupOptions |= LookupOptions.Morpho;
+						if (cbPartOfSpeech.Checked)
+							lookupOptions |= LookupOptions.PartOfSpeechFilter;
+						var response = _dictionary.Lookup((LangPair) cmbDictionaryLangPairs.SelectedItem,
+							tbDictionaryInput.Text, cmbDictionaryLangUi.SelectedItem.ToString().ToLowerInvariant(),
+							lookupOptions);
 
-					rbDictionaryOutput.Text = response.ToString(cbDictionaryFormatting.Checked, tbDictionaryIndent.Text);
+						rbDictionaryOutput.Text =
+							response.ToString(cbDictionaryFormatting.Checked, tbDictionaryIndent.Text);
+					}
+					else
+					{
+						tbDictionaryIndent.Text = "";
+					}
 				}
 				catch (Exception ex)
 				{
@@ -357,12 +375,21 @@ namespace YandexLinguistics.NET.Gui
 			{
 				try
 				{
-					var response = _translator.Translate(tbTranslatorInput.Text,
-						new LangPair((Lang)cmbTranslatorInputLang.SelectedItem, (Lang)cmbTranslatorOutputLang.SelectedItem), null, cbTranslatorDetectInputLang.Checked);
+					if (!string.IsNullOrWhiteSpace(tbTranslatorInput.Text))
+					{
+						var response = _translator.Translate(tbTranslatorInput.Text,
+							new LangPair((Lang) cmbTranslatorInputLang.SelectedItem,
+								(Lang) cmbTranslatorOutputLang.SelectedItem), null,
+							cbTranslatorDetectInputLang.Checked);
 
-					if (response.Detected != null)
-						tbTranslatorDetectedLang.Text = response.Detected.Lang.ToString();
-					rtbTranslatorOutput.Text = response.Text;
+						if (response.Detected != null)
+							tbTranslatorDetectedLang.Text = response.Detected.Lang.ToString();
+						rtbTranslatorOutput.Text = response.Text;
+					}
+					else
+					{
+						rtbTranslatorOutput.Text = "";
+					}
 				}
 				catch (Exception ex)
 				{
@@ -476,7 +503,9 @@ namespace YandexLinguistics.NET.Gui
 						}
 					}
 					else
+					{
 						rtbSpellerOutput.Text = input;
+					}
 				}
 				catch (Exception ex)
 				{
