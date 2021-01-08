@@ -150,7 +150,7 @@ namespace YandexLinguistics.NET.Tests
 		}
 
 		[Test]
-		public void SpellerInputEpmty()
+		public void SpellerInputEmpty()
 		{
 			var mistakes = SpellerService.OptimalStringAlignmentDistance("", "синхрофазотрон");
 			Assert.AreEqual("синхрофазартон".Length, mistakes.Count);
@@ -162,7 +162,7 @@ namespace YandexLinguistics.NET.Tests
 		}
 
 		[Test]
-		public void SpellerOutputEpmty()
+		public void SpellerOutputEmpty()
 		{
 			var mistakes = SpellerService.OptimalStringAlignmentDistance("синхрофазотрон", "");
 			Assert.AreEqual("синхрофазартон".Length, mistakes.Count);

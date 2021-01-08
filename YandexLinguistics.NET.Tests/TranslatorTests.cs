@@ -16,14 +16,14 @@ namespace YandexLinguistics.NET.Tests
 		}
 
 		[Test]
-		public void TranslatorGetLangs()
+		public void TranslatorGetLanguages()
 		{
 			var expectedLangPairs = _translatorService.GetLanguagesAsync().Result;
 			CollectionAssert.AreEquivalent(expectedLangPairs, TranslatorDirection.Pairs);
 		}
 
 		[Test]
-		public void TranslatorDetectLang()
+		public void TranslatorDetectLanguage()
 		{
 			var lang = _translatorService.DetectLanguageAsync("Язик до Києва доведе").Result;
 			Assert.AreEqual(Language.Uk, lang);

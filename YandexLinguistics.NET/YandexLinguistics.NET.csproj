@@ -1,14 +1,28 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netstandard2.0</TargetFramework>
+        <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
         <LangVersion>Latest</LangVersion>
         <AssemblyTitle>YandexLinguistics.NET</AssemblyTitle>
-        <Copyright>Copyright © 2020</Copyright>
+        <Version>2.0</Version>
+        <Authors>Ivan Kochurkin (KvanTTT)</Authors>
+        <Copyright>Copyright © 2021</Copyright>
+        <Title>Yandex Linguistics .NET</Title>
+        <Description>An implementation of yandex linguistics API (Predictor, Translator, Dictionary, Speller, Inflector) in .NET</Description>
+        <PackageId>YandexLinguistics.NET</PackageId>
+        <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+        <PackageProjectUrl>https://github.com/KvanTTT/Yandex-Linguistics.NET</PackageProjectUrl>
+        <PackageIcon>Icon.png</PackageIcon>
+        <PackageReleaseNotes>.NET Standard 2.0; async API</PackageReleaseNotes>
+        <PackageTags>yandex linguistics api predict translate dictionary spell</PackageTags>
     </PropertyGroup>
 
     <ItemGroup>
       <PackageReference Include="System.Text.Json" Version="4.7.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Include="Icon.png" Pack="true" PackagePath="" />
     </ItemGroup>
 
 </Project>

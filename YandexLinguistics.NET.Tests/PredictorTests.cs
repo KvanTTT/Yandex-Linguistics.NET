@@ -8,25 +8,25 @@ namespace YandexLinguistics.NET.Tests
 	[TestFixture]
 	public class PredictorTests
 	{
-		private PredictorService predictorService;
+		private PredictorService _predictorService;
 
 		[OneTimeSetUp]
 		public void Init()
 		{
-			predictorService = new PredictorService(Utils.PredictorKey);
+			_predictorService = new PredictorService(Utils.PredictorKey);
 		}
 
 		[Test]
 		public void PredictorGetLanguages()
 		{
-			var expectedLangs = predictorService.GetLanguagesAsync().Result;
-			CollectionAssert.AreEquivalent(expectedLangs, PredictorService.Languages);
+			var expectedLanguages = _predictorService.GetLanguagesAsync().Result;
+			CollectionAssert.AreEquivalent(expectedLanguages, PredictorService.Languages);
 		}
 
 		[Test]
 		public void PredictorComplete1()
 		{
-			var response = predictorService.CompleteAsync(Language.En, "hello wo").Result;
+			var response = _predictorService.CompleteAsync(Language.En, "hello wo").Result;
 
 			Assert.AreEqual(-2, response.Position);
 			Assert.IsFalse(response.EndOfWord);
@@ -36,7 +36,7 @@ namespace YandexLinguistics.NET.Tests
 		[Test]
 		public void PredictorComplete2()
 		{
-			var response = predictorService.CompleteAsync(Language.Ru, "здравствуй").Result;
+			var response = _predictorService.CompleteAsync(Language.Ru, "здравствуй").Result;
 
 			Assert.AreEqual(-10, response.Position);
 			Assert.IsTrue(response.EndOfWord);
@@ -59,7 +59,7 @@ namespace YandexLinguistics.NET.Tests
 		{
 			CompleteResponse response;
 			var exception = Assert.Throws<AggregateException>(
-				() => response = predictorService.CompleteAsync(Language.En, new string('a', 100000)).Result);
+				() => response = _predictorService.CompleteAsync(Language.En, new string('a', 100000)).Result);
 			Assert.AreEqual(
 				new YandexLinguisticsException(0, "Invalid URI: The Uri string is too long.").ToString(),
 				exception.InnerException?.ToString());
