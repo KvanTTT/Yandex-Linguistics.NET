@@ -1,21 +1,22 @@
-﻿using RestSharp.Deserializers;
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
-namespace YandexLinguistics.NET
+namespace YandexLinguistics.NET.Translator
 {
 	public class Translation
 	{
-		public int Code { get; set; }
+		[JsonPropertyName("code")] public int Code { get; set; }
 
-		[DeserializeAs(Name = "lang")] public string LangPairString { get; set; }
+		[JsonPropertyName("lang")] public string LangPairString { get; set; }
 
-		public LangPair LangPair
+		[JsonPropertyName("text")] public IReadOnlyList<string> Texts { get; set; }
+
+		[JsonPropertyName("detected")] public DetectedLanguage DetectedLanguage { get; set; }
+
+		public LanguagePair LanguagePair
 		{
-			get => LangPair.Parse(LangPairString);
+			get => LanguagePair.Parse(LangPairString);
 			set => LangPairString = value.ToString().ToLowerInvariant();
 		}
-
-		public DetectedLang Detected { get; set; }
-
-		[DeserializeAs(Attribute = false)] public string Text { get; set; }
 	}
 }

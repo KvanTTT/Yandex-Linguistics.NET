@@ -1,24 +1,20 @@
-﻿using RestSharp.Deserializers;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text;
+using System.Text.Json.Serialization;
 
-namespace YandexLinguistics.NET
+namespace YandexLinguistics.NET.Dictionary
 {
-	public class Tr
+	public class Translation
 	{
-		[DeserializeAs(Attribute = false)] public string Text { get; set; }
+		[JsonPropertyName("text")] public string Text { get; set; }
 
-		[DeserializeAs(Name = "pos")] public string PartOfSpeech { get; set; }
+		[JsonPropertyName("pos")] public string PartOfSpeech { get; set; }
 
-		public List<Syn> Synonyms { get; set; }
+		[JsonPropertyName("syn")] public IReadOnlyList<Synonym> Synonyms { get; set; }
 
-		public List<Mean> Meanings { get; set; }
+		[JsonPropertyName("mean")] public IReadOnlyList<Meaning> Meanings { get; set; }
 
-		public List<Ex> Examples { get; set; }
-
-		public Tr()
-		{
-		}
+		[JsonPropertyName("ex")] public IReadOnlyList<Example> Examples { get; set; }
 
 		public void ToString(StringBuilder builder, int level, bool formatting, string indent)
 		{
@@ -29,7 +25,7 @@ namespace YandexLinguistics.NET
 				builder.Append("; PartOfSpeech: " + PartOfSpeech);
 			builder.AppendLine();
 
-			if (Synonyms != null && Synonyms.Count > 0)
+			if (Synonyms?.Count > 0)
 			{
 				for (int i = 0; i < level + 1; i++)
 					builder.Append(indent);
@@ -37,15 +33,12 @@ namespace YandexLinguistics.NET
 				for (int i = 0; i < Synonyms.Count; i++)
 				{
 					builder.Append(Synonyms[i].Text);
-					if (i != Synonyms.Count - 1)
-						builder.Append(", ");
-					else
-						builder.Append('.');
+					builder.Append(i == Synonyms.Count - 1 ? "." : ", ");
 				}
 				builder.AppendLine();
 			}
 
-			if (Meanings != null && Meanings.Count > 0)
+			if (Meanings?.Count > 0)
 			{
 				for (int i = 0; i < level + 1; i++)
 					builder.Append(indent);
@@ -53,15 +46,12 @@ namespace YandexLinguistics.NET
 				for (int i = 0; i < Meanings.Count; i++)
 				{
 					builder.Append(Meanings[i].Text);
-					if (i != Meanings.Count - 1)
-						builder.Append(", ");
-					else
-						builder.Append('.');
+					builder.Append(i == Meanings.Count - 1 ? "." : ", ");
 				}
 				builder.AppendLine();
 			}
 
-			if (Examples != null && Examples.Count > 0)
+			if (Examples?.Count > 0)
 			{
 				for (int i = 0; i < level + 1; i++)
 					builder.Append(indent);

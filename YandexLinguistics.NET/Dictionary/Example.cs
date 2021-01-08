@@ -1,27 +1,23 @@
-﻿using RestSharp.Deserializers;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text;
+using System.Text.Json.Serialization;
 
-namespace YandexLinguistics.NET
+namespace YandexLinguistics.NET.Dictionary
 {
-	public class Ex
+	public class Example
 	{
-		[DeserializeAs(Attribute = false)] public string Text { get; set; }
+		[JsonPropertyName("text")] public string Text { get; set; }
 
-		public List<Tr> Translations { get; set; }
-
-		public Ex()
-		{
-		}
+		[JsonPropertyName("tr")] public IReadOnlyList<Translation> Translations { get; set; }
 
 		public void ToString(StringBuilder builder, int level, bool formatting, string indent)
 		{
 			for (int i = 0; i < level; i++)
 				builder.Append(indent);
 
-			if (Translations != null && Translations.Count != 0)
-				foreach (var tr in Translations)
-					tr.ToString(builder, level + 1, formatting, indent);
+			if (Translations?.Count > 0)
+				foreach (var translation in Translations)
+					translation.ToString(builder, level + 1, formatting, indent);
 		}
 	}
 }

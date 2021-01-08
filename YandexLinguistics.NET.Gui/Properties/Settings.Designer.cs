@@ -9,20 +9,20 @@
 //------------------------------------------------------------------------------
 
 namespace YandexLinguistics.NET.Gui.Properties {
-    
-    
+
+
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.9.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
-        
+
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
-        
+
         public static Settings Default {
             get {
                 return defaultInstance;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Ru")]
@@ -34,7 +34,7 @@ namespace YandexLinguistics.NET.Gui.Properties {
                 this["PredictorLanguage"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("3")]
@@ -46,7 +46,7 @@ namespace YandexLinguistics.NET.Gui.Properties {
                 this["PredictorMaxHintCount"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("300")]
@@ -58,7 +58,7 @@ namespace YandexLinguistics.NET.Gui.Properties {
                 this["PredictorHintDelay"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Ru-Ru")]
@@ -70,7 +70,7 @@ namespace YandexLinguistics.NET.Gui.Properties {
                 this["DictionaryLangPair"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
@@ -82,7 +82,7 @@ namespace YandexLinguistics.NET.Gui.Properties {
                 this["DictionaryLangUi"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
@@ -94,7 +94,7 @@ namespace YandexLinguistics.NET.Gui.Properties {
                 this["DictionaryFamily"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
@@ -106,7 +106,7 @@ namespace YandexLinguistics.NET.Gui.Properties {
                 this["DictionaryMorpho"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
@@ -118,7 +118,7 @@ namespace YandexLinguistics.NET.Gui.Properties {
                 this["DictionaryPartOfSpeech"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
@@ -130,7 +130,7 @@ namespace YandexLinguistics.NET.Gui.Properties {
                 this["PredictorInput"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
@@ -142,7 +142,7 @@ namespace YandexLinguistics.NET.Gui.Properties {
                 this["DictionaryInput"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("300")]
@@ -154,7 +154,7 @@ namespace YandexLinguistics.NET.Gui.Properties {
                 this["DictionaryHintDelay"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
@@ -166,7 +166,7 @@ namespace YandexLinguistics.NET.Gui.Properties {
                 this["DictionaryFormatting"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
@@ -178,7 +178,7 @@ namespace YandexLinguistics.NET.Gui.Properties {
                 this["SelectedTabIndex"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("None")]
@@ -190,7 +190,7 @@ namespace YandexLinguistics.NET.Gui.Properties {
                 this["TranslatorInputLang"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Ru")]
@@ -202,7 +202,7 @@ namespace YandexLinguistics.NET.Gui.Properties {
                 this["TranslatorOutputLang"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("300")]
@@ -214,7 +214,7 @@ namespace YandexLinguistics.NET.Gui.Properties {
                 this["TranslatorHintDelay"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
@@ -226,7 +226,7 @@ namespace YandexLinguistics.NET.Gui.Properties {
                 this["TranslatorDetectInputLang"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
@@ -238,7 +238,7 @@ namespace YandexLinguistics.NET.Gui.Properties {
                 this["TranslatorInput"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
@@ -250,7 +250,7 @@ namespace YandexLinguistics.NET.Gui.Properties {
                 this["SpellerRuLang"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
@@ -262,7 +262,7 @@ namespace YandexLinguistics.NET.Gui.Properties {
                 this["SpellerEnLang"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
@@ -274,7 +274,7 @@ namespace YandexLinguistics.NET.Gui.Properties {
                 this["SpellerUkLang"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
@@ -286,7 +286,7 @@ namespace YandexLinguistics.NET.Gui.Properties {
                 this["SpellerOptions"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("300")]
@@ -298,7 +298,7 @@ namespace YandexLinguistics.NET.Gui.Properties {
                 this["SpellerHintDelay"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
@@ -310,7 +310,7 @@ namespace YandexLinguistics.NET.Gui.Properties {
                 this["SpellerInput"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
@@ -322,7 +322,7 @@ namespace YandexLinguistics.NET.Gui.Properties {
                 this["SpellerIncludeErrorWords"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("pdct.1.1.20131116T111605Z.e45a2927eae2bd1b.7bd44f99c7d9d634ef38bcd649fdc996c8b6dd" +
@@ -335,7 +335,7 @@ namespace YandexLinguistics.NET.Gui.Properties {
                 this["PredictorKey"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("dict.1.1.20131116T111739Z.ed5e7998d207ec85.dcbda87c023115b94a6c5caeb6dd122a0b62c8" +
@@ -348,7 +348,7 @@ namespace YandexLinguistics.NET.Gui.Properties {
                 this["DictionaryKey"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("trnsl.1.1.20131116T111727Z.1996f6347b51e3cb.51f72e60d8a05960bc4b820d9a9f558c9dc00" +
@@ -361,55 +361,7 @@ namespace YandexLinguistics.NET.Gui.Properties {
                 this["TranslatorKey"] = value;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://predictor.yandex.net/api/v1/predict")]
-        public string PredictorBaseUrl {
-            get {
-                return ((string)(this["PredictorBaseUrl"]));
-            }
-            set {
-                this["PredictorBaseUrl"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://dictionary.yandex.net/api/v1/dicservice")]
-        public string DictionaryBaseUrl {
-            get {
-                return ((string)(this["DictionaryBaseUrl"]));
-            }
-            set {
-                this["DictionaryBaseUrl"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://translate.yandex.net/api/v1.5/tr")]
-        public string TranslatorBaseUrl {
-            get {
-                return ((string)(this["TranslatorBaseUrl"]));
-            }
-            set {
-                this["TranslatorBaseUrl"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://speller.yandex.net/services/spellservice")]
-        public string SpellerBaseUrl {
-            get {
-                return ((string)(this["SpellerBaseUrl"]));
-            }
-            set {
-                this["SpellerBaseUrl"] = value;
-            }
-        }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]

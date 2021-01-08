@@ -1,78 +1,81 @@
-﻿using NUnit.Framework;
+﻿using System;
+using System.Collections.Generic;
+using NUnit.Framework;
+using YandexLinguistics.NET.Speller;
 
 namespace YandexLinguistics.NET.Tests
 {
 	[TestFixture]
 	public class SpellerTests
 	{
-		private Speller _speller;
+		private SpellerService _spellerService;
 
 		[SetUp]
 		public void Init()
 		{
-			_speller = new Speller();
+			_spellerService = new SpellerService();
 		}
 
 		[Test]
 		public void SpellerCheckText()
 		{
-			var spellResult = _speller.CheckText("синхрафазатрон в дубне");
+			var spellResult = _spellerService.CheckTextAsync("синхрафазатрон в дубне").Result;
 
-			var error = spellResult.Errors[0];
+			var error = spellResult[0];
 			Assert.AreEqual(1, error.Code);
 			Assert.AreEqual(0, error.Position);
 			Assert.AreEqual(0, error.Row);
 			Assert.AreEqual(0, error.Column);
 			Assert.AreEqual(14, error.Length);
 			Assert.AreEqual("синхрафазатрон", error.Word);
-			Assert.AreEqual("синхрофазотрон", error.Steer);
+			Assert.AreEqual("синхрофазотрон", error.Steers[0]);
 
-			error = spellResult.Errors[1];
+			error = spellResult[1];
 			Assert.AreEqual(3, error.Code);
 			Assert.AreEqual(17, error.Position);
 			Assert.AreEqual(0, error.Row);
 			Assert.AreEqual(17, error.Column);
 			Assert.AreEqual(5, error.Length);
 			Assert.AreEqual("дубне", error.Word);
-			Assert.AreEqual("Дубне", error.Steer);
+			Assert.AreEqual("Дубне", error.Steers[0]);
 		}
 
 		[Test]
 		public void SpellerCheckTexts()
 		{
-			var response = _speller.CheckTexts(new[] { "синхрафазатрон", "в дубне" });
+			var response = _spellerService.CheckTextsAsync(new[] { "синхрафазатрон", "в дубне" }).Result;
 
-			var error = response.Results[0].Errors[0];
+			var error = response[0][0];
 			Assert.AreEqual(1, error.Code);
 			Assert.AreEqual(0, error.Position);
 			Assert.AreEqual(0, error.Row);
 			Assert.AreEqual(0, error.Column);
 			Assert.AreEqual(14, error.Length);
 			Assert.AreEqual("синхрафазатрон", error.Word);
-			Assert.AreEqual("синхрофазотрон", error.Steer);
+			Assert.AreEqual("синхрофазотрон", error.Steers[0]);
 
-			error = response.Results[1].Errors[0];
+			error = response[1][0];
 			Assert.AreEqual(3, error.Code);
 			Assert.AreEqual(2, error.Position);
 			Assert.AreEqual(0, error.Row);
 			Assert.AreEqual(2, error.Column);
 			Assert.AreEqual(5, error.Length);
 			Assert.AreEqual("дубне", error.Word);
-			Assert.AreEqual("Дубне", error.Steer);
+			Assert.AreEqual("Дубне", error.Steers[0]);
 		}
 
 		[Test]
 		public void SpellerFlags()
 		{
-			var response = _speller.CheckText("asdf@asdf.com орапгн36 москва", null, SpellerOptions.IgnoreDigits | SpellerOptions.IgnoreUrls | SpellerOptions.IgnoreCapitalization);
+			var response = _spellerService.CheckTextAsync("asdf@asdf.com орапгн36 москва", null, SpellerOptions.IgnoreDigits | SpellerOptions.IgnoreUrls | SpellerOptions.IgnoreCapitalization).Result;
 
-			Assert.AreEqual(0, response.Errors.Count);
+			Assert.AreEqual(0, response.Count);
 		}
 
 		[Test]
 		public void SpellerSubstitution()
 		{
-			var mistakes = Speller.OptimalStringAlignmentDistance("синхрАфазАтрон", "синхрофазотрон");
+			var mistakes = SpellerService.OptimalStringAlignmentDistance("синхрАфазАтрон", "синхрофазотрон");
 			Assert.AreEqual(2, mistakes.Count);
 			Assert.AreEqual(mistakes[0].Position, 5);
 			Assert.AreEqual(mistakes[0].Type, CharMistakeType.Substitution);
@@ -83,7 +86,7 @@ namespace YandexLinguistics.NET.Tests
 		[Test]
 		public void SpellerInsertion()
 		{
-			var mistakes = Speller.OptimalStringAlignmentDistance("синхрофазотр", "синхрофазотрон");
+			var mistakes = SpellerService.OptimalStringAlignmentDistance("синхрофазотр", "синхрофазотрон");
 			Assert.AreEqual(2, mistakes.Count);
 			Assert.AreEqual(12, mistakes[0].Position);
 			Assert.AreEqual(CharMistakeType.Insertion, mistakes[0].Type);
@@ -94,7 +97,7 @@ namespace YandexLinguistics.NET.Tests
 		[Test]
 		public void SpellerDeletion1()
 		{
-			var mistakes = Speller.OptimalStringAlignmentDistance("синНхрофаАзотрон", "синхрофазотрон");
+			var mistakes = SpellerService.OptimalStringAlignmentDistance("синНхрофаАзотрон", "синхрофазотрон");
 			Assert.AreEqual(2, mistakes.Count);
 			Assert.AreEqual(3, mistakes[0].Position);
 			Assert.AreEqual(CharMistakeType.Deletion, mistakes[0].Type);
@@ -105,7 +108,7 @@ namespace YandexLinguistics.NET.Tests
 		[Test]
 		public void SpellerDeletion2()
 		{
-			var mistakes = Speller.OptimalStringAlignmentDistance("аДубна", "Дубна");
+			var mistakes = SpellerService.OptimalStringAlignmentDistance("аДубна", "Дубна");
 			Assert.AreEqual(1, mistakes.Count);
 			Assert.AreEqual(0, mistakes[0].Position);
 			Assert.AreEqual(CharMistakeType.Deletion, mistakes[0].Type);
@@ -114,7 +117,7 @@ namespace YandexLinguistics.NET.Tests
 		[Test]
 		public void SpellerTransposition()
 		{
-			var mistakes = Speller.OptimalStringAlignmentDistance("синхрофазортон", "синхрофазотрон");
+			var mistakes = SpellerService.OptimalStringAlignmentDistance("синхрофазортон", "синхрофазотрон");
 			Assert.AreEqual(1, mistakes.Count);
 			Assert.AreEqual(10, mistakes[0].Position);
 			Assert.AreEqual(CharMistakeType.Transposition, mistakes[0].Type);
@@ -123,7 +126,7 @@ namespace YandexLinguistics.NET.Tests
 		[Test]
 		public void SpellerTranspositionOff()
 		{
-			var mistakes = Speller.OptimalStringAlignmentDistance("синхрофазортон", "синхрофазотрон", false);
+			var mistakes = SpellerService.OptimalStringAlignmentDistance("синхрофазортон", "синхрофазотрон", false);
 			Assert.AreEqual(2, mistakes.Count);
 			Assert.AreEqual(10, mistakes[0].Position);
 			Assert.AreEqual(CharMistakeType.Insertion, mistakes[0].Type);
@@ -134,7 +137,7 @@ namespace YandexLinguistics.NET.Tests
 		[Test]
 		public void SpellerMixed()
 		{
-			var mistakes = Speller.OptimalStringAlignmentDistance("АсИнхрофаортон", "синхрофазотрон");
+			var mistakes = SpellerService.OptimalStringAlignmentDistance("АсИнхрофаортон", "синхрофазотрон");
 			Assert.AreEqual(4, mistakes.Count);
 			Assert.AreEqual(0, mistakes[0].Position);
 			Assert.AreEqual(CharMistakeType.Deletion, mistakes[0].Type);
@@ -149,7 +152,7 @@ namespace YandexLinguistics.NET.Tests
 		[Test]
 		public void SpellerInputEpmty()
 		{
-			var mistakes = Speller.OptimalStringAlignmentDistance("", "синхрофазотрон");
+			var mistakes = SpellerService.OptimalStringAlignmentDistance("", "синхрофазотрон");
 			Assert.AreEqual("синхрофазартон".Length, mistakes.Count);
 			for (int i = 0; i < mistakes.Count; i++)
 			{
@@ -161,7 +164,7 @@ namespace YandexLinguistics.NET.Tests
 		[Test]
 		public void SpellerOutputEpmty()
 		{
-			var mistakes = Speller.OptimalStringAlignmentDistance("синхрофазотрон", "");
+			var mistakes = SpellerService.OptimalStringAlignmentDistance("синхрофазотрон", "");
 			Assert.AreEqual("синхрофазартон".Length, mistakes.Count);
 			for (int i = 0; i < mistakes.Count; i++)
 			{
@@ -173,11 +176,12 @@ namespace YandexLinguistics.NET.Tests
 		[Test]
 		public void SpellerVeryLongInputString()
 		{
-			var exception = Assert.Throws<YandexLinguisticsException>(
-				() => _speller.CheckText(new string('a', 100000)));
+			IReadOnlyList<Error> errors;
+			var exception = Assert.Throws<AggregateException>(
+				() => errors = _spellerService.CheckTextAsync(new string('a', 100000)).Result);
 			Assert.AreEqual(
 				new YandexLinguisticsException(0, "Invalid URI: The Uri string is too long.").ToString(),
-				exception.ToString());
+				exception.InnerException?.ToString());
 		}
 	}
 }

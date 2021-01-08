@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Text;
+using System.Text.Json.Serialization;
 
-namespace YandexLinguistics.NET
+namespace YandexLinguistics.NET.Dictionary
 {
-	public class DicResult
+	public class DictionaryResult
 	{
-		public List<Def> Definitions { get; set; }
+		[JsonPropertyName("def")]
+		public IReadOnlyList<Definition> Definitions { get; set; }
 
-		public DicResult()
-		{
-		}
+		public override string ToString() => ToString(false, "    ");
 
 		public string ToString(bool formatting, string indent)
 		{
@@ -23,7 +23,5 @@ namespace YandexLinguistics.NET
 
 			return builder.ToString();
 		}
-
-		public override string ToString() => ToString(false, "    ");
 	}
 }

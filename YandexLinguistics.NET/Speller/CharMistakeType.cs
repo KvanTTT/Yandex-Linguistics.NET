@@ -1,4 +1,4 @@
-﻿namespace YandexLinguistics.NET
+﻿namespace YandexLinguistics.NET.Speller
 {
 	public enum CharMistakeType
 	{

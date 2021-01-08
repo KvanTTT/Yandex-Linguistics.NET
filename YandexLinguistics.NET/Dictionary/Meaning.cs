@@ -1,13 +1,11 @@
-﻿using RestSharp.Deserializers;
+﻿using System.Text.Json.Serialization;
 
-namespace YandexLinguistics.NET
+namespace YandexLinguistics.NET.Dictionary
 {
-	public class Mean
+	public class Meaning
 	{
-		[DeserializeAs(Attribute = false)] public string Text { get; set; }
+		[JsonPropertyName("text")] public string Text { get; set; }
 
-		public Mean()
-		{
-		}
+		public override string ToString() => $"Meaning: {Text}";
 	}
 }

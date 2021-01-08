@@ -1,6 +1,9 @@
-﻿namespace YandexLinguistics.NET
+﻿using System.Text.Json.Serialization;
+
+namespace YandexLinguistics.NET
 {
-	public enum Lang
+	[JsonConverter(typeof(JsonStringEnumConverter))]
+	public enum Language
 	{
 		None = 0,
 

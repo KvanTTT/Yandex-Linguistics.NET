@@ -1,29 +1,32 @@
-﻿using NUnit.Framework;
+﻿using System;
+using System.Collections.Generic;
+using NUnit.Framework;
+using YandexLinguistics.NET.Dictionary;
 
 namespace YandexLinguistics.NET.Tests
 {
 	[TestFixture]
 	public class DictionaryTests
 	{
-		private Dictionary _dictionary;
+		private DictionaryService _dictionaryService;
 
 		[OneTimeSetUp]
 		public void Init()
 		{
-			_dictionary = new Dictionary(Utils.DictionaryKey);
+			_dictionaryService = new DictionaryService(Utils.DictionaryKey);
 		}
 
 		[Test]
-		public void DictionaryGetLangs()
+		public void DictionaryGetLanguages()
 		{
-			LangPair[] expectedLangPairs = _dictionary.GetLanguages();
-			CollectionAssert.AreEquivalent(expectedLangPairs, DictionaryDirectory.Pairs);
+			IReadOnlyList<LanguagePair> expectedLangPairs = _dictionaryService.GetLanguagesAsync().Result;
+			CollectionAssert.AreEquivalent(expectedLangPairs, DictionaryDirection.Pairs);
 		}
 
 		[Test]
 		public void DictionaryLookup()
 		{
-			var dicResult = _dictionary.Lookup(DictionaryDirectory.GetLangPair(Lang.En, Lang.Ru), "time");
+			var dicResult = _dictionaryService.LookupAsync(DictionaryDirection.GetLanguagePair(Language.En, Language.Ru), "time").Result;
 
 			var def0 = dicResult.Definitions[0];
 			var def1 = dicResult.Definitions[1];
@@ -59,21 +62,23 @@ namespace YandexLinguistics.NET.Tests
 		[Test]
 		public void DictionaryLangNotSupported()
 		{
-			var exception = Assert.Throws<YandexLinguisticsException>(
-				() => _dictionary.Lookup(new LangPair(Lang.Uk, Lang.It), "asdf"));
+			DictionaryResult result;
+			var exception = Assert.Throws<AggregateException>(
+				() => result = _dictionaryService.LookupAsync(new LanguagePair(Language.Uk, Language.It), "asdf").Result);
 			Assert.AreEqual(
 				new YandexLinguisticsException(501, "The specified language is not supported").ToString(),
-				exception.ToString());
+				exception.InnerException?.ToString());
 		}
 
 		[Test]
 		public void DictionaryVeryLongInputString()
 		{
-			var exception = Assert.Throws<YandexLinguisticsException>(
-				() => _dictionary.Lookup(DictionaryDirectory.GetLangPair(Lang.En, Lang.Ru), new string('a', 100000)));
+			DictionaryResult result;
+			var exception = Assert.Throws<AggregateException>(
+				() => result = _dictionaryService.LookupAsync(DictionaryDirection.GetLanguagePair(Language.En, Language.Ru), new string('a', 100000)).Result);
 			Assert.AreEqual(
 				new YandexLinguisticsException(0, "Invalid URI: The Uri string is too long.").ToString(),
-				exception.ToString());
+				exception.InnerException?.ToString());
 		}
 	}
 }

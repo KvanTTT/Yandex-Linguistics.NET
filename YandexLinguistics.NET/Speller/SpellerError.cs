@@ -1,26 +1,43 @@
-﻿using RestSharp.Deserializers;
+﻿using System.Collections.Generic;
+using System.Text;
+using System.Text.Json.Serialization;
 
-namespace YandexLinguistics.NET
+namespace YandexLinguistics.NET.Speller
 {
 	public class Error
 	{
-		public int Code { get; set; }
+		[JsonPropertyName("code")] public int Code { get; set; }
 
-		[DeserializeAs(Name = "pos")] public int Position { get; set; }
+		[JsonPropertyName("pos")] public int Position { get; set; }
 
-		public int Row { get; set; }
+		[JsonPropertyName("row")] public int Row { get; set; }
 
-		[DeserializeAs(Name = "col")] public int Column { get; set; }
+		[JsonPropertyName("col")] public int Column { get; set; }
 
-		[DeserializeAs(Name = "len")] public int Length { get; set; }
+		[JsonPropertyName("len")] public int Length { get; set; }
 
-		[DeserializeAs(Attribute = false)] public string Word { get; set; }
+		[JsonPropertyName("word")] public string Word { get; set; }
 
-		[DeserializeAs(Attribute = false, Name = "s")]
-		public string Steer { get; set; }
+		[JsonPropertyName("s")] public IReadOnlyList<string> Steers { get; set; }
 
-		public Error()
+		public override string ToString()
 		{
+			var result = new StringBuilder();
+			result.Append("Code: ");
+			result.AppendLine(Code.ToString());
+			result.Append("Position: ");
+			result.AppendLine(Position.ToString());
+			result.Append("Row: ");
+			result.AppendLine(Row.ToString());
+			result.Append("Column: ");
+			result.AppendLine(Column.ToString());
+			result.Append("Length: ");
+			result.AppendLine(Length.ToString());
+			result.Append("Word: ");
+			result.AppendLine(Word);
+			result.Append("Steers: ");
+			result.AppendLine(string.Join(",", Steers));
+			return result.ToString();
 		}
 	}
 }

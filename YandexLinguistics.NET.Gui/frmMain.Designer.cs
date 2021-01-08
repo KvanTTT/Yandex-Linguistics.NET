@@ -173,9 +173,10 @@
 			this.tbSpellerBaseUrl.Location = new System.Drawing.Point(136, 20);
 			this.tbSpellerBaseUrl.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.tbSpellerBaseUrl.Name = "tbSpellerBaseUrl";
+			this.tbSpellerBaseUrl.ReadOnly = true;
 			this.tbSpellerBaseUrl.Size = new System.Drawing.Size(660, 26);
 			this.tbSpellerBaseUrl.TabIndex = 42;
-			this.tbSpellerBaseUrl.Text = "http://speller.yandex.net/services/spellservice";
+			this.tbSpellerBaseUrl.Text = "http://speller.yandex.net/services/spellservice.json";
 			this.tbSpellerBaseUrl.TextChanged += new System.EventHandler(this.tbSpellerBaseUrl_TextChanged);
 			// 
 			// rtbSpellerOutput
@@ -512,9 +513,10 @@
 			this.tbTranslatorBaseUrl.Location = new System.Drawing.Point(124, 20);
 			this.tbTranslatorBaseUrl.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.tbTranslatorBaseUrl.Name = "tbTranslatorBaseUrl";
+			this.tbTranslatorBaseUrl.ReadOnly = true;
 			this.tbTranslatorBaseUrl.Size = new System.Drawing.Size(656, 26);
 			this.tbTranslatorBaseUrl.TabIndex = 39;
-			this.tbTranslatorBaseUrl.Text = "https://translate.yandex.net/api/v1.5/tr";
+			this.tbTranslatorBaseUrl.Text = "https://translate.yandex.net/api/v1.5/tr.json";
 			this.tbTranslatorBaseUrl.TextChanged += new System.EventHandler(this.tbTranslatorKey_TextChanged);
 			// 
 			// tbTranslatorKey
@@ -762,9 +764,10 @@
 			this.tbDictionaryBaseUrl.Location = new System.Drawing.Point(142, 9);
 			this.tbDictionaryBaseUrl.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.tbDictionaryBaseUrl.Name = "tbDictionaryBaseUrl";
+			this.tbDictionaryBaseUrl.ReadOnly = true;
 			this.tbDictionaryBaseUrl.Size = new System.Drawing.Size(654, 26);
 			this.tbDictionaryBaseUrl.TabIndex = 31;
-			this.tbDictionaryBaseUrl.Text = "https://dictionary.yandex.net/api/v1/dicservice";
+			this.tbDictionaryBaseUrl.Text = "https://dictionary.yandex.net/api/v1/dicservice.json";
 			this.tbDictionaryBaseUrl.TextChanged += new System.EventHandler(this.tbDictionaryKey_TextChanged);
 			// 
 			// tbDictionaryKey
@@ -1060,9 +1063,10 @@
 			this.tbPredictorBaseUrl.Location = new System.Drawing.Point(105, 9);
 			this.tbPredictorBaseUrl.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.tbPredictorBaseUrl.Name = "tbPredictorBaseUrl";
+			this.tbPredictorBaseUrl.ReadOnly = true;
 			this.tbPredictorBaseUrl.Size = new System.Drawing.Size(694, 26);
 			this.tbPredictorBaseUrl.TabIndex = 24;
-			this.tbPredictorBaseUrl.Text = "https://predictor.yandex.net/api/v1/predict";
+			this.tbPredictorBaseUrl.Text = "https://predictor.yandex.net/api/v1/predict.json";
 			this.tbPredictorBaseUrl.TextChanged += new System.EventHandler(this.tbPredictorKey_TextChanged);
 			// 
 			// tbPredictorKey
@@ -1319,6 +1323,7 @@
 			this.Name = "frmMain";
 			this.Text = "Yandex Linguistics";
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmMain_FormClosed);
+			this.Load += new System.EventHandler(this.frmMain_Load);
 			this.tpSpeller.ResumeLayout(false);
 			this.tpSpeller.PerformLayout();
 			((System.ComponentModel.ISupportInitialize) (this.nudSpellerDelay)).EndInit();

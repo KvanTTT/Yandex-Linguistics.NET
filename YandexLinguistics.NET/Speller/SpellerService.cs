@@ -1,44 +1,36 @@
-﻿using RestSharp;
-using System;
-using System.Linq;
+﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
-namespace YandexLinguistics.NET
+namespace YandexLinguistics.NET.Speller
 {
-	public class Speller : YandexService
+	public class SpellerService : YandexService
 	{
-		public Speller(string baseUrl = "http://speller.yandex.net/services/spellservice")
+		public SpellerService(string baseUrl = "http://speller.yandex.net/services/spellservice.json/")
 			: base("", baseUrl)
 		{
 		}
 
-		public SpellResult CheckText(string text, Lang[] lang = null, SpellerOptions? options = null, OutputFormat? format = null)
+		public async Task<IReadOnlyList<Error>> CheckTextAsync(string text, Language[] lang = null, SpellerOptions? options = null,
+			OutputFormat? format = null)
 		{
-			RestRequest request = new RestRequest("checkText");
-			request.AddParameter("text", text);
-			if (lang != null && lang.Length != 0)
-				request.AddParameter("lang", string.Join(",", lang.Select(l => l.ToString().ToLowerInvariant())));
-			if (options.HasValue)
-				request.AddParameter("options", (int)options.Value);
-			if (format.HasValue)
-				request.AddParameter("format", format.Value.ToString().ToLowerInvariant());
-
-			return SendRequest<SpellResult>(request);
+			var result = await CheckTextsAsync(new[] {text}, lang, options, format).ConfigureAwait(false);
+			return result[0];
 		}
 
-		public ArrayOfSpellResult CheckTexts(string[] texts, Lang[] lang = null, SpellerOptions? options = null, OutputFormat? format = null)
+		public Task<IReadOnlyList<IReadOnlyList<Error>>> CheckTextsAsync(string[] texts, Language[] lang = null, SpellerOptions? options = null, OutputFormat? format = null)
 		{
-			RestRequest request = new RestRequest("checkTexts");
+			var request = CreateRequestBuilder("checkTexts");
 			foreach (var text in texts)
-				request.AddParameter("text", text);
+				AddParameter(request, "text", text);
 			if (lang != null && lang.Length != 0)
-				request.AddParameter("lang", string.Join(",", lang.ToString().ToLowerInvariant()));
+				AddParameter(request, "lang", string.Join(",", lang.ToString().ToLowerInvariant()));
 			if (options.HasValue)
-				request.AddParameter("options", (int)options.Value);
+				AddParameter(request, "options", ((int) options.Value).ToString());
 			if (format.HasValue)
-				request.AddParameter("format", format.Value.ToString().ToLowerInvariant());
+				AddParameter(request, "format", format.Value.ToString().ToLowerInvariant());
 
-			return SendRequest<ArrayOfSpellResult>(request);
+			return GetAndDeserializeAsync<IReadOnlyList<IReadOnlyList<Error>>>(request);
 		}
 
 		public static List<Mistake> OptimalStringAlignmentDistance(

@@ -1,67 +1,73 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
+using YandexLinguistics.NET.Translator;
 
 namespace YandexLinguistics.NET.Tests
 {
 	[TestFixture]
 	public class TranslatorTests
 	{
-		private Translator _translator;
+		private TranslatorService _translatorService;
 
 		[OneTimeSetUp]
 		public void Init()
 		{
-			_translator = new Translator(Utils.TranslatorKey);
+			_translatorService = new TranslatorService(Utils.TranslatorKey);
 		}
 
 		[Test]
 		public void TranslatorGetLangs()
 		{
-			LangPair[] expectedLangPairs = _translator.GetLangs();
-			CollectionAssert.AreEquivalent(expectedLangPairs, TranslatorDirectory.Pairs);
+			var expectedLangPairs = _translatorService.GetLanguagesAsync().Result;
+			CollectionAssert.AreEquivalent(expectedLangPairs, TranslatorDirection.Pairs);
 		}
 
 		[Test]
 		public void TranslatorDetectLang()
 		{
-			var lang = _translator.DetectLang("Язик до Києва доведе");
-			Assert.AreEqual(Lang.Uk, lang);
+			var lang = _translatorService.DetectLanguageAsync("Язик до Києва доведе").Result;
+			Assert.AreEqual(Language.Uk, lang);
 		}
 
 		[Test]
 		public void TranslatorTranslate()
 		{
-			var translation = _translator.Translate("Лучше поздно, чем никогда", TranslatorDirectory.GetLangPair(Lang.En, Lang.Ru));
-			Assert.AreEqual("Лучше поздно, чем никогда", translation.Text);
-			Assert.AreEqual(TranslatorDirectory.GetLangPair(Lang.En, Lang.Ru), translation.LangPair);
+			var translation = _translatorService.TranslateAsync("Лучше поздно, чем никогда",
+				TranslatorDirection.GetLangPair(Language.En, Language.Ru)).Result;
+			Assert.AreEqual("Лучше поздно, чем никогда", translation.Texts[0]);
+			Assert.AreEqual(TranslatorDirection.GetLangPair(Language.En, Language.Ru), translation.LanguagePair);
 		}
 
 		[Test]
 		public void TranslatorDetectAndTranslate()
 		{
-			var translation = _translator.Translate("Семь раз отмерь, один раз отрежь", new LangPair(Lang.None, Lang.En), null, true);
-			Assert.AreEqual("Measure twice, cut once", translation.Text);
-			Assert.AreEqual(TranslatorDirectory.GetLangPair(Lang.Ru, Lang.En), translation.LangPair);
-			Assert.AreEqual(Lang.Ru, translation.Detected.Lang);
+			var translation = _translatorService.TranslateAsync("Семь раз отмерь, один раз отрежь",
+				new LanguagePair(Language.None, Language.En), null, true).Result;
+			Assert.AreEqual("Measure twice, cut once", translation.Texts[0]);
+			Assert.AreEqual(TranslatorDirection.GetLangPair(Language.Ru, Language.En), translation.LanguagePair);
+			Assert.AreEqual(Language.Ru, translation.DetectedLanguage.Language);
 		}
 
 		[Test]
 		public void TranslatorLangNotSupported()
 		{
-			var exception = Assert.Throws<YandexLinguisticsException>(
-				() => _translator.Translate("Example text", new LangPair(Lang.None, Lang.None)));
+			Translation translation;
+			var exception = Assert.Throws<AggregateException>(
+				() => translation = _translatorService.TranslateAsync("Example text", new LanguagePair(Language.None, Language.None)).Result);
 			Assert.AreEqual(
 				new YandexLinguisticsException(502, "Invalid parameter: lang").ToString(),
-				exception.ToString());
+				exception.InnerException?.ToString());
 		}
 
 		[Test]
 		public void TranslatorVeryLongInputString()
 		{
-			var exception = Assert.Throws<YandexLinguisticsException>(
-				() => _translator.Translate(new string('a', 100000), new LangPair(Lang.None, Lang.Ru)));
+			Translation translation;
+			var exception = Assert.Throws<AggregateException>(
+				() => translation = _translatorService.TranslateAsync(new string('a', 100000), new LanguagePair(Language.None, Language.Ru)).Result);
 			Assert.AreEqual(
 				new YandexLinguisticsException(0, "Invalid URI: The Uri string is too long.").ToString(),
-				exception.ToString());
+				exception.InnerException?.ToString());
 		}
 	}
 }

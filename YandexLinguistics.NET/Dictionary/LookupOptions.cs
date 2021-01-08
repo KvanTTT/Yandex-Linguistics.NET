@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace YandexLinguistics.NET
+namespace YandexLinguistics.NET.Dictionary
 {
 	[Flags]
 	public enum LookupOptions
